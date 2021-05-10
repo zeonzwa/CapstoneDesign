@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.capstone.mappers.adminMapper">
+
+<!-- 상품 등록 -->
+	<insert id="register">
+		insert into goods (gdsNum, gdsName, gdsCategory, gdsPrice,gdsSta, gdsDes, 
+								gdsImg)
+	   		values (goods_seq.nextval, #{gdsName}, #{gdsCategory}, #{gdsPrice}, #{gdsSta} ,#{gdsDes},
+	   		 		#{gdsImg})
+	</insert>
+<!-- 상품 목록 -->	
+	<select id="goodslist" resultType="com.capstone.domain.GoodsVO">
+		select
+			gdsNum, gdsName, gdsCategory, gdsSta,gdsPrice, gdsDes, gdsImg, gdsDate
+	    from goods
+	        order by gdsNum desc
+	</select>
+<!-- 상품 조회 -->
+	<select id="goodsView" resultType="com.capstone.domain.GoodsVO">
+		select gdsNum, gdsName, gdsCategory, gdsSta, gdsPrice, gdsDes, gdsImg, gdsDate
+    		from goods
+        		where gdsNum = #{gdsNum}
+	</select>
+<!-- 상품 수정 -->
+	<update id="goodsModify">
+		update goods
+		    set
+		        gdsName = #{gdsName},
+		        gdsCategory = #{gdsCategory},
+		        gdsPrice = #{gdsPrice}, 
+		        gdsSta = #{gdsSta},
+		        gdsDes = #{gdsDes},
+		        gdsImg = #{gdsImg}
+		        
+		    where gdsNum = ${gdsNum}
+	</update>
+	
+	<!-- 상품 삭제 -->
+	<delete id="goodsDelete">
+		delete
+	   		goods
+		where gdsNum = #{gdsNum}
+	</delete>
+	
+</mapper>
