@@ -67,7 +67,7 @@ public class TalentController {
 	public String postTalentModify(Talent_S_VO vo, HttpServletRequest req) throws Exception{
 		logger.info("post modify");
 		
-		talentService.talentModify(vo);
+		talentService.talentSModify(vo);
 		return "redirect:/talent/talent_S_list";
 	}
 	

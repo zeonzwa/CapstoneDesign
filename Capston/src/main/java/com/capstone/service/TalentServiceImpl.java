@@ -24,8 +24,8 @@ public class TalentServiceImpl implements TalentService{
 
 	//재능 판매 수정
 	@Override
-	public void talentModify(Talent_S_VO vo) throws Exception {
-		dao.talentModify(vo);
+	public void talentSModify(Talent_S_VO vo) throws Exception {
+		dao.talentSModify(vo);
 	}
 
 	//재능 판매 삭제

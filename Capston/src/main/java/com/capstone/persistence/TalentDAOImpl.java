@@ -26,7 +26,7 @@ public class TalentDAOImpl implements TalentDAO{
 	
 	//재능 판매 수정
 	@Override
-	public void talentModify(Talent_S_VO vo) throws Exception {
+	public void talentSModify(Talent_S_VO vo) throws Exception {
 		sql.update(namespace + ".talentModify", vo);
 	}
 	
