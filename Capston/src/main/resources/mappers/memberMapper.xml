@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.capstone.mappers.memberMapper">
+
+<!-- 회원 가입 -->
+<insert id="signup">
+ insert into member (Name, Id, Pw, Major, Student_Num, Email, Phone_Num)
+  values(#{Name}, #{Id}, #{Pw}, #{Major}, #{Student_Num}, #{Email}, #{Phone_Num}) 
+</insert>
+
+<!-- 로그인 -->
+<select id="signin" resultType="com.capstone.domain.MemberVO">
+	select
+	    Name, Id, Pw, Major, Student_Num, Email, Phone_Num
+	from
+	    member
+	where Id = #{Id} AND Pw = #{Pw}
+</select>
+<!-- 아이디 체크 -->
+<select id="idChk" resultType="com.capstone.domain.MemberVO">
+	select Id from member 
+	where Id = #{Id}
+</select>
+
+<!-- 거래 조회 -->
+	<select id="tradeView" resultType="com.capstone.domain.TradeVO">
+		select
+			trade_Code, trade_State, seller_Id, buyer_Id
+	    from trade
+	    where buyer_Id = #{Id} AND trade_State = 3
+	        order by goods_Code desc
+	</select>
+</mapper>

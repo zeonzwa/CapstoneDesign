@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.capstone.mappers.adminMapper">
+
+<!--판매 상품 등록 -->
+	<insert id="register">
+		insert into goods (goods_Code, seller_Id, goods_Name, goods_Cate, goods_Price,goods_Sta, goods_Des, 
+								goods_Pic, phone_Num, goods_State)
+	   		values (goods_seq.nextval, #{seller_Id},#{goods_Name}, #{goods_Cate}, #{goods_Price}, #{goods_Sta} ,#{goods_Des},
+	   		 		#{goods_Pic}, #{phone_Num}, 1)  	
+	</insert>
+<!--판매 상품 목록(화면) 출력-->	
+	<select id="goodslist" resultType="com.capstone.domain.GoodsVO">
+		select
+			goods_Code, seller_Id, goods_Name, goods_Cate, goods_Sta,goods_Price, goods_Des, goods_Pic, goods_Date, phone_Num
+	    from goods
+	    where goods_State = 1
+	        order by goods_Code desc
+	</select>
+<!--판매 상품 조회 -->
+	<select id="goodsView" resultType="com.capstone.domain.GoodsVO">
+		select goods_Code, seller_Id, goods_Name, goods_Cate, goods_Sta, goods_Price, goods_Des, goods_Pic, goods_Date, phone_Num
+    		from goods
+        		where goods_Code = #{goods_Code}
+	</select>
+<!--판매 상품 수정 -->
+	<update id="goodsModify">
+		update goods
+		    set
+		        goods_Name = #{goods_Name},
+		        goods_Cate = #{goods_Cate},
+		        goods_Price = #{goods_Price}, 
+		        goods_Sta = #{goods_Sta},
+		        goods_Des = #{goods_Des},
+		        goods_Pic = #{goods_Pic}
+		        
+		    where goods_Code = ${goods_Code}
+	</update>	
+<!--판매 상품 삭제 -->
+	<delete id="goodsDelete">
+		delete
+	   		goods
+		where goods_Code = #{goods_Code}
+	</delete>	
+	
+<!--구매 상품 등록 -->	
+	<insert id="goods_B_Register">
+		insert into goods_b (goodsb_Code, goodsb_Id ,goodsb_Title, goodsb_Cate, goodsb_Price, goodsb_Des, phone_Num)
+		values (goods_b_seq.nextval, #{goodsb_Id}, #{goodsb_Title}, #{goodsb_Cate}, #{goodsb_Price}, #{goodsb_Des}, #{phone_Num})
+	</insert>
+
+<!--구매 상품 수정 -->	
+	<update id="goods_B_Modify">
+	update goods_b
+		    set
+		        goodsb_Title = #{goodsb_Title},
+		        goodsb_Cate = #{goodsb_Cate},
+		        goodsb_Price = #{goodsb_Price}, 
+		        goodsb_Des = #{goodsb_Des}
+		        
+		    where goodsb_Code = ${goodsb_Code}
+	</update>
+
+<!--구매 상품 삭제 -->	
+	<delete id="goods_B_Delete">
+		delete
+			goods_b
+		where goodsb_Code = #{goodsb_Code}
+	</delete>
+
+<!--구매 상품 목록(화면) 출력 -->	
+	<select id="goods_B_list" resultType="com.capstone.domain.Goods_B_VO">
+		select
+			goodsb_Code, goodsb_Id, goodsb_Title, goodsb_Cate, goodsb_Price, goodsb_Des, phone_Num, goodsb_Date
+	    from goods_b
+	        order by goodsb_Code desc
+	</select>
+<!--구매 상품 상세 조회 -->	
+	<select id="goods_B_View" resultType="com.capstone.domain.Goods_B_VO">
+	select goodsb_Code, goodsb_Id, goodsb_Title, goodsb_Cate, goodsb_Price, goodsb_Des, phone_Num, goodsb_Date
+    		from goods_b
+        		where goodsb_Code = #{goodsb_Code}
+	</select>
+	
+<!-- 거래 등록 -->
+	<insert id="trade_register">
+		insert into trade (trade_Code, goods_Code, seller_Id, trade_State)
+		values (tbl_goods_seq.nextval, #{goods_Code}, #{seller_Id}, 1)
+	</insert>
+<!-- 거래 조회 -->
+	<select id="trade_view" resultType="com.capstone.domain.TradeVO">
+		select
+			trade_Code, goods_Code, seller_Id, buyer_Id, trade_State
+			from trade
+				where goods_Code = #{goods_Code}
+	</select>
+<!-- 거래 요청 -->
+	<update id="trade_req">
+		update trade
+			set
+				buyer_Id = #{buyer_Id},
+				trade_State = #{trade_State}
+			where goods_Code = #{goods_Code}
+	</update>
+	
+<!-- 거래 요청 취소 및 거부 -->
+	<update id="trade_cancel">
+		update trade
+			set
+				buyer_Id = #{buyer_Id},
+				trade_State = #{trade_State}
+			where trade_Code = #{trade_Code}
+	</update>
+	
+<!-- 거래 완료 -->
+	<update id="trade_complete">
+		update trade
+			set
+				trade_State = #{trade_State}
+			where trade_Code = #{trade_Code}
+	</update>
+<!-- 거래 완료 후 상품 상태 승격 -->
+	<update id="goods_set">
+		update goods
+			set
+				goods_State = 2
+			where goods_Code = #{goods_Code}
+	</update>
+<!-- 거래 삭제 -->
+	<delete id="tradeDelete">
+		delete 
+			trade
+		where goods_Code = #{goods_Code}
+	</delete>
+	
+</mapper>

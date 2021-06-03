@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.capstone.mappers.talentMapper">
+
+<!--재능 판매 등록 -->	
+<insert id="register">
+	insert into Talent_S (Tals_Code, Tals_Title, Tals_Kinds, Tals_Content, Tals_Price, Tals_Term, Phone_Num, Tals_Id, Tals_Date)
+	values (Talent_S_Seq.nextval, #{Tals_Title}, #{Tals_Kinds}, #{Tals_Content},
+		#{Tals_Price}, #{Tals_Term}, #{Phone_Num}, #{Tals_Id}, SYSDATE )
+</insert>
+
+<!--재능 판매 수정 -->
+<update id="talentModify">
+	update Talent_S
+		set
+			Tals_Title = #{Tals_Title},
+			Tals_Kinds = #{Tals_Kinds},
+			Tals_Content = #{Tals_Content},
+			Tals_Price = #{Tals_Price}
+			
+		where Tals_Code = ${Tals_Code}
+</update>
+
+
+<!--재능 판매 삭제 -->
+<delete id="talentDelete">
+	delete Talent_S where Tals_Code = #{Tals_Code}
+</delete>
+
+
+<!--재능 판매 목록(화면) 출력 -->
+<select id="talentSlist" resultType="com.capstone.domain.Talent_S_VO">
+	select Tals_Code, Tals_Title, Tals_Kinds, Tals_Content, 
+	Tals_Price, Phone_Num, Tals_Date, Tals_Id
+	from Talent_S order by Tals_Code desc
+</select>
+
+
+<!--재능 판매 상세 조회 -->
+<select id="talentSview" resultType="com.capstone.domain.Talent_S_VO">
+	select Tals_Code, Tals_Title, Tals_Kinds, Tals_Content, Tals_Price, Phone_Num, Tals_Date, Tals_Id
+	from Talent_S where Tals_Code = #{Tals_Code}
+</select>
+
+
+<!--재능 구매 등록 -->
+
+
+<!--재능 구매 수정 -->
+
+
+<!--재능 구매 삭제 -->
+
+
+<!--재능 구매 목록(화면) 출력 -->
+
+<!--재능 구매 상세 조회 -->
+
+
+</mapper>

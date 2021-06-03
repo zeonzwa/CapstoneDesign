@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.capstone.mappers.moveMapper">
+<!-- 1:1문의 -->
+<select id="noticelist" resultType="com.capstone.domain.NoticeVO">
+	select
+		notice_Num, notice_Title, notice_Content, notice_Date
+	from notice
+		order by notice_Num desc
+</select>
+
+<!-- 1:1문의 -->
+	<insert id="faq">
+		insert into faq (faq_Title, faq_Kinds, faq_Content, faq_Id)
+		values (#{faq_Title}, #{faq_Kinds}, #{faq_Content}, #{faq_Id})
+	</insert>
+
+<!-- 내가 등록한 판매 물품 -->
+<select id="goodslist" resultType="com.capstone.domain.GoodsVO">
+	select
+		goods_Code, goods_Name, goods_Des, goods_Pic, goods_Date
+	from goods
+		where seller_Id = #{seller_Id} 
+		order by goods_Code desc
+</select>
+
+<!-- 내가 등록한 구매 희망 물품 -->
+<select id="goods_B_list" resultType="com.capstone.domain.Goods_B_VO">
+	select
+		goodsb_Code, goodsb_Title, goodsb_Des, goodsb_Date
+	from goods_b
+		where goodsb_Id = #{goodsb_Id}
+		order by goodsb_Code desc
+</select>
+<!-- 내가 요청한 거래들 -->
+<select id="my_Trade_List" resultType="com.capstone.domain.TradeVO">
+	select
+		goods_Code, trade_State
+	from trade
+		where buyer_Id = #{goodsb_Id}
+		order by goods_Code desc
+</select>
+
+<!-- 거래완료된 거래들 -->
+<select id="my_TradeC_List" resultType="com.capstone.domain.TradeVO">
+	select
+		goods_Code, trade_State
+	from trade
+		where buyer_Id = #{goodsb_Id}
+		order by goods_Code desc
+</select>
+
+<!--등록된 판매 상품 조회 -->
+	<select id="goodsView" resultType="com.capstone.domain.GoodsVO">
+		select goods_Code, seller_Id, goods_Name, goods_Cate, goods_Sta, goods_Price, goods_Des, goods_Pic, goods_Date, phone_Num
+    		from goods
+        		where goods_Code = #{goods_Code}
+	</select>
+<!--거래 조회 -->
+	<select id="tradeView" resultType="com.capstone.domain.TradeVO">
+		select
+			trade_Code, goods_Code, seller_Id, buyer_Id, trade_State
+			from trade
+				where goods_Code = #{goods_Code}
+	</select>
+<!--후기 작성 완료한 거래 -->
+	<update id="trade_com">
+		update trade
+			set
+				trade_State = #{trade_State}
+		where trade_Code = #{trade_Code}
+	</update>
+<!--후기 작성 -->
+	<insert id ="review_register">
+		insert into review (review_Code, review_Content, review_Sta, review_Writer, review_Goods, review_Trader)
+			values (review_seq.nextval, #{review_Content}, #{review_Sta}, #{review_Writer}, #{review_Goods}, #{review_Trader})
+	</insert>
+	
+<!--후기 출력 -->
+	<select id="reviewlist" resultType="com.capstone.domain.ReviewVO">
+		select
+			review_Code, review_Content, review_Sta, review_Writer, review_Date, review_Goods, review_Trader
+			from review
+			where review_Writer = #{Id}
+			order by review_Code desc 
+	</select>
+<!--후기 삭제 -->
+	<delete id="reviewDelete">
+		delete
+	   		review
+		where review_Code = #{review_Code}
+	</delete>	
+<!--후기 수정 -->	
+	<update id="reviewModify">
+	update review
+		    set
+		        review_Content = #{review_Content},
+		        review_Sta = #{review_Sta}
+		        
+		    where review_Code = #{review_Code}
+	</update>	
+<!--후기 조회 -->
+	<select id="reviewView" resultType="com.capstone.domain.ReviewVO">
+		select review_Code, review_Content, review_Sta, review_Writer, review_Date, review_Goods, review_Trader
+    		from review
+        		where review_Code = #{review_Code}
+	</select>		
+
+</mapper>

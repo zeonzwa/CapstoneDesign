@@ -1,0 +1,38 @@
+@charset "EUC-KR";
+
+#wantbuy_btn{
+	position:relative; 
+	left:800px;
+}
+
+
+.col-lg-100{ 
+	margin: 5px; 
+	-ms-flex:0 0 40%;
+	flex:0 0 40%;
+	max-width:100%}
+
+#after_Btn{
+	width :400px;
+}
+
+#after-btn-container{
+	display:inline-block;
+	position:relative; 
+	left:200px;
+}
+
+
+#uploaded-btn{
+	
+	position:relative; 
+	left:200px;
+	top:80px;
+}
+
+#notice-date{
+	width:100%
+	font-size: 15px;
+	color : #A9A9A9;
+	border-bottom: 1px solid #A9A9A9;
+}
