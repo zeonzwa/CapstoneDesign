@@ -94,7 +94,8 @@
     <h1 class="mt-4 mb-3">마이 페이지
       <small></small>
     </h1>
-    <a href="/talent/talent_S_reg">글쓰기</a>
+    
+        <a href="/talent/talent_S_reg">글쓰기</a>
     <hr/>
     <a href="/talent/talent_S_list">글목록</a>
 

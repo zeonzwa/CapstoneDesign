@@ -6,57 +6,81 @@
 
 <!--재능 판매 등록 -->	
 <insert id="register">
-	insert into Talent_S (Tals_Code, Tals_Title, Tals_Kinds, Tals_Content, Tals_Price, Tals_Term, Phone_Num, Tals_Id, Tals_Date)
-	values (Talent_S_Seq.nextval, #{Tals_Title}, #{Tals_Kinds}, #{Tals_Content},
-		#{Tals_Price}, #{Tals_Term}, #{Phone_Num}, #{Tals_Id}, SYSDATE )
+	insert into Talent_S (tals_Code, tals_Title, tals_Kinds, tals_Content, tals_Price, tals_Term, phone_Num, tals_Id, tals_Date)
+	values (talent_S_Seq.nextval, #{tals_Title}, #{tals_Kinds}, #{tals_Content},
+		#{tals_Price}, #{tals_Term}, #{phone_Num}, #{tals_Id}, SYSDATE )
 </insert>
 
 <!--재능 판매 수정 -->
 <update id="talentModify">
 	update Talent_S
 		set
-			Tals_Title = #{Tals_Title},
-			Tals_Kinds = #{Tals_Kinds},
-			Tals_Content = #{Tals_Content},
-			Tals_Price = #{Tals_Price}
+			tals_Title = #{tals_Title},
+			tals_Kinds = #{tals_Kinds},
+			tals_Content = #{tals_Content},
+			tals_Price = #{tals_Price}
 			
-		where Tals_Code = ${Tals_Code}
+		where tals_Code = ${tals_Code}
 </update>
 
 
 <!--재능 판매 삭제 -->
 <delete id="talentDelete">
-	delete Talent_S where Tals_Code = #{Tals_Code}
+	delete Talent_S where tals_Code = #{tals_Code}
 </delete>
 
 
 <!--재능 판매 목록(화면) 출력 -->
 <select id="talentSlist" resultType="com.capstone.domain.Talent_S_VO">
-	select Tals_Code, Tals_Title, Tals_Kinds, Tals_Content, 
-	Tals_Price, Phone_Num, Tals_Date, Tals_Id
-	from Talent_S order by Tals_Code desc
+	select tals_Code, tals_Title, tals_Kinds, tals_Content, 
+	tals_Price, phone_Num, tals_Date, tals_Id
+	from Talent_S order by tals_Code desc
 </select>
 
 
 <!--재능 판매 상세 조회 -->
 <select id="talentSview" resultType="com.capstone.domain.Talent_S_VO">
-	select Tals_Code, Tals_Title, Tals_Kinds, Tals_Content, Tals_Price, Phone_Num, Tals_Date, Tals_Id
+	select tals_Code, tals_Title, tals_Kinds, tals_Content, tals_Price, phone_Num, tals_Date, tals_Id, tals_Term
 	from Talent_S where Tals_Code = #{Tals_Code}
 </select>
 
 
 <!--재능 구매 등록 -->
-
+<insert id="talent_B_Register">
+		insert into talent_b (talb_Code, talb_Id ,talb_Title, talb_Kinds, talb_Content, phone_Num)
+		values (talb_seq.nextval, #{talb_Id}, #{talb_Title}, #{talb_Kinds}, #{talb_Content}, #{phone_Num})
+</insert>
 
 <!--재능 구매 수정 -->
-
+	<update id="talent_B_Modify">
+	update talent_b
+		    set
+		        talb_Title = #{talb_Title},
+		        talb_Kinds = #{talb_Kinds},
+		        talb_Content = #{talb_Content}
+		        
+		    where talb_Code = ${talb_Code}
+	</update>
 
 <!--재능 구매 삭제 -->
-
+	<delete id="talent_B_Delete">
+		delete
+			talent_b
+		where talb_Code = #{talb_Code}
+	</delete>
 
 <!--재능 구매 목록(화면) 출력 -->
-
+	<select id="talent_B_list" resultType="com.capstone.domain.Talent_B_VO">
+		select
+			talb_Code, talb_Id, talb_Title, talb_Kinds, talb_Content, phone_Num, talb_Date
+	    from talent_b
+	        order by talb_Code desc
+	</select>
 <!--재능 구매 상세 조회 -->
-
+	<select id="talent_B_View" resultType="com.capstone.domain.Talent_B_VO">
+	select talb_Code, talb_Id, talb_Title, talb_Kinds, talb_Content, phone_Num, talb_Date
+    		from talent_b
+        		where talb_Code = #{talb_Code}
+	</select>
 
 </mapper>

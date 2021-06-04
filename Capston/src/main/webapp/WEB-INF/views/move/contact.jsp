@@ -192,7 +192,7 @@ li {
     <ul>
     <li>제목<span>날짜</span></li>
     <c:forEach items="${list}" var="list">
-    <li><sapn>${list.notice_Num}</sapn><a href="#">${list.notice_Title}</a><span>${list.notice_Date}</span></li>
+    <li><sapn>${list.notice_Num}</sapn> <a href="/move/contact_view?n=${list.notice_Num}">${list.notice_Title}</a><span>${list.notice_Date}</span></li>
       	
     </c:forEach>
     </ul>
@@ -211,7 +211,7 @@ li {
   <!-- Footer -->
   <footer class="py-5 bg-dark">
     <div class="container">
-      <p class="m-0 text-center text-white">Copyright &copy; Your Website 2020</p>
+      <p class="m-0 text-center text-white">충대 장터</p>
     </div>
     <!-- /.container -->
   </footer>

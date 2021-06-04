@@ -3,12 +3,20 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.capstone.mappers.moveMapper">
-<!-- 1:1문의 -->
+<!-- 공지사항 -->
 <select id="noticelist" resultType="com.capstone.domain.NoticeVO">
 	select
 		notice_Num, notice_Title, notice_Content, notice_Date
 	from notice
 		order by notice_Num desc
+</select>
+
+<!-- 공지사항 상세 조회 -->
+<select id="notice_View" resultType="com.capstone.domain.NoticeVO">
+	select
+		notice_Num, notice_Title, notice_Content, notice_Date
+	from notice
+		where notice_Num = #{notice_Num}
 </select>
 
 <!-- 1:1문의 -->

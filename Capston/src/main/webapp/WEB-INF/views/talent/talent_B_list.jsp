@@ -18,10 +18,12 @@
 
   <!-- Custom styles for this template -->
   <link href="${pageContext.request.contextPath}/resources/css/modern-business.css" rel="stylesheet" type="text/css">
+   <!--  add CSS -->
+  <link href="${pageContext.request.contextPath}/resources/vendor/bootstrap/css/web.css" rel="stylesheet" type="text/css">
 
 <style>
 .card-img-top { width:418px; height:250px; }
-
+#reg {width : 49px; height:29px; border: none; padding: 0;font-size:20px; position:absolute; left:1100px; background: }
 </style>
 
 </head>
@@ -29,7 +31,7 @@
 <body>
 
   <!-- Navigation -->
-  <nav class="navbar fixed-top navbar-expand-lg navbar-dark bg-dark fixed-top">
+ <nav class="navbar fixed-top navbar-expand-lg navbar-dark bg-dark fixed-top">
     <div class="container">
       <a class="navbar-brand" href="/move/index">충대 장터</a>
       <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
@@ -87,37 +89,39 @@
   </nav>
 
 
+  
+  <!-- Page Content -->
+  <div class="container">
 
+    <!-- Page Heading/Breadcrumbs -->
+    <h1 class="mt-4 mb-3">재능구매 거래소
+    <button id = "reg" onclick="location.href='/talent/talent_B_register'">등록</button>
+    
+      <small></small>
+    </h1>
+
+    <ol class="breadcrumb">
+      <li class="breadcrumb-item">
+        <a href="talent_B_list.html">재능 구매</a>
+      </li>
+      <li class="breadcrumb-item active">재능구매 리스트</li>
+    </ol>
   
 
-    <!-- Team Members -->
-    <div id = "title">
-    <h2>충대 장터 거래소</h2> 
-    <div id = "Product_reg">
-      <button id = "reg" onclick="location.href='/admin/register'">등록</button>
-      </div>
-  </div>
-  
-
-    <div class="row">
-    	<c:forEach items="${list}" var="list">
-    	 <div class="col-lg-100">
-        <div class="card h-100 text-center">
-        <div id="trade_list_margin">
-         <img src="${list.goods_Pic}" class="card-img-top"/>
-         </div>
-          <div class="card-body">
-         		 <label for="gdsName">상품명</label>
-				<h4 class="card-title">${list.goods_Name}</h4>
+    <c:forEach items="${list}" var="list">
+    <div class="card mb-4">
+      <div class="card-body">
+          <div class="col-lg-6">
+            <h2 class="card-title">${list.talb_Title}</h2>
+            
+            <span>작성자 : </span>
+            <p class="card-text">${list.talb_Id}</p>
+            <p class="card-text"><div id="btn-place"><a href="/talent/talent_B_view?n=${list.talb_Code}"  class="btn btn-primary">상세보기 &rarr;</a></div> </p> 
           </div>
-          <div class="card-footer">
-          	<span>닉네임:</span>
-            <a href="/admin/trade_view?n=${list.goods_Code}">${list.seller_Id}</a>
-          </div>
-        </div>
       </div>
-    	
-    	</c:forEach>
+    </div>
+      	
+    </c:forEach>
     </div>
     <!-- /.row -->
 
@@ -128,7 +132,7 @@
   <!-- Footer -->
   <footer class="py-5 bg-dark">
     <div class="container">
-      <p class="m-0 text-center text-white">충대장터</p>
+      <p class="m-0 text-center text-white">충대 장터</p>
     </div>
     <!-- /.container -->
   </footer>

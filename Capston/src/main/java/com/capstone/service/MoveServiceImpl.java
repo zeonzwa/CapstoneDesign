@@ -27,6 +27,12 @@ public class MoveServiceImpl implements MoveService {
 		return dao.noticelist();
 	}
 	
+	//공지사항상세조회
+	@Override
+	public NoticeVO notice_View(int notice_Num) throws Exception{
+		return dao.notice_View(notice_Num);
+	}
+	
 	//1:1문의 등록
 	@Override
 	public void faq(FaqVO vo) throws Exception{

@@ -56,6 +56,15 @@ public class MoveController {
 		model.addAttribute("list", list);
 	}
 	
+	// 공지사항 상세 조회
+	@RequestMapping(value = "/contact_view", method = RequestMethod.GET)
+	public void getGoodsview(@RequestParam("n") int notice_Num, Model model, HttpServletRequest req) throws Exception {
+		logger.info("get notice view");
+		HttpSession session = req.getSession(); 	
+		NoticeVO notice = moveService.notice_View(notice_Num);
+		model.addAttribute("notice", notice);
+	}
+	
 	
 	//등록한 판매, 구매 물품 목록 get
 	@RequestMapping(value = "/uploaded", method = RequestMethod.GET)

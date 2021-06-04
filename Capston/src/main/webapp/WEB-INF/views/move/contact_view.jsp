@@ -125,21 +125,21 @@ li {
 
     <ol class="breadcrumb">
       <li class="breadcrumb-item">
-        <a href="index.html">공지사항</a>
+        <a href="contact.html">공지사항</a>
       </li>
       <li class="breadcrumb-item active">공지</li>
     </ol>
 
 <div id=noice-subject>
 	<div id="notice-title">
- 		<h2>공지 | 제목</h2>
+ 		<h2>${notice.notice_Title}</h2>
 	</div>
 	<div>
-		<p id = "notice-date">2021.05.27</p>
+		<p id = "notice-date">${notice.notice_Date}</p>
 	</div>
 
 	<div>
-		<span id="notice-content">안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요</span>
+		<span id="notice-content">${notice.notice_Content}</span>
 	</div>
 </div>
 

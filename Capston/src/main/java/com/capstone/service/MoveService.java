@@ -14,6 +14,9 @@ public interface MoveService {
 	//공지사항
 	public List<NoticeVO> noticelist() throws Exception;
 	
+	//공지사항상세조회
+	public NoticeVO notice_View(int notice_Num) throws Exception;
+	
 	//1:1문의 등록
 	public void faq(FaqVO vo) throws Exception;
 	
