@@ -59,7 +59,7 @@ textarea#gdsDes { width:400px; height:180px; }
 <body>
 
   <!-- Navigation -->
-    <nav class="navbar fixed-top navbar-expand-lg navbar-dark bg-dark fixed-top">
+  <nav class="navbar fixed-top navbar-expand-lg navbar-dark bg-dark fixed-top">
     <div class="container">
       <a class="navbar-brand" href="/move/index">충대 장터</a>
       <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
@@ -84,8 +84,8 @@ textarea#gdsDes { width:400px; height:180px; }
               재능거래소
             </a>
             <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownBlog">
-              <a class="dropdown-item" href="/move/uploaded">재능 판매</a>
-              <a class="dropdown-item" href="/move/wantbuy">재능 구매</a>
+              <a class="dropdown-item" href="/talent/talent_S_list">재능 판매</a>
+              <a class="dropdown-item" href="/talent/talent_B_list">재능 구매</a>
             </div>
           </li>
           <li class="nav-item dropdown">
@@ -115,7 +115,6 @@ textarea#gdsDes { width:400px; height:180px; }
       </div>
     </div>
   </nav>
-
   
 
     <!-- Team Members -->

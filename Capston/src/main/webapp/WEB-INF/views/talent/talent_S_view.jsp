@@ -112,36 +112,28 @@ input { width:150px; }
     <div class="row">
       <div class="col-lg-6">
         <div class="inputArea">
-				<label for="tals_Title">재능판매_제목</label>
+				<label for="tals_Title">제목</label>
 				<span>${talent.tals_Title}</span>
 		</div>
 		 <div class="inputArea">
-				<label for="tals_Kinds">재능판매_종류</label>
+				<label for="tals_Kinds">판매희망분류</label>
 				<span>${talent.tals_Kinds}</span>
 		</div>
 		<div class="inputArea">
-				<label for="tals_Content">재능판매_내용</label>
+				<label for="tals_Content">내용</label>
 				<span>${talent.tals_Content}</span>
 		</div>
 		<div class="inputArea">
-				<label for="tals_Price">재능판매_가격</label>
+				<label for="tals_Price">가격</label>
 				<span>${talent.tals_Price}</span>
 		</div>
 		<div class="inputArea">
-				<label for="tals_Term">재능판매_텀</label>
+				<label for="tals_Term">작업기간</label>
 				<span>${talent.tals_Term}</span>
 		</div>
 		<div class="inputArea">
-				<label for="phone_Num">핸드폰_번호</label>
+				<label for="phone_Num">연락처</label>
 				<span>${talent.phone_Num}</span>
-		</div>
-		<div class="inputArea">
-				<label for="tals_Date">재능판매글올린_날짜</label>
-				<span>${talent.tals_Date}</span>
-		</div>
-		<div class="inputArea">
-				<label for="tals_Id">재능판매_글쓴사람</label>
-				<span>${talent.tals_Id}</span>
 		</div>
       </div>
     </div>
@@ -149,9 +141,34 @@ input { width:150px; }
       </div>
   <c:choose>
   <c:when test = "${member.id eq talent.tals_Id}">
-<a href="/talent/talent_S_modify?n=${talent.tals_Code}">게시물 수정</a><hr/>
-<a href="/talent/talent_S_delete?n=${talent.tals_Code}">게시물  삭제</a>
+  <div id = "tradebtn">
+    <button type="button" id="modify_Btn" class="btn btn-warning">수정</button>
+	<button type="button" id="delete_Btn" class="btn btn-danger">삭제</button>
+			<script>
+					var formObj = $("form[role='form']");
+					
+					$("#modify_Btn").click(function(){
+						formObj.attr("action", "/talent/talent_S_modify");
+						formObj.attr("method", "get")
+						formObj.submit();
+					});
+					
+					$("#delete_Btn").click(function(){
+						
+						var con = confirm("정말로 삭제하시겠습니까?");
+						
+						if(con) {						
+							formObj.attr("action", "/talent/talent_S_delete");
+							formObj.submit();
+						}
+					});
+				</script>	
+  </div>
+
 </c:when>
+<c:otherwise>
+
+</c:otherwise>
 
 </c:choose>
 <a href="/talent/talent_S_list">게시물  리스트</a>

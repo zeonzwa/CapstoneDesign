@@ -49,7 +49,6 @@ public class TalentDAOImpl implements TalentDAO{
 		return sql.selectOne(namespace + ".talentSview", Tals_Code);
 	}
 		
-		
 	//재능 구매 등록
 	@Override
 	public void talent_B_Register(Talent_B_VO vo) throws Exception{

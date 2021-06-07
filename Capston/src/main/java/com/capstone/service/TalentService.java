@@ -25,12 +25,16 @@ public interface TalentService {
 		
 	//재능 구매 등록
 	public void talent_B_Register(Talent_B_VO vo) throws Exception;
+	
 	//재능 구매 수정
-	public void talent_B_Modify(Talent_B_VO vo) throws Exception;	
+	public void talent_B_Modify(Talent_B_VO vo) throws Exception;
+	
 	//재능 구매 삭제
 	public void talent_B_Delete(int talb_Code) throws Exception;
+	
 	//재능 구매 목록(화면) 출력
 	public List<Talent_B_VO> talent_B_list() throws Exception;
+	
 	//재능 구매 상세 조회
 	public Talent_B_VO talent_B_View(int talb_Code) throws Exception;
 }

@@ -54,8 +54,8 @@
               재능거래소
             </a>
             <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownBlog">
-              <a class="dropdown-item" href="/move/uploaded">재능 판매</a>
-              <a class="dropdown-item" href="/move/wantbuy">재능 구매</a>
+              <a class="dropdown-item" href="/talent/talent_S_list">재능 판매</a>
+              <a class="dropdown-item" href="/talent/talent_B_list">재능 구매</a>
             </div>
           </li>
           <li class="nav-item dropdown">
@@ -86,40 +86,44 @@
     </div>
   </nav>
 
-<div id="root">
- <header>
-  <h1>재능기부 판매 게시판 리스트</h1>
- </header>
-<hr /> 
-   <a href="/talent/talent_S_reg">글쓰기</a>
-  <table>
-   <tr>
-   <th>글 번호</th>
-   <th>글 제목</th>
-   <th>글종류</th>
-   <th>텀</th>
-   <th>폰번호</th>
-   <th>작성일자</th>
-   <th>글쓴이</th>
-   </tr>
-   
-   <!-- 목록 시작 -->
-   <c:forEach items="${list}" var="list">
-   <tr>
-    <td><a href="/talent/talent_S_view?n=${list.tals_Code}">${list.tals_Code}</a></td>
-    <td>${list.tals_Title}</td>
-    <td>${list.tals_Kinds}</td>
-    <td>${list.tals_Term}</td>
-    <td>${list.phone_Num}</td>
-    <td><fmt:formatDate value="${list.tals_Date}" pattern="yyyy-MM-dd" /></td>
-    <td>${list.tals_Id}</td>
-   </tr>
-   </c:forEach>
-   <!-- 목록 끝 -->
-   
-  </table>
+  <!-- Page Content -->
+  <div class="container">
 
- </section>
+    <!-- Page Heading/Breadcrumbs -->
+    <h2 class="mt-4 mb-3">재능판매 거래소
+    <button id = "reg" onclick="location.href='/talent/talent_S_reg'">등록</button>
+    
+      <small></small>
+    </h2>
+
+    <ol class="breadcrumb">
+      <li class="breadcrumb-item">
+        <a href="talent_S_list">재능 판매</a>
+      </li>
+      <li class="breadcrumb-item active">재능판매 리스트</li>
+    </ol>
+  
+
+    <c:forEach items="${list}" var="list">
+    <div class="card mb-4">
+      <div class="card-body">
+          <div class="col-lg-6">
+            <h2 class="card-title">${list.tals_Title}</h2>
+            
+            <span>작성자 : </span>
+            <p class="card-text">${list.tals_Id}</p>
+            <p class="card-text"><div id="btn-place"><a href="/talent/talent_S_view?n=${list.tals_Code}"  class="btn btn-primary">상세보기 &rarr;</a></div> </p> 
+          </div>
+      </div>
+    </div>
+      	
+    </c:forEach>
+    </div>
+    <!-- /.row -->
+
+
+  
+  <!-- /.container -->
 
 <hr />
 

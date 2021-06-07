@@ -7,8 +7,8 @@ import javax.inject.Inject;
 import org.springframework.stereotype.Service;
 
 import com.capstone.domain.Talent_B_VO;
-import com.capstone.persistence.TalentDAO;
 import com.capstone.domain.Talent_S_VO;
+import com.capstone.persistence.TalentDAO;
 
 @Service
 public class TalentServiceImpl implements TalentService{

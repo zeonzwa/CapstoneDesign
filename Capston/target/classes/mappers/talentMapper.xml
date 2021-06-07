@@ -18,7 +18,8 @@
 			tals_Title = #{tals_Title},
 			tals_Kinds = #{tals_Kinds},
 			tals_Content = #{tals_Content},
-			tals_Price = #{tals_Price}
+			tals_Price = #{tals_Price},
+			tals_Term = #{tals_Term}
 			
 		where tals_Code = ${tals_Code}
 </update>

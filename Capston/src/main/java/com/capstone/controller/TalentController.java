@@ -16,9 +16,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.capstone.domain.Goods_B_VO;
-import com.capstone.domain.Talent_S_VO;
 import com.capstone.domain.MemberVO;
 import com.capstone.domain.Talent_B_VO;
+import com.capstone.domain.Talent_S_VO;
 import com.capstone.domain.TradeVO;
 import com.capstone.service.AdminService;
 import com.capstone.service.TalentService;

@@ -59,7 +59,7 @@ textarea#gdsDes { width:400px; height:180px; }
 <body>
 
   <!-- Navigation -->
-    <nav class="navbar fixed-top navbar-expand-lg navbar-dark bg-dark fixed-top">
+  <nav class="navbar fixed-top navbar-expand-lg navbar-dark bg-dark fixed-top">
     <div class="container">
       <a class="navbar-brand" href="/move/index">충대 장터</a>
       <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
@@ -84,8 +84,8 @@ textarea#gdsDes { width:400px; height:180px; }
               재능거래소
             </a>
             <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownBlog">
-              <a class="dropdown-item" href="/move/uploaded">재능 판매</a>
-              <a class="dropdown-item" href="/move/wantbuy">재능 구매</a>
+              <a class="dropdown-item" href="/talent/talent_S_list">재능 판매</a>
+              <a class="dropdown-item" href="/talent/talent_B_list">재능 구매</a>
             </div>
           </li>
           <li class="nav-item dropdown">
@@ -116,13 +116,21 @@ textarea#gdsDes { width:400px; height:180px; }
     </div>
   </nav>
   
-    <!-- Talent_S Members -->
+    <!-- Team Members -->
     <section id="container">
    
 		<div id="wrapper"> 
 <div id="content">
 		
-			    <h1 class="mt-4 mb-3">재능기부물품판매 수정
+			    <h1 class="mt-4 mb-3">재능판매내용 수정
+      <small></small>
+    </h1>
+			    <ol class="breadcrumb">
+      <li class="breadcrumb-item">
+        <a href="/talent/talent_S_list">재능 판매</a>
+      </li>
+      <li class="breadcrumb-item active">재능구매내용 수정</li>
+    </ol>
 			
 <form role="form" method="post" autocomplete="off" enctype="multipart/form-data">
 
@@ -134,20 +142,35 @@ textarea#gdsDes { width:400px; height:180px; }
  <input type="text" id="tals_Title" name="tals_Title" value="${talent.tals_Title}"/>
 </div>
 <div class="inputArea">
- <label for="tals_Kinds">종류</label>
- <input type="text" id="tals_Kinds" name="tals_Kinds" value="${talent.tals_Kinds}"/>
+	<label for="tals_Kinds">재능분류</label>
+	<select id="tals_Kinds" name="tals_Kinds" >
+		<option value="디자인" <c:if test='${talent.tals_Kinds == "디자인"}'>selected</c:if>>디자인</option>
+  		<option value="코딩" <c:if test='${talent.tals_Kinds == "코딩"}'>selected</c:if>>코딩</option>
+ 	 	<option value="과제"  <c:if test='${talent.tals_Kinds == "과제"}'>selected</c:if>>과제</option>
+	</select>
 </div>
 <div class="inputArea">
- <label for="tals_Content">내용</label>
- <input type="text" id="tals_Content" name="tals_Content" value="${talent.tals_Content}"/>
+ <label for="tals_Content">재능판매내용</label>
+ <textarea rows="5" cols="50" id="tals_Content" name="tals_Content">${talent.tals_Content}</textarea>
 </div>
 <div class="inputArea">
  <label for="tals_Price">가격</label>
  <input type="text" id="tals_Price" name="tals_Price" value="${talent.tals_Price}"/>
 </div>
 <div class="inputArea">
+ <label for="tals_Term">작업 기간</label>
+ <input type="text" id="tals_Term" name="tals_Term" value="${talent.tals_Term}"/>
+</div>
+
+<div class="inputArea">
  <button type="submit" id="update_Btn" class="btn btn-primary">완료</button>
- <input type="button" value="뒤로 가기" onclick="history.back(-1)">
+ <button type="submit" id="back_Btn" class="btn btn-warning">취소</button>
+  <script>
+ $("#back_Btn").click(function(){
+  //history.back();
+  location.href = "/talent/talent_S_view?n=" + ${talent.tals_Code};
+ });   
+</script>
 </div>   
 
 </form>
