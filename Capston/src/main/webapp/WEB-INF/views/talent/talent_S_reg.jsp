@@ -125,30 +125,59 @@ textarea#gdsDes { width:400px; height:180px; }
 
 <hr />
 
- <section id="container">
- 
-  <form role="form" method="post" autocomplete="off">
-   <p>
-    <label for="Tals_Title">글 제목</label><input type="text" id="Tals_Title" name="Tals_Title" />
-   </p>
-   <p>
-    <label for="Tals_Kinds">글 종류</label><input type="text" id="Tals_Kinds" name="Tals_Kinds" />
-   </p>
-   <p>
-    <label for="Tals_Content">글 내용</label><textarea id="Tals_Content" name="Tals_Content"></textarea>
-   </p>
-   <p>
-    <label for="Tals_Price">가격</label><input type="text" id="Tals_Price" name="Tals_Price" />
-   </p>
-   <p>
-    <label for="Tals_Term">텀</label><input type="text" id="Tals_Term" name="Tals_Term" />
-   </p>
-   <p>
-    <button type="submit">작성</button>
-   </p>  
-  </form>
+     <!-- Team Members -->
+   <section id="container">
+   
+		<div id="wrapper"> 
+<div id="content">
+		
+			    <h1 class="mt-4 mb-3">재능판매
+      <small></small>
+    </h1>
+			    <ol class="breadcrumb">
+      <li class="breadcrumb-item">
+        <a href="talent_S_list">재능판매 거래소</a>
+      </li>
+      <li class="breadcrumb-item active">재능판매 등록</li>
+    </ol>
+				
+<form role="form" method="post" autocomplete="off" enctype="multipart/form-data">
 
- </section>
+
+<div class="inputArea">
+	<label for="tals_Title">제목</label>
+	<input type="text" id="tals_Title" name="tals_Title"/>
+</div>
+<div class="inputArea">
+	<label for="tals_Kinds">재능분류</label>
+	<select id="tals_Kinds" name="tals_Kinds" >
+		<option value="디자인" selected="selected">디자인</option>
+  		<option value="코딩">코딩</option>
+ 	 	<option value="과제" >과제</option>
+	</select>
+</div>
+
+<div class="inputArea">
+	<label for="talb_Content">재능판매 내용</label>
+	<textarea rows="5" cols="50" id="tals_Content" name="tals_Content"></textarea>
+</div>
+<div class="inputArea">
+	<label for="tals_Price">가격</label>
+	<input type="text" id="tals_Price" name="tals_Price"/>
+</div>
+<div class="inputArea">
+	<label for="tals_Term">작업 기간</label>
+	<input type="text" id="tals_Term" name="tals_Term"/>
+</div>
+<div class="inputArea">
+	<button type="submit" id="register_Btn" class="btn btn-primary">등록</button>
+</div>
+</div>
+</div>
+</form>
+			
+		</div>
+	</section>
 
 <hr />
 
