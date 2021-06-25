@@ -29,6 +29,7 @@
 </beans:bean>
 
 <!-- 일반 파일 업로드 경로 -->
+<resources mapping="/resources/**" location="/resources/"/>
 <resources mapping="/imgUpload/**" location="/resources/imgUpload/" />
 
 <beans:bean class="org.springframework.web.multipart.commons.CommonsMultipartResolver" id="multipartResolver">

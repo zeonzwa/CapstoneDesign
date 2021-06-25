@@ -41,20 +41,20 @@
           </li>
           <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownPortfolio" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-              거래소
+              중고장터
             </a>
             <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownPortfolio">
-              <a class="dropdown-item" href="/admin/trade_list">판매</a>
-              <a class="dropdown-item" href="/admin/goodsb_list">구매</a>
+              <a class="dropdown-item" href="/admin/trade_list">중고판매</a>
+              <a class="dropdown-item" href="/admin/goodsb_list">중고구매</a>
             </div>
           </li>
           <li class="nav-item dropdown">
                      <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownBlog" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-              재능거래소
+              재능장터
             </a>
             <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownBlog">
-              <a class="dropdown-item" href="/talent/talent_S_list">재능 판매</a>
-              <a class="dropdown-item" href="/talent/talent_B_list">재능 구매</a>
+              <a class="dropdown-item" href="/talent/talent_S_list">재능판매</a>
+              <a class="dropdown-item" href="/talent/talent_B_list">재능구매</a>
             </div>
           </li>
           <li class="nav-item dropdown">
@@ -106,15 +106,15 @@
       <div class="card-body">
         <div class="row">
           <div class="col-lg-6">
-            <h2 class="card-title"><span>제목</span>${list.goods_Name}</h2>
-            <p class="card-text"><span>판매자</span>${list.seller_Id}</p>
-            <p class="card-text"><span>내용</span>${list.goods_Des}</p>
+            <h2 class="card-title"><label>제목 : </label>${list.goods_Name}</h2>
+            <p class="card-text"><label>판매자 : </label>${list.seller_Id}</p>
+            <p class="card-text"><label>내용 : </label>${list.goods_Des}</p>
             <a id="wantbuy_btn" href="/admin/trade_view?n=${list.goods_Code}" class="btn btn-primary">상세한 정보 확인하기 &rarr;</a>
           </div>
         </div>
       </div>
       <div class="card-footer text-muted">
-       	<p>${list.phone_Num}</p>
+       	<p><label>판매자연락처 : </label>${list.phone_Num}</p>
         <a href="#"></a>
       </div>
     </div>

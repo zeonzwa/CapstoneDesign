@@ -74,7 +74,7 @@
                  <div>
                     <h3 class="join_title"><label for="Major">전공</label></h3>
                     <span class="box int_name">
-                        <input type="text" id="Major" name="Major" class="int" required="required">
+                        <input type="text" id="Major" name="Major" placeholder="ex)컴퓨터공학과" class="int" required="required">
                     </span>
                     <span class="error_next_box"></span>
                 </div>
@@ -82,7 +82,7 @@
                  <div>
                     <h3 class="join_title"><label for="Student_Num">학번</label></h3>
                     <span class="box int_name">
-                        <input type="text" id="Student_Num" name="Student_Num" class="int" required="required">
+                        <input type="text" id="Student_Num" name="Student_Num" placeholder="ex)2021040001" class="int" required="required">
                     </span>
                     <span class="error_next_box"></span>
                 </div>
@@ -104,7 +104,7 @@
                 <div>
                     <h3 class="join_title"><label for="Phone_Num">휴대전화</label></h3>
                     <span class="box int_mobile">
-                        <input type="text" id="Phone_Num" name="Phone_Num" placeholder="연락처를 입력해주세요" required="required" class="int">
+                        <input type="text" id="Phone_Num" name="Phone_Num" placeholder="ex)010-1234-5678 (-포함)" required="required" class="int">
                     </span>
                     <span class="error_next_box"></span>    
                 </div>

@@ -1,11 +1,13 @@
 package com.capstone.controller;
 
 import java.io.File;
+import java.io.PrintWriter;
 import java.util.List;
 
 import javax.annotation.Resource;
 import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.apache.commons.lang.StringUtils;
@@ -21,6 +23,7 @@ import org.springframework.web.multipart.MultipartFile;
 import com.capstone.domain.GoodsVO;
 import com.capstone.domain.Goods_B_VO;
 import com.capstone.domain.MemberVO;
+import com.capstone.domain.ReviewVO;
 import com.capstone.domain.TradeVO;
 import com.capstone.service.AdminService;
 import com.capstone.utils.UploadFileUtils;
@@ -152,14 +155,17 @@ public class AdminController {
 		MemberVO member = (MemberVO) session.getAttribute("member"); 	
 		GoodsVO goods = adminService.goodsView(goods_Code);
 		TradeVO trade = adminService.trade_view(goods_Code);
+		List<ReviewVO> list = adminService.goodsReview(goods.getSeller_Id());
 		if(trade==null) {
 		adminService.trade_register(goods);//거래 테이블 값 넣기 시작
 		model.addAttribute("goods", goods);
 		model.addAttribute("member", member);
+		model.addAttribute("list", list);
 		}
 		else {
 		model.addAttribute("goods", goods);
 		model.addAttribute("member", member);
+		model.addAttribute("list", list);
 		}
 	}
 	
@@ -238,100 +244,116 @@ public class AdminController {
 	
 	//거래 요청
 	@RequestMapping(value = "/req", method = RequestMethod.POST)
-	public String postTradeReq(@RequestParam("n") int goods_Code, Model model, HttpServletRequest req) throws Exception {
+	public String postTradeReq(@RequestParam("n") int goods_Code, Model model, HttpServletRequest req, HttpServletResponse response) throws Exception {
 		logger.info("post trade request");
 		HttpSession session = req.getSession();
 		MemberVO member = (MemberVO) session.getAttribute("member"); 
 		TradeVO trade = adminService.trade_view(goods_Code);
+		
+		response.setContentType("text/html; charset=UTF-8");
+		PrintWriter out = response.getWriter();
+		
 		if(trade.getTrade_State()==1) {
 		trade.setBuyer_Id(member.getId());
 		trade.setTrade_State(2);
+		out.println("<script language='javascript'>");
+		out.println("alert('정상적으로 거래요청 되었습니다.');");
+		out.println("</script>");
+		out.flush();
 		adminService.trade_req(trade);
 		}
+		else if(trade.getTrade_State()==2) {
+			out.println("<script language='javascript'>");
+			out.println("alert('해당 상품은 이미 거래가 진행중입니다.');");
+			out.println("</script>");
+			out.flush();
+			
+		}
 		
-		return "redirect:/admin/trade_list";
+		return "/move/index";
 		
 	}
 	//거래 요청 취소
 	@RequestMapping(value = "/cancel", method = RequestMethod.POST)
-	public String postTradeCancel(@RequestParam("n") int goods_Code, Model model, HttpServletRequest req) throws Exception {
+	public String postTradeCancel(@RequestParam("n") int goods_Code, Model model, HttpServletRequest req, HttpServletResponse response) throws Exception {
 		logger.info("post trade cancel");
 		HttpSession session = req.getSession();
 		MemberVO member = (MemberVO) session.getAttribute("member"); 
 		TradeVO trade = adminService.trade_view(goods_Code);
+		response.setContentType("text/html; charset=UTF-8");
+		PrintWriter out = response.getWriter();
+		
 		if(member.getId().equals(trade.getBuyer_Id()) && trade.getTrade_State()==2) {
 			String str="...";
 			trade.setBuyer_Id(str);
 			trade.setTrade_State(1);
+			out.println("<script language='javascript'>");
+			out.println("alert('정상적으로 거래요청취소 되었습니다.');");
+			out.println("</script>");
+			out.flush();
 			adminService.trade_cancel(trade);
-		}	
-		return "redirect:/admin/trade_list";
+		}else {
+			out.println("<script language='javascript'>");
+			out.println("alert('거래요청한 상품이 아닙니다.');");
+			out.println("</script>");
+			out.flush();
+		}
+		return "/move/index";
 		
 	}
 	//거래 완료
 	@RequestMapping(value = "/complete", method = RequestMethod.POST)
-	public String postTradeComplete(@RequestParam("n") int goods_Code, Model model, HttpServletRequest req) throws Exception {
+	public String postTradeComplete(@RequestParam("n") int goods_Code, Model model, HttpServletRequest req, HttpServletResponse response) throws Exception {
 		logger.info("post trade complete");
 		TradeVO trade = adminService.trade_view(goods_Code);
+		response.setContentType("text/html; charset=UTF-8");
+		PrintWriter out = response.getWriter();
 		if(trade.getTrade_State()==2) {
 			trade.setTrade_State(3);
+			out.println("<script language='javascript'>");
+			out.println("alert('정상적으로 거래완료 되었습니다.');");
+			out.println("</script>");
+			out.flush();
 			adminService.trade_complete(trade);
 			adminService.goods_set(goods_Code);
-		}	
-		return "redirect:/admin/trade_list";//후기작성으로 넘어가게 하면 됨.
+		}
+		else if(trade.getTrade_State()==1) {
+			out.println("<script language='javascript'>");
+			out.println("alert('요청받은 거래가 없습니다.');");
+			out.println("</script>");
+			out.flush();
+		}
+		return "/move/index";
 		
 	}
 	//거래 거부
 	@RequestMapping(value = "/reject", method = RequestMethod.POST)
-	public String postTradeReject(@RequestParam("n") int goods_Code, Model model) throws Exception {
+	public String postTradeReject(@RequestParam("n") int goods_Code, Model model, HttpServletResponse response) throws Exception {
 		logger.info("post trade reject");
 		TradeVO trade = adminService.trade_view(goods_Code);
+		response.setContentType("text/html; charset=UTF-8");
+		PrintWriter out = response.getWriter();
 		if(trade.getTrade_State()==2) {
 			String str="...";
 			trade.setBuyer_Id(str);
 			trade.setTrade_State(1);
+			out.println("<script language='javascript'>");
+			out.println("alert('정상적으로 요청된 거래를 거부 하였습니다.');");
+			out.println("</script>");
+			out.flush();
 			adminService.trade_cancel(trade);
-		}	
-		return "redirect:/admin/trade_list";
+		}
+		else if(trade.getTrade_State()==1) {
+			out.println("<script language='javascript'>");
+			out.println("alert('요청받은 거래가 없습니다.');");
+			out.println("</script>");
+			out.flush();
+		}
+		
+		return "/move/index";
 		
 	}
 	
 //////////여기 까지 상품 거래 관련
-	
-	//후기관리 get
-	@RequestMapping(value = "/review", method = RequestMethod.GET)
-	public void getReview() throws Exception {
-		logger.info("get index");
-	}
-		
-	// 후기관리 post
-	@RequestMapping(value = "/review", method = RequestMethod.POST)
-	public String postReview(MemberVO vo) throws Exception {
-			 
-		return "admin/review";
-	}
-	//후기작성 get
-	@RequestMapping(value = "/review_reg", method = RequestMethod.GET)
-	public void getReviewReg() throws Exception {
-		logger.info("get index");
-	}
-		
-	// 후기작성 post
-	@RequestMapping(value = "/review_reg", method = RequestMethod.POST)
-	public String postReviewReg(MemberVO vo) throws Exception {
-			 
-		return "admin/review_reg";
-	}
-	//구매요청 get
-	@RequestMapping(value = "/wantbuy2", method = RequestMethod.GET)
-	public void getWantBuy() throws Exception {
-		logger.info("get wantbuy");
-	}
-		
-	// 구매요청 post
-	@RequestMapping(value = "/wantbuy2", method = RequestMethod.POST)
-	public String postWantBuy(MemberVO vo) throws Exception {
-			 
-		return "admin/wantbuy2";
-	}
+
 }

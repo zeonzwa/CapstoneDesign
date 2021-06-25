@@ -41,7 +41,7 @@ input { width:150px; }
 <body>
 
   <!-- Navigation -->
-   <nav class="navbar fixed-top navbar-expand-lg navbar-dark bg-dark fixed-top">
+  <nav class="navbar fixed-top navbar-expand-lg navbar-dark bg-dark fixed-top">
     <div class="container">
       <a class="navbar-brand" href="/move/index">충대 장터</a>
       <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
@@ -54,20 +54,20 @@ input { width:150px; }
           </li>
           <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownPortfolio" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-              거래소
+              중고장터
             </a>
             <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownPortfolio">
-              <a class="dropdown-item" href="/admin/trade_list">판매</a>
-              <a class="dropdown-item" href="/admin/goodsb_list">구매</a>
+              <a class="dropdown-item" href="/admin/trade_list">중고판매</a>
+              <a class="dropdown-item" href="/admin/goodsb_list">중고구매</a>
             </div>
           </li>
           <li class="nav-item dropdown">
                      <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownBlog" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-              재능거래소
+              재능장터
             </a>
             <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownBlog">
-              <a class="dropdown-item" href="/talent/talent_S_list">재능 판매</a>
-              <a class="dropdown-item" href="/talent/talent_B_list">재능 구매</a>
+              <a class="dropdown-item" href="/talent/talent_S_list">재능판매</a>
+              <a class="dropdown-item" href="/talent/talent_B_list">재능구매</a>
             </div>
           </li>
           <li class="nav-item dropdown">
@@ -103,7 +103,7 @@ input { width:150px; }
   <div class="container">
 
     <!-- Page Heading/Breadcrumbs -->
-    <h1 class="mt-4 mb-3">물품상세</h1>
+    <h1 class="mt-4 mb-3">중고판매 상세</h1>
 
 	<form role="form" method="post" autocomplete="off">
 			
@@ -123,13 +123,17 @@ input { width:150px; }
 				<label for="gdsCategory">상품분류</label>
 				<span>${goods.goods_Cate}</span>
 		</div>
+				<div class="inputArea">
+				<label >작성자</label>
+				<span>${goods.seller_Id}</span>
+		</div>
 		<div class="inputArea">
 				<label for="gdsCategory">연락처</label>
 				<span>${goods.phone_Num}</span>
 		</div>
 		<div class="inputArea">
 				<label for="gdsPrice">상품가격</label>
-				<span><fmt:formatNumber value="${goods.goods_Price}" pattern="###,###,###"/></span>
+				<span><fmt:formatNumber value="${goods.goods_Price}" pattern="###,###,###원"/></span>
 			</div>
 		<div class="inputArea">
 				<label for="gdsSta">상품상태</label>
@@ -138,7 +142,7 @@ input { width:150px; }
         <div class="inputArea">
 				<label for="gdsDes">상품소개</label>	
 				<div class="gdsDes">${goods.goods_Des}</div>
-			</div>
+		</div>
       </div>
     </div>
 
@@ -211,9 +215,10 @@ input { width:150px; }
   <div id = "after">
     <h4>최근 거래 후기</h2>
     <ul>
-      <li><span>정말 친절해요</span><h1><span id="star"></span></h1></li>
-      <li><span>쿨거래 감사합니다</span><h1><span id="star"></span></h1></li>
-      <li><span>후기3</span><h1><span id="star"></span></h1></li>
+   	 <li><label>별점</label><label>후기내용</label></li>
+    	<c:forEach items="${list}" var="list">
+      		<li><label>${list.review_Sta}</label>${list.review_Content}</li>
+     	</c:forEach>
     </ul>
   </div>
 
@@ -223,7 +228,7 @@ input { width:150px; }
   <!-- Footer -->
   <footer class="py-5 bg-dark">
     <div class="container">
-      <p class="m-0 text-center text-white">Copyright &copy; Your Website 2020</p>
+      <p class="m-0 text-center text-white">충대 장터</p>
     </div>
     <!-- /.container -->
   </footer>

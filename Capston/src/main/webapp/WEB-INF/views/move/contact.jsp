@@ -2,6 +2,7 @@
 <%@ page session="false" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -128,20 +129,20 @@ li {
           </li>
           <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownPortfolio" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-              거래소
+              중고장터
             </a>
             <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownPortfolio">
-              <a class="dropdown-item" href="/admin/trade_list">판매</a>
-              <a class="dropdown-item" href="/admin/goodsb_list">구매</a>
+              <a class="dropdown-item" href="/admin/trade_list">중고판매</a>
+              <a class="dropdown-item" href="/admin/goodsb_list">중고구매</a>
             </div>
           </li>
           <li class="nav-item dropdown">
                      <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownBlog" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-              재능거래소
+              재능장터
             </a>
             <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownBlog">
-              <a class="dropdown-item" href="/talent/talent_S_list">재능 판매</a>
-              <a class="dropdown-item" href="/talent/talent_B_list">재능 구매</a>
+              <a class="dropdown-item" href="/talent/talent_S_list">재능판매</a>
+              <a class="dropdown-item" href="/talent/talent_B_list">재능구매</a>
             </div>
           </li>
           <li class="nav-item dropdown">
@@ -192,8 +193,7 @@ li {
     <ul>
     <li>제목<span>날짜</span></li>
     <c:forEach items="${list}" var="list">
-    <li><sapn>${list.notice_Num}</sapn> <a href="/move/contact_view?n=${list.notice_Num}">${list.notice_Title}</a><span>${list.notice_Date}</span></li>
-      	
+    <li><sapn>${list.notice_Num}</sapn> <a href="/move/contact_view?n=${list.notice_Num}">${list.notice_Title}</a><span><fmt:formatDate pattern="yyyy/MM/dd" value="${list.notice_Date}"/></span></li>
     </c:forEach>
     </ul>
 

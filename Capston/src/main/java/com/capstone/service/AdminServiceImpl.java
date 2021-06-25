@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import com.capstone.domain.GoodsVO;
 import com.capstone.domain.Goods_B_VO;
 import com.capstone.domain.MemberVO;
+import com.capstone.domain.ReviewVO;
 import com.capstone.domain.TradeVO;
 import com.capstone.persistence.AdminDAO;
 
@@ -32,6 +33,11 @@ public class AdminServiceImpl implements AdminService {
 	@Override
 	public GoodsVO goodsView(int goods_Code) throws Exception {
 		return dao.goodsView(goods_Code);
+	}
+	//판매상품조회(후기 출력관련)
+	@Override
+	public List<ReviewVO> goodsReview(String goods_Id) throws Exception{
+		return dao.goodsReview(goods_Id);
 	}
 	//판매상품수정
 	@Override

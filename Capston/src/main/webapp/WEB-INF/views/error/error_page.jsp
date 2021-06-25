@@ -21,13 +21,14 @@
 	</c:if>
 	
 	<c:if test="${requestScope['javax.servlet.error.status_code'] == 500}">
-		<p>서버에 오류가 발생하여 요청을 수행할 수 없습니다.</p>
+		<p>잘못된 형식의 값을 입력하셨습니다. 다시 입력해주시기 바랍니다.</p>
 	</c:if>
 	
 	<c:if test="${requestScope['javax.servlet.error.status_code'] == 503}">
 		<p>서비스를 사용할 수 없습니다.</p>
 	</c:if>
 	
-	<a href="/">HOME</a>
+	<a href="/move/index">Home</a>
+	<a href="javascript:history.back(-1)">뒤로가기</a>
 </body>
 </html>

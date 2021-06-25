@@ -72,20 +72,20 @@ textarea#gdsDes { width:400px; height:180px; }
           </li>
           <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownPortfolio" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-              거래소
+              중고장터
             </a>
             <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownPortfolio">
-              <a class="dropdown-item" href="/admin/trade_list">판매</a>
-              <a class="dropdown-item" href="/admin/goodsb_list">구매</a>
+              <a class="dropdown-item" href="/admin/trade_list">중고판매</a>
+              <a class="dropdown-item" href="/admin/goodsb_list">중고구매</a>
             </div>
           </li>
           <li class="nav-item dropdown">
                      <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownBlog" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-              재능거래소
+              재능장터
             </a>
             <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownBlog">
-              <a class="dropdown-item" href="/talent/talent_S_list">재능 판매</a>
-              <a class="dropdown-item" href="/talent/talent_B_list">재능 구매</a>
+              <a class="dropdown-item" href="/talent/talent_S_list">재능판매</a>
+              <a class="dropdown-item" href="/talent/talent_B_list">재능구매</a>
             </div>
           </li>
           <li class="nav-item dropdown">
@@ -123,14 +123,14 @@ textarea#gdsDes { width:400px; height:180px; }
 		<div id="wrapper"> 
 <div id="content">
 		
-			    <h1 class="mt-4 mb-3">재능구매내용 수정
+			    <h1 class="mt-4 mb-3">재능구매 수정
       <small></small>
     </h1>
 			    <ol class="breadcrumb">
       <li class="breadcrumb-item">
-        <a href="index.html">재능 구매</a>
+        <a href="index.html">재능구매</a>
       </li>
-      <li class="breadcrumb-item active">재능구매내용 수정</li>
+      <li class="breadcrumb-item active">재능구매 수정</li>
     </ol>
 			
 <form role="form" method="post" autocomplete="off" enctype="multipart/form-data">
@@ -151,7 +151,7 @@ textarea#gdsDes { width:400px; height:180px; }
 	</select>
 </div>
 <div class="inputArea">
- <label for="talb_Content">재능구매내용</label>
+ <label for="talb_Content">내용</label>
  <textarea rows="5" cols="50" id="talb_Content" name="talb_Content">${talent.talb_Content}</textarea>
 </div>
 

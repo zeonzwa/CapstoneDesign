@@ -10,6 +10,7 @@ import org.springframework.stereotype.Repository;
 import com.capstone.domain.GoodsVO;
 import com.capstone.domain.Goods_B_VO;
 import com.capstone.domain.MemberVO;
+import com.capstone.domain.ReviewVO;
 import com.capstone.domain.TradeVO;
 
 @Repository
@@ -36,6 +37,12 @@ public class AdminDAOImpl implements AdminDAO {
 	@Override
 	public GoodsVO goodsView(int goods_Code) throws Exception {
 		return sql.selectOne(namespace + ".goodsView", goods_Code);
+	}
+	
+	//판매상품조회(후기 출력관련)
+	@Override
+	public List<ReviewVO> goodsReview(String goods_Id) throws Exception{
+		return sql.selectList(namespace + ".goodsReview", goods_Id);
 	}
 
 	//판매 상품 수정

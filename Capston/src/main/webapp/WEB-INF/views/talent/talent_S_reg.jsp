@@ -74,20 +74,20 @@ textarea#gdsDes { width:400px; height:180px; }
           </li>
           <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownPortfolio" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-              거래소
+              중고장터
             </a>
             <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownPortfolio">
-              <a class="dropdown-item" href="/admin/trade_list">판매</a>
-              <a class="dropdown-item" href="/admin/goodsb_list">구매</a>
+              <a class="dropdown-item" href="/admin/trade_list">중고판매</a>
+              <a class="dropdown-item" href="/admin/goodsb_list">중고구매</a>
             </div>
           </li>
           <li class="nav-item dropdown">
                      <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownBlog" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-              재능거래소
+              재능장터
             </a>
             <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownBlog">
-              <a class="dropdown-item" href="/talent/talent_S_list">재능 판매</a>
-              <a class="dropdown-item" href="/talent/talent_B_list">재능 구매</a>
+              <a class="dropdown-item" href="/talent/talent_S_list">재능판매</a>
+              <a class="dropdown-item" href="/talent/talent_B_list">재능구매</a>
             </div>
           </li>
           <li class="nav-item dropdown">
@@ -118,25 +118,18 @@ textarea#gdsDes { width:400px; height:180px; }
     </div>
   </nav>
 
-<div id="root">
- <header>
-  <h1>재능기부 판매 게시판 글쓰기</h1>
- </header>
 
-<hr />
-
-     <!-- Team Members -->
-   <section id="container">
+<section id="container">
    
-		<div id="wrapper"> 
+<div id="wrapper"> 
 <div id="content">
 		
-			    <h1 class="mt-4 mb-3">재능판매
+	  <h1 class="mt-4 mb-3">재능판매
       <small></small>
     </h1>
 			    <ol class="breadcrumb">
       <li class="breadcrumb-item">
-        <a href="talent_S_list">재능판매 거래소</a>
+        <a href="talent_B_list.html">재능판매 장터</a>
       </li>
       <li class="breadcrumb-item active">재능판매 등록</li>
     </ol>
@@ -158,17 +151,20 @@ textarea#gdsDes { width:400px; height:180px; }
 </div>
 
 <div class="inputArea">
-	<label for="talb_Content">재능판매 내용</label>
+	<label for="tals_Content">내용</label>
 	<textarea rows="5" cols="50" id="tals_Content" name="tals_Content"></textarea>
 </div>
+
 <div class="inputArea">
 	<label for="tals_Price">가격</label>
 	<input type="text" id="tals_Price" name="tals_Price"/>
 </div>
+
 <div class="inputArea">
-	<label for="tals_Term">작업 기간</label>
+	<label for="tals_Term">작업기간</label>
 	<input type="text" id="tals_Term" name="tals_Term"/>
 </div>
+
 <div class="inputArea">
 	<button type="submit" id="register_Btn" class="btn btn-primary">등록</button>
 </div>
@@ -176,7 +172,7 @@ textarea#gdsDes { width:400px; height:180px; }
 </div>
 </form>
 			
-		</div>
+</div>
 	</section>
 
 <hr />

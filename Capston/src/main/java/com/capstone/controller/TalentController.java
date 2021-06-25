@@ -72,7 +72,7 @@ public class TalentController {
 	
 	
 	//재능 판매 삭제
-	@RequestMapping(value="/talent_S_delete",method=RequestMethod.GET)
+	@RequestMapping(value="/talent_S_delete",method=RequestMethod.POST)
 	public String getTalentDelete(@RequestParam("n") int tals_Code) throws Exception{
 		logger.info("post talent delete");
 		talentService.talentDelete(tals_Code);

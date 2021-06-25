@@ -6,9 +6,9 @@
 
 <!--재능 판매 등록 -->	
 <insert id="register">
-	insert into Talent_S (tals_Code, tals_Title, tals_Kinds, tals_Content, tals_Price, tals_Term, phone_Num, tals_Id, tals_Date)
-	values (talent_S_Seq.nextval, #{tals_Title}, #{tals_Kinds}, #{tals_Content},
-		#{tals_Price}, #{tals_Term}, #{phone_Num}, #{tals_Id}, SYSDATE )
+	insert into Talent_S (tals_Code, tals_Title, tals_Kinds, tals_Content, tals_Price, tals_Term, phone_Num, tals_Id)
+	values (tals_seq.nextval, #{tals_Title}, #{tals_Kinds}, #{tals_Content},
+		#{tals_Price}, #{tals_Term}, #{phone_Num}, #{tals_Id})
 </insert>
 
 <!--재능 판매 수정 -->
@@ -18,8 +18,7 @@
 			tals_Title = #{tals_Title},
 			tals_Kinds = #{tals_Kinds},
 			tals_Content = #{tals_Content},
-			tals_Price = #{tals_Price},
-			tals_Term = #{tals_Term}
+			tals_Price = #{tals_Price}
 			
 		where tals_Code = ${tals_Code}
 </update>

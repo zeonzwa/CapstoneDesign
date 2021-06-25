@@ -23,7 +23,7 @@
 
 <style>
 .card-img-top { width:418px; height:250px; }
-#reg {width : 49px; height:29px; border: none; padding: 0;font-size:20px; position:absolute; left:1100px; background: }
+
 </style>
 
 </head>
@@ -31,7 +31,7 @@
 <body>
 
   <!-- Navigation -->
-   <nav class="navbar fixed-top navbar-expand-lg navbar-dark bg-dark fixed-top">
+  <nav class="navbar fixed-top navbar-expand-lg navbar-dark bg-dark fixed-top">
     <div class="container">
       <a class="navbar-brand" href="/move/index">충대 장터</a>
       <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
@@ -44,20 +44,20 @@
           </li>
           <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownPortfolio" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-              거래소
+              중고장터
             </a>
             <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownPortfolio">
-              <a class="dropdown-item" href="/admin/trade_list">판매</a>
-              <a class="dropdown-item" href="/admin/goodsb_list">구매</a>
+              <a class="dropdown-item" href="/admin/trade_list">중고판매</a>
+              <a class="dropdown-item" href="/admin/goodsb_list">중고구매</a>
             </div>
           </li>
           <li class="nav-item dropdown">
                      <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownBlog" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-              재능거래소
+              재능장터
             </a>
             <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownBlog">
-              <a class="dropdown-item" href="/talent/talent_S_list">재능 판매</a>
-              <a class="dropdown-item" href="/talent/talent_B_list">재능 구매</a>
+              <a class="dropdown-item" href="/talent/talent_S_list">재능판매</a>
+              <a class="dropdown-item" href="/talent/talent_B_list">재능구매</a>
             </div>
           </li>
           <li class="nav-item dropdown">
@@ -93,7 +93,7 @@
   <div class="container">
 
     <!-- Page Heading/Breadcrumbs -->
-    <h1 class="mt-4 mb-3">재능구매 거래소
+    <h1 id ="talb_list_title" class="mt-4 mb-3">재능구매 장터
     <button id = "reg" onclick="location.href='/talent/talent_B_register'">등록</button>
     
       <small></small>
@@ -101,7 +101,7 @@
 
     <ol class="breadcrumb">
       <li class="breadcrumb-item">
-        <a href="talent_B_list.html">재능 구매</a>
+        <a href="talent_B_list.html">재능구매</a>
       </li>
       <li class="breadcrumb-item active">재능구매 리스트</li>
     </ol>
@@ -111,10 +111,9 @@
     <div class="card mb-4">
       <div class="card-body">
           <div class="col-lg-6">
-            <h2 class="card-title">${list.talb_Title}</h2>
-            
-            <span>작성자 : </span>
-            <p class="card-text">${list.talb_Id}</p>
+            <h2 class="card-title"><label>제목 : </label>${list.talb_Title}</h2>
+            <p class="card-text"><label>작성자 : </label>${list.talb_Id}</p>
+            <p class="card-text"><label>구매희망분류 : </label>${list.talb_Kinds}</p>
             <p class="card-text"><div id="btn-place"><a href="/talent/talent_B_view?n=${list.talb_Code}"  class="btn btn-primary">상세보기 &rarr;</a></div> </p> 
           </div>
       </div>

@@ -38,20 +38,20 @@
           </li>
           <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownPortfolio" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-              거래소
+              중고장터
             </a>
             <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownPortfolio">
-              <a class="dropdown-item" href="/admin/trade_list">판매</a>
-              <a class="dropdown-item" href="/admin/goodsb_list">구매</a>
+              <a class="dropdown-item" href="/admin/trade_list">중고판매</a>
+              <a class="dropdown-item" href="/admin/goodsb_list">중고구매</a>
             </div>
           </li>
           <li class="nav-item dropdown">
                      <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownBlog" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-              재능거래소
+              재능장터
             </a>
             <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownBlog">
-              <a class="dropdown-item" href="/talent/talent_S_list">재능 판매</a>
-              <a class="dropdown-item" href="/talent/talent_B_list">재능 구매</a>
+              <a class="dropdown-item" href="/talent/talent_S_list">재능판매</a>
+              <a class="dropdown-item" href="/talent/talent_B_list">재능구매</a>
             </div>
           </li>
           <li class="nav-item dropdown">
@@ -97,30 +97,30 @@
       <li class="breadcrumb-item active">FAQ</li>
     </ol>
 
-    <div class="mb-4" id="accordion" role="tablist" aria-multiselectable="true">
+<div class="mb-4" id="accordion" role="tablist" aria-multiselectable="true">
       <div class="card">
         <div class="card-header" role="tab" id="headingOne">
           <h5 class="mb-0">
-            <a data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne">자주 묻는 질문1</a>
+            <a data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne">자주 묻는 질문1 : 거래소에 사고 싶은 물품은 어디서 볼 수 있어요?</a>
           </h5>
         </div>
 
         <div id="collapseOne" class="collapse show" role="tabpanel" aria-labelledby="headingOne">
           <div class="card-body">
-            내용1
+            상단 메뉴의 거래소 탭에 마우스를 올려보시고 판매 메뉴를 클릭하시면 등록된 물품들을 보실 수 있습니다.
           </div>
         </div>
       </div>
       <div class="card">
         <div class="card-header" role="tab" id="headingTwo">
           <h5 class="mb-0">
-            <a class="collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">자주 묻는 질문2
+            <a class="collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">자주 묻는 질문2 : 제가 올린 물건을 수정하고 싶어요.
             </a>
           </h5>
         </div>
         <div id="collapseTwo" class="collapse" role="tabpanel" aria-labelledby="headingTwo">
           <div class="card-body">
-          내용2
+          상단 메뉴의 마이페이지 탭에서 '내가 등록한 물건'을 클릭하셔서 등록한 물품의 상세 정보 확인과 수정이 가능합니다.
           </div>
         </div>
       </div>
@@ -144,14 +144,14 @@
   <!-- Footer -->
   <footer class="py-5 bg-dark">
     <div class="container">
-      <p class="m-0 text-center text-white">Copyright &copy; Your Website 2020</p>
+      <p class="m-0 text-center text-white">충대 장터</p>
     </div>
     <!-- /.container -->
   </footer>
 
   <footer class="py-5 bg-dark">
     <div class="container">
-      <p class="m-0 text-center text-white">Copyright &copy; Your Website 2020</p>
+      <p class="m-0 text-center text-white">충대 장터</p>
     </div>
     <!-- /.container -->
   </footer>

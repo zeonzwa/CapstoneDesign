@@ -25,6 +25,16 @@
     		from goods
         		where goods_Code = #{goods_Code}
 	</select>
+	
+<!--판매 상품 조회(후기출력관련) -->
+	<select id="goodsReview" resultType="com.capstone.domain.ReviewVO">
+		select
+			review_Code, review_Content, review_Sta, Review_Writer
+		from review
+		where review_Trader = #{goods_Id}
+			order by review_Code desc
+	</select>
+
 <!--판매 상품 수정 -->
 	<update id="goodsModify">
 		update goods

@@ -42,20 +42,20 @@
           </li>
           <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownPortfolio" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-              거래소
+              중고장터
             </a>
             <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownPortfolio">
-              <a class="dropdown-item" href="/admin/trade_list">판매</a>
-              <a class="dropdown-item" href="/admin/goodsb_list">구매</a>
+              <a class="dropdown-item" href="/admin/trade_list">중고판매</a>
+              <a class="dropdown-item" href="/admin/goodsb_list">중고구매</a>
             </div>
           </li>
           <li class="nav-item dropdown">
                      <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownBlog" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-              재능거래소
+              재능장터
             </a>
             <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownBlog">
-              <a class="dropdown-item" href="/talent/talent_S_list">재능 판매</a>
-              <a class="dropdown-item" href="/talent/talent_B_list">재능 구매</a>
+              <a class="dropdown-item" href="/talent/talent_S_list">재능판매</a>
+              <a class="dropdown-item" href="/talent/talent_B_list">재능구매</a>
             </div>
           </li>
           <li class="nav-item dropdown">
@@ -108,13 +108,15 @@
         <div class="row">
            <div class="col-lg-6">
             <a href="#">
+            <div class="col-lg-6">
               <img class="img-fluid rounded" src="${list.goods_Pic}" alt="">
+             </div>
             </a>
           </div>
           <div class="col-lg-6">
-            <h2 class="card-title"><span>제목</span>${list.goods_Name}</h2>
-            <p class="card-text"><span>판매자</span>${list.seller_Id}</p>
-            <p class="card-text"><span>내용</span>${list.goods_Des}</p>                     
+            <h2 class="card-title"><label>제목 : </label>${list.goods_Name}</h2>
+            <p class="card-text"><label>판매자 : </label>${list.seller_Id}</p>
+            <p class="card-text"><label>내용 : </label>${list.goods_Des}</p>                     
             <a href="/move/review_reg?n=${list.goods_Code}" class="btn btn-primary">후기 작성 &rarr;</a>
           </div>
         </div>

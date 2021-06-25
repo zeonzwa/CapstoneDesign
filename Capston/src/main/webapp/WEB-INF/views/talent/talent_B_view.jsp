@@ -54,20 +54,20 @@ input { width:150px; }
           </li>
           <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownPortfolio" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-              거래소
+              중고장터
             </a>
             <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownPortfolio">
-              <a class="dropdown-item" href="/admin/trade_list">판매</a>
-              <a class="dropdown-item" href="/admin/goodsb_list">구매</a>
+              <a class="dropdown-item" href="/admin/trade_list">중고판매</a>
+              <a class="dropdown-item" href="/admin/goodsb_list">중고구매</a>
             </div>
           </li>
           <li class="nav-item dropdown">
                      <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownBlog" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-              재능거래소
+              재능장터
             </a>
             <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownBlog">
-              <a class="dropdown-item" href="/talent/talent_S_list">재능 판매</a>
-              <a class="dropdown-item" href="/talent/talent_B_list">재능 구매</a>
+              <a class="dropdown-item" href="/talent/talent_S_list">재능판매</a>
+              <a class="dropdown-item" href="/talent/talent_B_list">재능구매</a>
             </div>
           </li>
           <li class="nav-item dropdown">
@@ -98,12 +98,11 @@ input { width:150px; }
     </div>
   </nav>
 
-
   <!-- Page Content -->
   <div class="container">
 
     <!-- Page Heading/Breadcrumbs -->
-    <h1 class="mt-4 mb-3">구매 희망 상세</h1>
+    <h1 class="mt-4 mb-3">재능구매 상세</h1>
 
 	<form role="form" method="post" autocomplete="off">
 			
@@ -120,12 +119,16 @@ input { width:150px; }
 				<label for="gdsCategory">구매희망분류</label>
 				<span>${talent.talb_Kinds}</span>
 		</div>
+		 <div class="inputArea">
+				<label>작성자</label>
+				<span>${talent.talb_Id}</span>
+		</div>
 		<div class="inputArea">
 				<label for="gdsCategory">연락처</label>
 				<span>${talent.phone_Num}</span>
 		</div>
         <div class="inputArea">
-				<label for="gdsDes">구매내용</label>	
+				<label for="gdsDes">내용</label>	
 				<div class="gdsDes">${talent.talb_Content}</div>
 			</div>
       </div>

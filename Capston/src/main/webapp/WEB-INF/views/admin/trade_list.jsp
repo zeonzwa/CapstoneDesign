@@ -2,6 +2,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ page session="false" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+
 <!DOCTYPE html>
 
 <head>
@@ -27,9 +28,8 @@
 </head>
 
 <body>
-
   <!-- Navigation -->
-   <nav class="navbar fixed-top navbar-expand-lg navbar-dark bg-dark fixed-top">
+  <nav class="navbar fixed-top navbar-expand-lg navbar-dark bg-dark fixed-top">
     <div class="container">
       <a class="navbar-brand" href="/move/index">충대 장터</a>
       <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
@@ -42,20 +42,20 @@
           </li>
           <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownPortfolio" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-              거래소
+              중고장터
             </a>
             <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownPortfolio">
-              <a class="dropdown-item" href="/admin/trade_list">판매</a>
-              <a class="dropdown-item" href="/admin/goodsb_list">구매</a>
+              <a class="dropdown-item" href="/admin/trade_list">중고판매</a>
+              <a class="dropdown-item" href="/admin/goodsb_list">중고구매</a>
             </div>
           </li>
           <li class="nav-item dropdown">
                      <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownBlog" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-              재능거래소
+              재능장터
             </a>
             <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownBlog">
-              <a class="dropdown-item" href="/talent/talent_S_list">재능 판매</a>
-              <a class="dropdown-item" href="/talent/talent_B_list">재능 구매</a>
+              <a class="dropdown-item" href="/talent/talent_S_list">재능판매</a>
+              <a class="dropdown-item" href="/talent/talent_B_list">재능구매</a>
             </div>
           </li>
           <li class="nav-item dropdown">
@@ -92,11 +92,11 @@
 
     <!-- Team Members -->
     <div id = "title">
-    <h2>충대 장터 거래소</h2> 
+    <h2>중고판매 장터</h2> 
     <div id = "Product_reg">
       <button id = "reg" onclick="location.href='/admin/register'">등록</button>
       </div>
-  </div>
+  	</div>
   
 
     <div class="row">
@@ -104,14 +104,14 @@
     	 <div class="col-lg-100">
         <div class="card h-100 text-center">
         <div id="trade_list_margin">
-         <img src="${list.goods_Pic}" class="card-img-top"/>
+         <a href="/admin/trade_view?n=${list.goods_Code}"><img src="${list.goods_Pic}" class="card-img-top"/></a>
          </div>
           <div class="card-body">
-         		 <label for="gdsName">상품명</label>
-				<h4 class="card-title">${list.goods_Name}</h4>
+				<h4 class="card-title"><label>제목 : </label>${list.goods_Name}</h4>
+				 <p class="card-text"><label>가격 : </label><fmt:formatNumber value="${list.goods_Price}" pattern="###,###,###원"/></p>
           </div>
           <div class="card-footer">
-          	<span>닉네임:</span>
+          	<span>작성자:</span>
             <a href="/admin/trade_view?n=${list.goods_Code}">${list.seller_Id}</a>
           </div>
         </div>

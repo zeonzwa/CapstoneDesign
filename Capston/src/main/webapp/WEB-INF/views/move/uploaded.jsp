@@ -2,6 +2,7 @@
 <%@ page session="false" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE jsp>
 <jsp lang="en">
 
@@ -41,20 +42,20 @@
           </li>
           <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownPortfolio" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-              거래소
+              중고장터
             </a>
             <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownPortfolio">
-              <a class="dropdown-item" href="/admin/trade_list">판매</a>
-              <a class="dropdown-item" href="/admin/goodsb_list">구매</a>
+              <a class="dropdown-item" href="/admin/trade_list">중고판매</a>
+              <a class="dropdown-item" href="/admin/goodsb_list">중고구매</a>
             </div>
           </li>
           <li class="nav-item dropdown">
                      <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownBlog" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-              재능거래소
+              재능장터
             </a>
             <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownBlog">
-              <a class="dropdown-item" href="/talent/talent_S_list">재능 판매</a>
-              <a class="dropdown-item" href="/talent/talent_B_list">재능 구매</a>
+              <a class="dropdown-item" href="/talent/talent_S_list">재능판매</a>
+              <a class="dropdown-item" href="/talent/talent_B_list">재능구매</a>
             </div>
           </li>
           <li class="nav-item dropdown">
@@ -106,8 +107,10 @@
       <div class="card-body">
         <div class="row">
           <div class="col-lg-6">
-            <a href="/admin/goodsb_view?n=${list.goods_Code}">
+            <a href="/admin/trade_view?n=${list.goods_Code}">
+            <div class="col-lg-6">
               <img src="${list.goods_Pic}" class="card-img-top"/>
+              </div>
             </a>
           </div>
           <div class="col-lg-6">
@@ -118,8 +121,7 @@
         </div>
       </div>
       <div class="card-footer text-muted">
-       <p> ${list.goods_Date}</p>
-        <a href="#"></a>
+      <fmt:formatDate pattern="yyyy/MM/dd" value="${list.goods_Date}"/>
       </div>
     </div>
 	</c:forEach>
@@ -141,8 +143,7 @@
         </div>
       </div>
       <div class="card-footer text-muted">
-       	<p>${list2.goodsb_Date}</p>
-        <a href="#"></a>
+     	 <fmt:formatDate pattern="yyyy/MM/dd" value="${list2.goodsb_Date}"/>
       </div>
     </div>
 	</c:forEach>

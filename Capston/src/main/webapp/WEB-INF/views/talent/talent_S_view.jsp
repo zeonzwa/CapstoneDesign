@@ -23,7 +23,7 @@
 <style>
 .inputArea { margin:10px 0; }
 select { width:100px; }
-label { display:inline-block; width:90px; padding:5px; }
+label { display:inline-block; width:110px; padding:5px; }
 label[for='gdsDes'] { display:block; }
 input { width:150px; }
 .gdsDes { marigin:10px 0;width:400px; height:180px; }
@@ -41,7 +41,7 @@ input { width:150px; }
 <body>
 
   <!-- Navigation -->
-   <nav class="navbar fixed-top navbar-expand-lg navbar-dark bg-dark fixed-top">
+  <nav class="navbar fixed-top navbar-expand-lg navbar-dark bg-dark fixed-top">
     <div class="container">
       <a class="navbar-brand" href="/move/index">충대 장터</a>
       <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
@@ -54,20 +54,20 @@ input { width:150px; }
           </li>
           <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownPortfolio" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-              거래소
+              중고장터
             </a>
             <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownPortfolio">
-              <a class="dropdown-item" href="/admin/trade_list">판매</a>
-              <a class="dropdown-item" href="/admin/goodsb_list">구매</a>
+              <a class="dropdown-item" href="/admin/trade_list">중고판매</a>
+              <a class="dropdown-item" href="/admin/goodsb_list">중고구매</a>
             </div>
           </li>
           <li class="nav-item dropdown">
                      <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownBlog" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-              재능거래소
+              재능장터
             </a>
             <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownBlog">
-              <a class="dropdown-item" href="/move/uploaded">재능 판매</a>
-              <a class="dropdown-item" href="/move/wantbuy">재능 구매</a>
+              <a class="dropdown-item" href="/talent/talent_S_list">재능판매</a>
+              <a class="dropdown-item" href="/talent/talent_B_list">재능구매</a>
             </div>
           </li>
           <li class="nav-item dropdown">
@@ -102,7 +102,7 @@ input { width:150px; }
   <div class="container">
 
     <!-- Page Heading/Breadcrumbs -->
-    <h1 class="mt-4 mb-3">재능판매물품_상세</h1>
+    <h1 class="mt-4 mb-3">재능 판매 상세</h1>
 
 	<form role="form" method="post" autocomplete="off">
 			
@@ -119,13 +119,13 @@ input { width:150px; }
 				<label for="tals_Kinds">판매희망분류</label>
 				<span>${talent.tals_Kinds}</span>
 		</div>
-		<div class="inputArea">
-				<label for="tals_Content">내용</label>
-				<span>${talent.tals_Content}</span>
+		        <div class="inputArea">
+				<label>작성자</label>
+				<span>${talent.tals_Id}</span>
 		</div>
 		<div class="inputArea">
 				<label for="tals_Price">가격</label>
-				<span>${talent.tals_Price}</span>
+				<span><fmt:formatNumber value="${talent.tals_Price}" pattern="###,###,###원"/></span>
 		</div>
 		<div class="inputArea">
 				<label for="tals_Term">작업기간</label>
@@ -134,6 +134,10 @@ input { width:150px; }
 		<div class="inputArea">
 				<label for="phone_Num">연락처</label>
 				<span>${talent.phone_Num}</span>
+		</div>
+				<div class="inputArea">
+				<label for="tals_Content">내용</label>
+				<div class="gdsDes">${talent.tals_Content}</div>
 		</div>
       </div>
     </div>
@@ -164,18 +168,14 @@ input { width:150px; }
 					});
 				</script>	
   </div>
-
 </c:when>
-<c:otherwise>
-
-</c:otherwise>
 
 </c:choose>
-<a href="/talent/talent_S_list">게시물  리스트</a>
+
   <!-- Footer -->
   <footer class="py-5 bg-dark">
     <div class="container">
-      <p class="m-0 text-center text-white">Copyright &copy; Your Website 2020</p>
+      <p class="m-0 text-center text-white">충대 장터</p>
     </div>
     <!-- /.container -->
   </footer>

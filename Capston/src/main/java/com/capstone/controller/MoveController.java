@@ -117,8 +117,12 @@ public class MoveController {
 	
 	// 후기작성 get
 	@RequestMapping(value = "/review_reg", method = RequestMethod.GET)
-	public void getReviewReg(Model model) throws Exception {
+	public void getReviewReg(@RequestParam("n") int goods_Code, Model model , HttpServletRequest req) throws Exception {
 		logger.info("get review register");
+		HttpSession session = req.getSession();
+		MemberVO member = (MemberVO) session.getAttribute("member");
+		GoodsVO res = moveService.goodsView(goods_Code);
+		model.addAttribute("goods", res);
 	}
 	//후기 작성 post
 	@RequestMapping(value = "/review_reg", method = RequestMethod.POST)

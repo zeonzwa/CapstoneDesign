@@ -11,6 +11,10 @@
 	-ms-flex:0 0 40%;
 	flex:0 0 40%;
 	max-width:100%}
+	
+.container{
+	flex-wrap: wrap;
+}
 
 #after_Btn{
 	width :400px;
@@ -22,6 +26,10 @@
 	left:200px;
 }
 
+.col-lg-6{
+	flex-wrap: wrap;
+}
+
 
 #uploaded-btn{
 	
@@ -31,8 +39,41 @@
 }
 
 #notice-date{
-	width:100%
+	width:100%;
 	font-size: 15px;
 	color : #A9A9A9;
 	border-bottom: 1px solid #A9A9A9;
 }
+
+#goodsb_list_button{
+	position:relative; 
+	left:850px;
+
+}
+
+
+
+#goodsb_list_title{
+	width :100%;
+	position: relative;
+}
+#tals_list_title{
+	width :100%;
+	position: relative;
+}
+#talb_list_title{
+	width :100%;
+	position: relative;
+}
+
+#reg {
+	width : 49px; 
+	height:29px; 
+	border: none; 
+	padding: 0;
+	font-size:20px;
+	position:absolute;
+	right: 0%;
+	top: 19px;
+		
+	}
