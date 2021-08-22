@@ -7,6 +7,7 @@ public class NoticeVO {
 	private String notice_Content;
 	private Date notice_Date;
 	private int notice_Num;
+	private String notice_Id;
 	
 	
 	public int getNotice_Num() {
@@ -33,6 +34,13 @@ public class NoticeVO {
 	public void setNotice_Date(Date notice_Date) {
 		this.notice_Date = notice_Date;
 	}
+	public String getNotice_Id() {
+		return notice_Id;
+	}
+	public void setNotice_Id(String notice_Id) {
+		this.notice_Id = notice_Id;
+	}
+	
 	
 	
 }

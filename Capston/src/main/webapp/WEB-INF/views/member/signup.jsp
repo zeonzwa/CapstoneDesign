@@ -89,10 +89,10 @@
 
                 <!-- EMAIL -->
                 <div class="int_email_area">
-                    <h3 class="join_title"><label for="Email">본인확인 이메일<span class="optional"></span></label></h3>
+                    <h3 class="join_title"><label for="Email">이메일인증 때 입력했던 이메일을 다시 입력하세요.<span class="optional"></span></label></h3>
                     <span class="box int_email">
                         <input type="text" id="Email" name="Email" class="int" maxlength="100" placeholder="학교이메일을 입력해주세요" required="required">
-                        <span class="step_url">@cbnu.ac.kr</span>
+                        <span class="step_url"></span>
                     </span>
                     <a href="#" class="btn_verify btn_primary" id="btnSend" role="button">
                         <span class="">인증메일 받기</span>

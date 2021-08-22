@@ -38,7 +38,8 @@
 		 </form>
         <div class="join">
         	<span>아이디가 아직 없으신가요?</span>
-          	 <a href="/member/signup">회원가입</a>
+          	 <a href="/member/join">회원가입</a></hr>
+          	 <a href="/member/email_injeung">회원인증</a>
          </div>
          </form>
   </div>

@@ -142,6 +142,7 @@ textarea#faqDes { width:600px; height:300px; }
         <a href="index.html">FAQ</a>
       </li>
       <li class="breadcrumb-item active">1:1 문의</li>
+      <a href="/move/faq2_list">Faq 리스트</a>
     </ol>
 			
 <form role="form" method="post" autocomplete="off" enctype="multipart/form-data">

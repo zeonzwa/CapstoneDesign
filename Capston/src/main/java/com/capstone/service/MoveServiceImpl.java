@@ -9,8 +9,11 @@ import org.springframework.stereotype.Service;
 import com.capstone.domain.FaqVO;
 import com.capstone.domain.GoodsVO;
 import com.capstone.domain.Goods_B_VO;
+import com.capstone.domain.MemberVO;
 import com.capstone.domain.NoticeVO;
 import com.capstone.domain.ReviewVO;
+import com.capstone.domain.Talent_B_VO;
+import com.capstone.domain.Talent_S_VO;
 import com.capstone.domain.TradeVO;
 import com.capstone.persistence.AdminDAO;
 import com.capstone.persistence.MoveDAO;
@@ -104,5 +107,95 @@ public class MoveServiceImpl implements MoveService {
 	@Override
 	public ReviewVO reviewView(int review_Code) throws Exception{
 		return dao.reviewView(review_Code);
+	}
+
+	//공지사항 추가
+	@Override
+	public void notice_register(NoticeVO vo) throws Exception {
+		dao.notice_register(vo);
+	}
+
+	//공지사항 수정
+	@Override
+	public void noticeModify(NoticeVO vo) throws Exception {
+		dao.noticeModify(vo);		
+	}
+
+	//공지사항 삭제
+	@Override
+	public void noticeDelete(int notice_Num) throws Exception {
+		dao.noticeDelete(notice_Num);
+	}
+
+	//1:1문의 리스트
+	@Override
+	public List<FaqVO> faqlist() throws Exception {
+		return dao.faqlist();
+	}
+
+	//1:1문의 자세히보기
+	@Override
+	public FaqVO faq_View(int faq_Code) throws Exception {
+		return dao.faq_View(faq_Code);
+	}
+
+	//1:1문의 수정
+	@Override
+	public void faqModify(FaqVO vo) throws Exception {
+		dao.faqModify(vo);
+	}
+
+	//1:1문의 삭제
+	@Override
+	public void faqDelete(int faq_Code) throws Exception {
+		dao.faqDelete(faq_Code);
+	}
+
+	//회원리스트
+	@Override
+	public List<MemberVO> memberlist() throws Exception {
+		return dao.memberlist();
+	}
+
+	//회원삭제
+	@Override
+	public void memberDelete(String Id) throws Exception {
+		dao.memberDelete(Id);
+	}
+
+	//재능 판매 삭제
+	@Override
+	public void talentDelete(int Tals_Code) throws Exception {
+		dao.talentDelete(Tals_Code);
+	}
+
+	//재능 판매 화면
+	@Override
+	public List<Talent_S_VO> talentSlist() throws Exception {
+		return dao.talentSlist();
+	}
+
+	//재능 판매 상세 조회
+	@Override
+	public Talent_S_VO talentSview(int Tals_Code) throws Exception {
+		return dao.talentSview(Tals_Code);
+	}
+
+	//재능 구매 삭제
+	@Override
+	public void talent_B_Delete(int talb_Code) throws Exception {
+		dao.talent_B_Delete(talb_Code);
+	}
+
+	//재능 구매 리스트
+	@Override
+	public List<Talent_B_VO> talent_B_list() throws Exception {
+		return dao.talent_B_list();
+	}
+
+	//재능 구매 상세 조회
+	@Override
+	public Talent_B_VO talent_B_View(int talb_Code) throws Exception {
+		return dao.talent_B_View(talb_Code);
 	}
 }

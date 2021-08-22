@@ -10,8 +10,11 @@ import org.springframework.stereotype.Repository;
 import com.capstone.domain.FaqVO;
 import com.capstone.domain.GoodsVO;
 import com.capstone.domain.Goods_B_VO;
+import com.capstone.domain.MemberVO;
 import com.capstone.domain.NoticeVO;
 import com.capstone.domain.ReviewVO;
+import com.capstone.domain.Talent_B_VO;
+import com.capstone.domain.Talent_S_VO;
 import com.capstone.domain.TradeVO;
 
 @Repository
@@ -21,6 +24,7 @@ public class MoveDAOImpl implements MoveDAO {
 	private SqlSession sql;
 	// 매퍼 
 	private static String namespace = "com.capstone.mappers.moveMapper";
+	private static String namespace1 = "com.capstone.mappers.talentMapper";
 	
 	//공지사항 출력
 	@Override
@@ -106,5 +110,95 @@ public class MoveDAOImpl implements MoveDAO {
 	@Override
 	public ReviewVO reviewView(int review_Code) throws Exception{
 		return sql.selectOne(namespace + ".reviewView", review_Code);
+	}
+
+	//공지사항 추가
+	@Override
+	public void notice_register(NoticeVO vo) throws Exception {
+		sql.insert(namespace+".notice_register",vo);
+	}
+
+	//공지사항 수정
+	@Override
+	public void noticeModify(NoticeVO vo) throws Exception {
+		sql.update(namespace+".noticeModify",vo);
+	}
+
+	//공지사항 삭제
+	@Override
+	public void noticeDelete(int notice_Num) throws Exception {
+		sql.delete(namespace+".noticeDelete",notice_Num);
+	}
+
+	//1:1문의 리스트
+	@Override
+	public List<FaqVO> faqlist() throws Exception {
+		return sql.selectList(namespace+".faqlist");
+	}
+
+	//1:1문의 자세히보기
+	@Override
+	public FaqVO faq_View(int faq_Code) throws Exception {
+		return sql.selectOne(namespace+".faq_View",faq_Code);
+	}
+
+	//1:1문의 수정
+	@Override
+	public void faqModify(FaqVO vo) throws Exception {
+		sql.update(namespace+".faqModify",vo);
+	}
+
+	//1:1문의 삭제
+	@Override
+	public void faqDelete(int faq_Code) throws Exception {
+		sql.delete(namespace+".faqDelete",faq_Code);
+	}
+
+	//회원 리스트
+	@Override
+	public List<MemberVO> memberlist() throws Exception {
+		return sql.selectList(namespace+".memberlist");
+	}
+
+	//회원 삭제
+	@Override
+	public void memberDelete(String Id) throws Exception {
+		sql.delete(namespace+".memberDelete",Id);
+	}
+
+	//재능판매 상세 조회
+	@Override
+	public Talent_S_VO talentSview(int Tals_Code) throws Exception {
+		return sql.selectOne(namespace1+".talentSview", Tals_Code);
+	}
+
+	//재능판매 삭제
+	@Override
+	public void talentDelete(int Tals_Code) throws Exception {
+		sql.delete(namespace1 + ".talentDelete", Tals_Code);
+	}
+
+	//재능판매 리스트
+	@Override
+	public List<Talent_S_VO> talentSlist() throws Exception {
+		return sql.selectList(namespace1 + ".talentSlist");
+	}
+
+	//재능구매 상세 조회
+	@Override
+	public Talent_B_VO talent_B_View(int talb_Code) throws Exception {
+		return sql.selectOne(namespace1 + ".talent_B_View", talb_Code);
+	}
+
+	//재능구매 삭제
+	@Override
+	public void talent_B_Delete(int talb_Code) throws Exception {
+		sql.delete(namespace1 + ".talent_B_Delete", talb_Code);
+	}
+
+	//재능구매 리스트
+	@Override
+	public List<Talent_B_VO> talent_B_list() throws Exception {
+		return sql.selectList(namespace1 + ".talent_B_list");
 	}
 }

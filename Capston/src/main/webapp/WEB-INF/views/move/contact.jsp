@@ -176,30 +176,33 @@ li {
   <!-- Page Content -->
   <div class="container">
       <!-- Page Heading/Breadcrumbs -->
-    <h1 class="mt-4 mb-3">공지사항
+    <h3 id="notice_list_title" class="mt-4 mb-3">공지사항
       <small></small>
-    </h1>
+    </h3>
 
     <ol class="breadcrumb">
       <li class="breadcrumb-item">
         <a href="index.html">공지사항</a>
       </li>
-      <li class="breadcrumb-item active"></li>
+      <li class="breadcrumb-item active">공지사항 목록</li>
     </ol>
 
 
-  <div id="notice">
-
-    <ul>
-    <li>제목<span>날짜</span></li>
-    <c:forEach items="${list}" var="list">
-    <li><sapn>${list.notice_Num}</sapn> <a href="/move/contact_view?n=${list.notice_Num}">${list.notice_Title}</a><span><fmt:formatDate pattern="yyyy/MM/dd" value="${list.notice_Date}"/></span></li>
-    </c:forEach>
-    </ul>
-
-</div>
-
-
+<c:forEach items="${list}" var="list">
+	<div class="card mb-4">
+	 <div class="card-body">
+	  <div class="row">
+	   <div class="col-lg-6">
+	    <p class="card-text"><label>글 번호 :</label>${list.notice_Num}</p>
+	    <p class="card-text"><label>글 제목 :</label>${list.notice_Title}</p>
+	    <p class="card-text"><label>글 내용 :</label>${list.notice_Content}</p>
+	    <p class="card-text"><label>작성자 :</label>${list.notice_Id}</p>
+	    <p class="card-text"><div id="btn-place"><a href="/move/contact_view?n=${list.notice_Num}"  class="btn btn-primary">상세보기 &rarr;</a></div> </p>
+	   </div>
+	  </div>
+	 </div>
+	</div>
+</c:forEach>
 
 
     </div>

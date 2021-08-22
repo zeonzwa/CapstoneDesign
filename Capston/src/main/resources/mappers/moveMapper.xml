@@ -3,10 +3,28 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.capstone.mappers.moveMapper">
+
+<!-- 공지사항 추가 -->
+<insert id="notice_register">
+	insert into notice(notice_Num, notice_Title, notice_Content, notice_Id)
+	values (notice_seq.nextval, #{notice_Title}, #{notice_Content}, #{notice_Id})
+</insert>
+
+<!-- 공지사항 수정 -->
+<update id="noticeModify">
+	update notice set notice_Title=#{notice_Title}, notice_Content=#{notice_Content}
+		where notice_Num=${notice_Num}
+</update>
+
+<!-- 공지사항 삭제 -->
+<delete id="noticeDelete">
+	delete notice where notice_Num=#{notice_Num}
+</delete>
+
 <!-- 공지사항 -->
 <select id="noticelist" resultType="com.capstone.domain.NoticeVO">
 	select
-		notice_Num, notice_Title, notice_Content, notice_Date
+		notice_Num, notice_Title, notice_Content, notice_Id
 	from notice
 		order by notice_Num desc
 </select>
@@ -14,16 +32,63 @@
 <!-- 공지사항 상세 조회 -->
 <select id="notice_View" resultType="com.capstone.domain.NoticeVO">
 	select
-		notice_Num, notice_Title, notice_Content, notice_Date
+		notice_Num, notice_Title, notice_Content, notice_Id
 	from notice
 		where notice_Num = #{notice_Num}
 </select>
 
 <!-- 1:1문의 -->
 	<insert id="faq">
-		insert into faq (faq_Title, faq_Kinds, faq_Content, faq_Id)
-		values (#{faq_Title}, #{faq_Kinds}, #{faq_Content}, #{faq_Id})
+		insert into faq (faq_Code, faq_Title, faq_Kinds, faq_Content, faq_Id)
+		values (faq_seq.nextval, #{faq_Title}, #{faq_Kinds}, #{faq_Content}, #{faq_Id})
 	</insert>
+	
+<!-- 1:1문의 리스트 -->
+	<select id="faqlist" resultType="com.capstone.domain.FaqVO">
+		select
+			faq_Code, faq_Title, faq_Kinds, faq_Id
+		from faq
+			order by faq_Code desc
+	</select>
+	
+<!-- 1:1문의 자세히보기 -->
+	<select id="faq_View" resultType="com.capstone.domain.FaqVO">
+		select
+			faq_Code, faq_Title, faq_Kinds, faq_Content, faq_Id
+		from faq
+			where faq_Code=#{faq_Code}
+	</select>
+	
+<!-- 1:1문의 수정 -->
+	<update id="faqModify">
+	update faq
+			set
+				faq_Title=#{faq_Title},
+				faq_Kinds=#{faq_Kinds},
+				faq_Content=#{faq_Content}
+				
+			where faq_Code=#{faq_Code}
+	</update>
+
+<!-- 1:1문의 삭제 -->
+	<delete id="faqDelete">
+		delete
+				faq
+		where faq_Code=#{faq_Code}
+	</delete>
+	
+<!-- 회원 리스트 -->
+	<select id="memberlist" resultType="com.capstone.domain.MemberVO">
+		select Name, Id, Pw, Major, Student_Num, Email, Phone_Num
+			from member
+	</select>
+	
+<!-- 회원 삭제 -->
+	<delete id="memberDelete">
+		delete
+				member
+		where Id=#{Id}
+	</delete>
 
 <!-- 내가 등록한 판매 물품 -->
 <select id="goodslist" resultType="com.capstone.domain.GoodsVO">

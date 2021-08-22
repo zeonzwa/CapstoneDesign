@@ -119,37 +119,37 @@ li {
 
   <!-- Page Content -->
   <div class="container">
-      <!-- Page Heading/Breadcrumbs -->
-    <h1 class="mt-4 mb-3">공지사항
-      <small></small>
-    </h1>
 
-    <ol class="breadcrumb">
-      <li class="breadcrumb-item">
-        <a href="contact.html">공지사항</a>
-      </li>
-      <li class="breadcrumb-item active">공지</li>
-    </ol>
+    <!-- Page Heading/Breadcrumbs -->
+    <h1 class="mt-4 mb-3">공지사항 상세</h1>
 
-<div id=noice-subject>
-	<div id="notice-title">
- 		<h2>${notice.notice_Title}</h2>
-	</div>
-	<div>
-		<fmt:formatDate pattern="yyyy/MM/dd" value="${notice.notice_Date}"/>
+	<form role="form" method="post" autocomplete="off">
+			
+	<input type="hidden" name="n" value="${notice.notice_Num}"/>
 
-	</div>
-
-	<div>
-		<span id="notice-content">${notice.notice_Content}</span>
-	</div>
-</div>
-
-<br></br><br></br>
+    <!-- Intro Content -->
+    <div class="row">
+      <div class="col-lg-6">
+        <div class="inputArea">
+				<label for="gdsName">제목</label>
+				<span>${notice.notice_Title}</span>
+		</div>
+		 <div class="inputArea">
+				<label>작성자</label>
+				<span>${notice.notice_Id}</span>
+		</div>
+        <div class="inputArea">
+				<label for="gdsDes">내용</label>	
+				<div class="gdsDes">${notice.notice_Content}</div>
+			</div>
+      </div>
     </div>
-    <!-- /.row -->
 
+    <!-- /.row -->
   </div>
+
+
+
   <!-- /.container -->
 
   <!-- Footer -->

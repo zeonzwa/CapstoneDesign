@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.capstone.mappers.userMapper">
+
+<!-- mapper.xml -->
+<insert id="createAuthKey">
+	insert into userAuth values(#{userEmail}, #{authKey})
+</insert>
+
+<update id="userAuth">
+	<![CDATA[update user set userCertification = 1 where (select count(*) from userAuth where userEmail = #{userEmail}) > 0]]>
+</update>
+
+</mapper>

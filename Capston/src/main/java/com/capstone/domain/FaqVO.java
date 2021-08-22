@@ -8,6 +8,7 @@ public class FaqVO {
 	private String faq_Content;
 	private Date faq_Date;
 	private String faq_Id;
+	private int faq_Code;
 	
 	public String getFaq_Id() {
 		return faq_Id;
@@ -39,5 +40,13 @@ public class FaqVO {
 	public void setFaq_Date(Date faq_Date) {
 		this.faq_Date = faq_Date;
 	}
+	public int getFaq_Code() {
+		return faq_Code;
+	}
+	public void setFaq_Code(int faq_Code) {
+		this.faq_Code = faq_Code;
+	}
+	
+	
 	
 }
