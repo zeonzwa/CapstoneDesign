@@ -22,7 +22,7 @@
 			<div class="id_wrap">
 				<div class="id_name">아이디</div>
 				<div class="id_input_box">
-					<input class="id_input", name="memberId">
+					<input class="id_input", name="Id">
 				</div>
 				<span class="id_input_re_1">사용 가능한 아이디입니다.</span>
 				<span class="id_input_re_2">아이디가 이미 존재합니다.</span>
@@ -30,7 +30,7 @@
 			<div class="pw_wrap">
 				<div class="pw_name">비밀번호</div>
 				<div class="pw_input_box">
-					<input class="pw_input", name="memberPw">
+					<input class="pw_input", name="Pw">
 				</div>
 			</div>
 			<div class="pwck_wrap">
@@ -42,13 +42,25 @@
 			<div class="user_wrap">
 				<div class="user_name">이름</div>
 				<div class="user_input_box">
-					<input class="user_input", name="memberName">
+					<input class="user_input", name="Name">
+				</div>
+			</div>
+			<div class="major_wrap">
+				<div class="major_name">전공</div>
+				<div class="major_input_box">
+					<input class="major_input", name="Major">
+				</div>
+			</div>
+			<div class="studentnumber_wrap">
+				<div class="studentnumber_name">학번</div>
+				<div class="studentnumber_input_box">
+					<input class="studentnumber_input", name="Student_Num">
 				</div>
 			</div>
 			<div class="mail_wrap">
 				<div class="mail_name">이메일</div> 
 				<div class="mail_input_box">
-					<input class="mail_input", name="memberMail">
+					<input class="mail_input", name="Email">
 				</div>
 				<div class="mail_check_wrap">
 					<div class="mail_check_input_box" id="mail_check_input_box_false">
@@ -61,26 +73,10 @@
 					<span id="mail_check_input_box_warn"></span>
 				</div>
 			</div>
-			<div class="address_wrap">
-				<div class="address_name">주소</div>
-				<div class="address_input_1_wrap">
-					<div class="address_input_1_box">
-						<input class="address_input_1", name="memberAddr1">
-					</div>
-					<div class="address_button">
-						<span>주소 찾기</span>
-					</div>
-					<div class="clearfix"></div>
-				</div>
-				<div class ="address_input_2_wrap">
-					<div class="address_input_2_box">
-						<input class="address_input_2", name="memberAddr2">
-					</div>
-				</div>
-				<div class ="address_input_3_wrap">
-					<div class="address_input_3_box">
-						<input class="address_input_3", name="memberAddr3">
-					</div>
+			<div class="phonenumber_wrap">
+				<div class="phonenumber_name">전화번호</div>
+				<div class="phonenumber_input_box">
+					<input class="phonenumber_input", name="Phone_Num">
 				</div>
 			</div>
 			<div class="join_button_wrap">

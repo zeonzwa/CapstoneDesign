@@ -12,6 +12,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -89,10 +90,9 @@ public class MoveController {
 	//관리자 공지사항 수정  get
 	@RequestMapping(value="/manager_modify",method=RequestMethod.GET)
 	public void getManagerModify(@RequestParam("n") int notice_Num, Model model) throws Exception{
-		logger.info("get manager modify");
-		
-		NoticeVO manager=moveService.notice_View(notice_Num);
-		model.addAttribute("manager",manager);
+		logger.info("get manager modify");		
+		NoticeVO notice=moveService.notice_View(notice_Num);
+		model.addAttribute("notice",notice);
 	}
 	
 	//관리자 공지사항 수정 post
@@ -104,7 +104,7 @@ public class MoveController {
 	}
 	
 	//관리자 공지사항 삭제
-	@RequestMapping(value="/manager_delete", method=RequestMethod.GET)
+	@RequestMapping(value="/manager_delete", method=RequestMethod.POST)
 	public String postManagerDelete(@RequestParam("n") int notice_Num) throws Exception{
 		logger.info("post manager delete");
 		moveService.noticeDelete(notice_Num);
@@ -130,48 +130,6 @@ public class MoveController {
 		model.addAttribute("notice", notice);
 	}
 	
-	// 공지사항 추가 get
-	@RequestMapping(value="/contact_register", method=RequestMethod.GET)
-	public void getContact_Register(Model model) throws Exception{
-		logger.info("get Contact_Register");
-	}
-	
-	// 공지사항 추가 post
-	@RequestMapping(value="/contact_register", method=RequestMethod.POST)
-	public String postContact_Register(NoticeVO vo, HttpServletRequest req) throws Exception{
-		HttpSession session=req.getSession();
-		MemberVO seller=(MemberVO) session.getAttribute("member");
-		vo.setNotice_Id(seller.getId());
-		moveService.notice_register(vo);
-		return "redirect:/move/contact";
-	}
-	
-	//공지사항 수정 get
-	@RequestMapping(value="/contact_modify", method=RequestMethod.GET)
-	public void getContactModify(@RequestParam("n") int notice_Num, Model model) throws Exception{
-		logger.info("get contact modify");
-		
-		NoticeVO notice=moveService.notice_View(notice_Num);
-		model.addAttribute("notice",notice);
-	}
-	
-	//공지사항 수정 post
-	@RequestMapping(value="/contact_modify",method=RequestMethod.POST)
-	public String postContactModify(NoticeVO vo, HttpServletRequest req) throws Exception{
-		logger.info("post contact modify");
-		
-		moveService.noticeModify(vo);
-		return "redirect/move/index";
-	}
-	
-	//공지사항 삭제
-	@RequestMapping(value="/contact_delete", method=RequestMethod.GET)
-	public String postContactDelete(@RequestParam("n") int notice_Num) throws Exception{
-		logger.info("post contact delete");
-		moveService.noticeDelete(notice_Num);
-		
-		return "redirect/move/index";
-	}
 	
 	//관리자-재능 판매 화면 출력
 	@RequestMapping(value="/manager_talent_S", method=RequestMethod.GET)
@@ -235,6 +193,66 @@ public class MoveController {
 		return "redirect:/move/manager_talent_B";
 	}
 	
+	//관리자-판매상품 삭제
+	@RequestMapping(value="/manager_sell_delete",method=RequestMethod.GET)
+	public String postManagerGoodsDelete(@RequestParam("n") int goods_Code) throws Exception{
+		logger.info("post manager goods delete");
+		moveService.goodsDelete(goods_Code);
+		
+		return "redirect:/move/manager_sell";
+	}
+	
+	//관리자-판매상품 리스트
+	@RequestMapping(value="/manager_sell",method=RequestMethod.GET)
+	public void getManagerGoodsList(Model model, HttpServletRequest req) throws Exception{
+		logger.info("get manager goods list");
+		HttpSession session = req.getSession();
+		MemberVO member = (MemberVO) session.getAttribute("member");
+		List<GoodsVO> list=moveService.goodslist();
+		model.addAttribute("member", member);
+		model.addAttribute("list", list);
+	}
+	
+	//관리자-판매상품 상세조회
+	@RequestMapping(value="/manager_sell_view", method=RequestMethod.GET)
+	public void getManagerGoodsView(@RequestParam("n") int goods_Code, Model model, HttpServletRequest req) throws Exception{
+		logger.info("get manager goods view");
+		HttpSession session = req.getSession();
+		MemberVO member = (MemberVO) session.getAttribute("member");
+		GoodsVO goods = moveService.goodsView(goods_Code);
+		TradeVO trade = moveService.trade_view(goods_Code);
+	}
+	
+	//관리자-구매상품 리스트
+	@RequestMapping(value="/manager_buy",method=RequestMethod.GET)
+	public void getManagerGoodsBList(Model model,HttpServletRequest req) throws Exception{
+		logger.info("get manager goodsb list");
+		HttpSession session = req.getSession();
+		MemberVO member = (MemberVO) session.getAttribute("member"); 
+		List<Goods_B_VO> list = moveService.goods_B_list();
+		model.addAttribute("member", member);
+		model.addAttribute("list", list);		
+	}
+	
+	//관리자-구매상품 상세보기
+	@RequestMapping(value = "/manager_buy_view", method = RequestMethod.GET)
+	public void getManagerGoodsBview(@RequestParam("n") int goodsb_Code, Model model, HttpServletRequest req) throws Exception{
+		logger.info("get manager goodsb view");
+		HttpSession session = req.getSession();
+		MemberVO member = (MemberVO) session.getAttribute("member"); 
+		Goods_B_VO goods = moveService.goods_B_View(goodsb_Code);
+		TradeVO trade = moveService.trade_view(goodsb_Code);
+		model.addAttribute("goods", goods);
+		model.addAttribute("member", member);
+	}
+	
+	//관리자-구매상품 삭제
+	@RequestMapping(value = "/manager_buy_delete", method = RequestMethod.GET)
+	public String postManagerGoodsBDelete(@RequestParam("n") int goodsb_Code) throws Exception{
+		logger.info("post manager goodsb delete");
+		moveService.goods_B_Delete(goodsb_Code);
+		return "redirect:/move/manager_buy";
+	}
 	
 	//등록한 판매, 구매 물품 목록 get
 	@RequestMapping(value = "/uploaded", method = RequestMethod.GET)
@@ -374,7 +392,7 @@ public class MoveController {
 	}
 	
 	//1:1문의 리스트
-	@RequestMapping(value="/faq2_list", method=RequestMethod.GET)
+	@RequestMapping(value="/manager_faq", method=RequestMethod.GET)
 	public void getFaqList(Model model, HttpServletRequest req) throws Exception{
 		logger.info("get faq list");
 		List<FaqVO> list=moveService.faqlist();
@@ -382,12 +400,20 @@ public class MoveController {
 	}
 	
 	//1:1문의 자세히보기
-	@RequestMapping(value="/faq2_view", method=RequestMethod.GET)
+	@RequestMapping(value="/manager_faq_view", method=RequestMethod.GET)
 	public void getFaqView(@RequestParam("n") int faq_Code, Model model, HttpServletRequest req) throws Exception{
 		logger.info("get faq view");
 		HttpSession session=req.getSession();
 		FaqVO faq=moveService.faq_View(faq_Code);
 		model.addAttribute("faq",faq);
+	}
+	
+	//1:1문의 삭제
+	@RequestMapping(value="/manager_faq_delete", method=RequestMethod.GET)
+	public String postFaqDelete(@RequestParam("n") int faq_Code) throws Exception{
+		logger.info("post faq delete");
+		moveService.faqDelete(faq_Code);
+		return "redirect:/move/manager";
 	}
 	
 	//회원리스트

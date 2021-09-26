@@ -1,10 +1,9 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ page session="false" %>
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+
 <!DOCTYPE html>
-<html lang="en">
 
 <head>
 
@@ -13,47 +12,29 @@
   <meta name="description" content="">
   <meta name="author" content="">
 
-  <title>공지사항</title>
-
+  <title>Modern Business - Start Bootstrap Template</title>
+<script src="/resources/jquery/jquery-3.3.1.min.js"></script>
   <!-- Bootstrap core CSS -->
   <link href="${pageContext.request.contextPath}/resources/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css">
 
   <!-- Custom styles for this template -->
   <link href="${pageContext.request.contextPath}/resources/css/modern-business.css" rel="stylesheet" type="text/css">
-  
-    <!--  add CSS -->
-  <link href="${pageContext.request.contextPath}/resources/vendor/bootstrap/css/web.css" rel="stylesheet" type="text/css">
-    
-  <style>
-  * {
-    margin: 0;
-    padding: 0;
-}
 
-
-
-body {
-    font: 17px 'Nanum Gothic', sans-serif;
-}
-
-
-
-a {
-    text-decoration: none;
-    color: #404040;
-}
-
-
-
-li {
-    list-style: none;
-}
-
-
-
-
-
-  </style>
+<style>
+.inputArea { margin:10px 0; }
+select { width:100px; }
+label { display:inline-block; width:110px; padding:5px; }
+label[for='gdsDes'] { display:block; }
+input { width:150px; }
+.gdsDes { marigin:10px 0;width:400px; height:180px; }
+.card-img-top{width:418px; height:250px; }
+.star{background-image:url(/resources/image/star.jpg);}
+.thumbImg {}
+#com_Btn {border : 0; width:100px; height:30px;;  position: relative; left:70%;}
+#rej_Btn {border : 0; width:100px; height:30px;;  position: relative; left:70%;}
+#cancel_Btn {border : 0; width:100px; height:30px;;  position: relative; left:70%;}
+#req_Btn {border : 0; width:100px; height:30px;;  position: relative; left:70%;}
+</style>
 
 </head>
 
@@ -147,13 +128,34 @@ li {
 
     <!-- /.row -->
   </div>
+  <c:choose>
+  <c:when test = "${member.id eq talent.tals_Id || member.id=='manager'}">
+  <div id = "tradebtn">
+    <button type="button" id="modify_Btn" class="btn btn-warning">수정</button>
+	<button type="button" id="delete_Btn" class="btn btn-danger">삭제</button>
+			<script>
+					var formObj = $("form[role='form']");
+					
+					$("#modify_Btn").click(function(){
+						formObj.attr("action", "/move/manager_modify");
+						formObj.attr("method", "get")
+						formObj.submit();
+					});
+					
+					$("#delete_Btn").click(function(){
+						
+						var con = confirm("정말로 삭제하시겠습니까?");
+						
+						if(con) {						
+							formObj.attr("action", "/move/manager_delete");
+							formObj.submit();
+						}
+					});
+				</script>	
+  </div>
+</c:when>
 
-
-
-
-
-
-
+</c:choose>
   <!-- /.container -->
 
   <!-- Footer -->
@@ -165,11 +167,6 @@ li {
   </footer>
 
   <!-- Bootstrap core JavaScript -->
-  <script src="vendor/jquery/jquery.min.js"></script>
-  <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-
-  <!-- Contact form JavaScript -->
-  <!-- Do not edit these files! In order to set the email address and subject line for the contact form go to the bin/contact_me.php file. -->
   <script src="<c:url value="/resources/vendor/jquery/jquery.min.js" />"></script>
   <script src="<c:url value="/resources/vendor/bootstrap/js/bootstrap.bundle.min.js" />"></script>
 

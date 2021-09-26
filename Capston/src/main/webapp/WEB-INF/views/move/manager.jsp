@@ -183,7 +183,7 @@ li {
     <a href="/move/manager_talent_B">재능구매관리</a><br>
     <a href="/move/manager_sell">물품판매관리</a><br>
     <a href="/move/manager_buy">물품구매관리</a><br>
-    <a href="/move/manager_buy">1:1문의관리</a><br>
+    <a href="/move/manager_faq">1:1문의관리</a><br>
       <small></small>
     </h3>
 
@@ -205,8 +205,6 @@ li {
 	    <p class="card-text"><label>글 내용 :</label>${list.notice_Content}</p>
 	    <p class="card-text"><label>작성자 :</label>${list.notice_Id}</p>
 	    <p class="card-text"><div id="btn-place"><a href="/move/manager_view?n=${list.notice_Num}"  class="btn btn-primary">상세보기 &rarr;</a></div> </p>
-	    <a href="/move/manager_modify?n=${list.notice_Num}" class="btn btn-primary">수정 &rarr;</a>
-	    <a href="/move/manager_delete?n=${list.notice_Num}" class="btn btn-primary">삭제 &rarr;</a>
 	   </div>
 	  </div>
 	 </div>

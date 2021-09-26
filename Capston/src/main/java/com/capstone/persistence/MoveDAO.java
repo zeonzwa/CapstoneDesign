@@ -100,4 +100,22 @@ public interface MoveDAO {
 	
 	//후기 조회
 	public ReviewVO reviewView(int review_Code) throws Exception;
+	
+	//관리자-판매상품 리스트
+	public List<GoodsVO> goodslist() throws Exception;
+	
+	//관리자-판매상품 상세조회
+	//public GoodsVO goodsView(int goods_Code) throws Exception;
+	
+	//관리자-판매상품 삭제
+	public void goodsDelete(int goods_Code) throws Exception;
+	
+	//관리자-구매상품 삭제
+	public void goods_B_Delete(int goods_B_Code) throws Exception;
+	
+	//관리자-구매상품 리스트
+	public List<Goods_B_VO> goods_B_list() throws Exception;
+	
+	//관리자-구매상품 상세조회
+	public Goods_B_VO goods_B_View(int goods_B_Code) throws Exception;
 }

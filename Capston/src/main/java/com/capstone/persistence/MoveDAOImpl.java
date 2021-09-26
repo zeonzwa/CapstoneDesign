@@ -25,6 +25,7 @@ public class MoveDAOImpl implements MoveDAO {
 	// 매퍼 
 	private static String namespace = "com.capstone.mappers.moveMapper";
 	private static String namespace1 = "com.capstone.mappers.talentMapper";
+	private static String namespace2 = "com.capstone.mappers.adminMapper";
 	
 	//공지사항 출력
 	@Override
@@ -200,5 +201,35 @@ public class MoveDAOImpl implements MoveDAO {
 	@Override
 	public List<Talent_B_VO> talent_B_list() throws Exception {
 		return sql.selectList(namespace1 + ".talent_B_list");
+	}
+
+	//관리자-판매상품 리스트
+	@Override
+	public List<GoodsVO> goodslist() throws Exception {
+		return sql.selectList(namespace2+".goodslist");
+	}
+
+	//관리자-판매상품 삭제
+	@Override
+	public void goodsDelete(int goods_Code) throws Exception {
+		sql.delete(namespace2 + ".goodsDelete", goods_Code);
+	}
+
+	//관리자-구매상품 삭제
+	@Override
+	public void goods_B_Delete(int goods_B_Code) throws Exception {
+		sql.delete(namespace2 + ".goods_B_Delete", goods_B_Code);
+	}
+
+	//관리자-구매상품 리스트
+	@Override
+	public List<Goods_B_VO> goods_B_list() throws Exception {
+		return sql.selectList(namespace2 + ".goods_B_list");
+	}
+
+	//관리자-구매상품 상세조회
+	@Override
+	public Goods_B_VO goods_B_View(int goods_B_Code) throws Exception {
+		return sql.selectOne(namespace + ".goods_B_View", goods_B_Code);
 	}
 }

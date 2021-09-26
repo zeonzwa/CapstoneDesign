@@ -9,6 +9,7 @@ import com.capstone.domain.ReviewVO;
 import com.capstone.domain.TradeVO;
 
 public interface AdminService {
+	
 	// 상품등록
 	public void register(GoodsVO vo) throws Exception;
 	

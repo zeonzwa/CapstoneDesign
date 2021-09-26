@@ -148,8 +148,8 @@ textarea#gdsDes { width:400px; height:180px; }
 </div>
 
 <div class="inputArea">
- <button type="submit" id="update_Btn" class="btn btn-primary">완료</button>
- <button type="submit" id="back_Btn" class="btn btn-warning">취소</button>
+ <button type="submit" id="back_Btn" class="btn btn-warning">완료</button>
+ <a href="/move/manager">뒤로 가기 &rarr;</a>
   <script>
  $("#back_Btn").click(function(){
   //history.back();

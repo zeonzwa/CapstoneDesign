@@ -12,8 +12,12 @@
 
 <!-- 공지사항 수정 -->
 <update id="noticeModify">
-	update notice set notice_Title=#{notice_Title}, notice_Content=#{notice_Content}
-		where notice_Num=${notice_Num}
+	update notice
+		set
+			notice_Title = #{notice_Title},
+			notice_Content = #{notice_Content}
+			
+		where notice_Num = #{notice_Num}
 </update>
 
 <!-- 공지사항 삭제 -->

@@ -46,7 +46,7 @@ public class MailMemberController {
 		//이멜
 		mailservice.memberJoin(mail);
 		
-		return "redirect:/member/signup";
+		return "redirect:/member/signin";
 	}
 	
 	//로그인 페이지 이동

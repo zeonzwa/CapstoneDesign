@@ -198,4 +198,34 @@ public class MoveServiceImpl implements MoveService {
 	public Talent_B_VO talent_B_View(int talb_Code) throws Exception {
 		return dao.talent_B_View(talb_Code);
 	}
+
+	//관리자-판매상품 리스트
+	@Override
+	public List<GoodsVO> goodslist() throws Exception {
+		return dao.goodslist();
+	}
+
+	//관리자-판매상품 삭제
+	@Override
+	public void goodsDelete(int goods_Code) throws Exception {
+		dao.goodsDelete(goods_Code);
+	}
+
+	//관리자-구매상품 삭제
+	@Override
+	public void goods_B_Delete(int goods_B_Code) throws Exception {
+		dao.goods_B_Delete(goods_B_Code);
+	}
+
+	//관리자-구매상품 리스트
+	@Override
+	public List<Goods_B_VO> goods_B_list() throws Exception {
+		return dao.goods_B_list();
+	}
+
+	//관리자-구매상품 상세조회
+	@Override
+	public Goods_B_VO goods_B_View(int goods_B_Code) throws Exception {
+		return dao.goods_B_View(goods_B_Code);
+	}
 }
