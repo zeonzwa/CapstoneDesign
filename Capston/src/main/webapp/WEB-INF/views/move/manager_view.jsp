@@ -115,10 +115,6 @@ input { width:150px; }
 				<label for="gdsName">제목</label>
 				<span>${notice.notice_Title}</span>
 		</div>
-		 <div class="inputArea">
-				<label>작성자</label>
-				<span>${notice.notice_Id}</span>
-		</div>
         <div class="inputArea">
 				<label for="gdsDes">내용</label>	
 				<div class="gdsDes">${notice.notice_Content}</div>

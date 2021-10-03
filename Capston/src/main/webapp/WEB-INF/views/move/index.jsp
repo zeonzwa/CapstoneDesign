@@ -35,24 +35,24 @@
       <div class="collapse navbar-collapse" id="navbarResponsive">
         <ul class="navbar-nav ml-auto">
           <li class="nav-item">
-            <a class="nav-link" href="/move/contact">공지사항</a>
+            <a class="nav-link" href="/move/contactlistPage">공지사항</a>
           </li>
           <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownPortfolio" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-              중고장터
-            </a>
-            <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownPortfolio">
-              <a class="dropdown-item" href="/admin/trade_list">중고판매</a>
-              <a class="dropdown-item" href="/admin/goodsb_list">중고구매</a>
-            </div>
+            <a class="nav-link" href="/admin/tradelistPage"> 중고장터</a>
           </li>
           <li class="nav-item dropdown">
                      <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownBlog" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
               재능장터
             </a>
             <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownBlog">
-              <a class="dropdown-item" href="/talent/talent_S_list">재능판매</a>
-              <a class="dropdown-item" href="/talent/talent_B_list">재능구매</a>
+              <a class="dropdown-item" href="/talent/talent_S_list?n=디자인">디자인</a>
+              <a class="dropdown-item" href="/talent/talent_S_list?n=번역/외국어">번역/외국어</a>
+              <a class="dropdown-item" href="/talent/talent_S_list?n=문서작성">문서작성</a>
+              <a class="dropdown-item" href="/talent/talent_S_list?n=음악/영상">음악/영상</a>
+              <a class="dropdown-item" href="/talent/talent_S_list?n=프로그램개발">프로그램개발</a>
+              <a class="dropdown-item" href="/talent/talent_S_list?n=생활서비스">생활서비스</a>
+              <a class="dropdown-item" href="/talent/talentlistPage">재능리스트</a>
+              <a class="dropdown-item" href="/talent/talentlistSearch">재능리스트검색</a>
             </div>
           </li>
           <li class="nav-item dropdown">
@@ -60,10 +60,11 @@
               마이페이지
             </a>
             <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownBlog">
-              <a class="dropdown-item" href="/move/uploaded">내가 등록한 물건</a>
-              <a class="dropdown-item" href="/move/wantbuy">내가 요청한 물건</a>
-              <a class="dropdown-item" href="/move/review">후기관리</a>
+              <a class="dropdown-item" href="/move/uploaded">등록한 중고/재능</a>
+              <a class="dropdown-item" href="/move/trade">거래요청받은 중고/재능거래</a>
+              <a class="dropdown-item" href="/move/wantbuy">거래요청한 중고/재능거래</a>
               <a class="dropdown-item" href="/move/trade_complete">거래완료(후기작성)</a>
+              <a class="dropdown-item" href="/move/review">후기관리</a>
             </div>
           </li>
           <li class="nav-item dropdown">

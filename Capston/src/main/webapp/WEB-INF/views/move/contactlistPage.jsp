@@ -1,6 +1,8 @@
-<%@ page session="false" pageEncoding="utf-8" %>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ page session="false" %>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -18,48 +20,103 @@
 
   <!-- Custom styles for this template -->
   <link href="${pageContext.request.contextPath}/resources/css/modern-business.css" rel="stylesheet" type="text/css">
-  <link rel="stylesheet" href="./about2.css">
-  <link rel="stylesheet" href="./about3.css">
-  
-  
- <style>
- 
- 	section#container { padding:20px 0; border-top:2px solid #eee; border-bottom:2px solid #eee; }
-	section#container::after { content:""; display:block; clear:both; }
-	div#container_box { float:right; width:calc(100% - 200px - 20px); }
-	
-</style>
- 
-<style>
-.inputArea { margin:10px 0; }
-select { width:100px; }
-label { display:inline-block; width:90px; padding:5px; }
-label[for='gdsDes'] { display:block; }
-input { width:150px; }
-textarea#gdsDes { width:400px; height:180px; }
-.step_url {    position: absolute;    top: 16px;    right: 13px;    font-size: 15px;    color: #8e8e8e;}
-
-.select_img img {margin:20px 0;}
-.select_img img {width:418px; height:250px;}
-#wrapper {
-    position: relative;
-    height: 100%;
+  <style>
+  * {
+    margin: 0;
+    padding: 0;
 }
-#content {
-    position: relative;
-    left: 50%;
-    transform: translate(-50%);
-    width: 800px;
-}
-</style>
 
+
+
+body {
+    font: 17px 'Nanum Gothic', sans-serif;
+}
+
+
+
+a {
+    text-decoration: none;
+    color: #404040;
+}
+
+
+
+li {
+    list-style: none;
+}
+
+
+
+/*BODY*/
+
+#notice {
+    width: 100%;
+    margin: 0 auto;
+    box-sizing: border-box;
+    /*outline: 1px dashed black;*/
+}
+
+
+
+#notice h1 {
+    font-size: 25px;
+    text-align: center;
+    margin: 10px 180px;
+    padding: 10px;
+    color: #fff;
+    background: #007AAE;
+    border-radius: 30px;
+
+}
+
+
+
+#notice ul {
+    width: 100%;
+}
+
+
+
+#notice ul li {
+    line-height: 30px; /*li 세로 간격*/
+    padding-left: 20px;
+}
+
+
+
+#notice ul li:first-child {
+    border-top: 2px solid #6a6a6a;
+    border-bottom: 2px solid #6a6a6a;
+    padding-left: 150px;
+}
+
+
+
+#notice ul li:last-child {
+    border-bottom: 1px solid #000;
+}
+
+
+
+
+
+
+#notice ul li span {
+    display: inline-block;
+    float: right;
+    width: 150px;
+    text-align: center;
+}
+
+
+  </style>
 
 </head>
 
 <body>
 
   <!-- Navigation -->
-    <nav class="navbar fixed-top navbar-expand-lg navbar-dark bg-dark fixed-top">
+  <nav class="navbar fixed-top navbar-expand-lg navbar-dark bg-dark fixed-top">
     <div class="container">
       <a class="navbar-brand" href="/move/index">충대 장터</a>
       <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
@@ -115,70 +172,44 @@ textarea#gdsDes { width:400px; height:180px; }
       </div>
     </div>
   </nav>
-  
 
-    <!-- Team Members -->
-    <section id="container">
-   
-		<div id="wrapper"> 
-<div id="content">
-		
-			    <h1 class="mt-4 mb-3">중고구매 수정
+  <!-- Page Content -->
+  <div class="container">
+      <!-- Page Heading/Breadcrumbs -->
+    <h3 id="notice_list_title" class="mt-4 mb-3">공지사항
       <small></small>
-    </h1>
-			    <ol class="breadcrumb">
+    </h3>
+
+    <ol class="breadcrumb">
       <li class="breadcrumb-item">
-        <a href="index.html">중고구매</a>
+        <a href="index.html">공지사항</a>
       </li>
-      <li class="breadcrumb-item active">중고구매 수정</li>
+      <li class="breadcrumb-item active">공지사항 목록</li>
     </ol>
-			
-<form role="form" method="post" autocomplete="off" enctype="multipart/form-data">
-
-<input type="hidden" name="goodsb_Code" value="${goods.goodsb_Code}" />
+    
 
 
-<div class="inputArea">
- <label for="goods_Title">제목</label>
- <input type="text" id="goodsb_Title" name="goodsb_Title" value="${goods.goodsb_Title}"/>
-</div>
-<div class="inputArea">
-	<label for="goodsb_Cate">구매희망분류</label>
-	<select id="goodsb_Cate" name="goodsb_Cate" >
-		<option value="서적" <c:if test='${goods.goodsb_Cate == "서적"}'>selected</c:if>>서적</option>
-  		<option value="기계" <c:if test='${goods.goodsb_Cate == "기계"}'>selected</c:if>>기계</option>
- 	 	<option value="옷"  <c:if test='${goods.goodsb_Cate == "옷"}'>selected</c:if>>옷</option>
-	</select>
-</div>
-<div class="inputArea">
- <label for="goods_Price">구매희망가격</label>
- <input type="text" id="goodsb_Price" name="goodsb_Price" value="${goods.goodsb_Price}"/>
-</div>
-<div class="inputArea">
- <label for="goodsb_Des">구매희망내용</label>
- <textarea rows="5" cols="50" id="goodsb_Des" name="goodsb_Des">${goods.goodsb_Des}</textarea>
-</div>
+<a href="/move/contactlistSearch"  class="btn btn-primary">공지사항 검색 &rarr;</a>
+<c:forEach items="${list}" var="list">
+	<div class="card mb-4">
+	 <div class="card-body">
+	  <div class="row">
+	   <div class="col-lg-6">
+	    <p class="card-text"><label>글 번호 :</label>${list.notice_Num}</p>
+	    <p class="card-text"><label>글 제목 :</label>${list.notice_Title}</p>
+	    <p class="card-text"><label>글 내용 :</label>${list.notice_Content}</p>
+	    <p class="card-text"><div id="btn-place"><a href="/move/contact_view?n=${list.notice_Num}"  class="btn btn-primary">상세보기 &rarr;</a></div> </p>
+	   </div>
+	  </div>
+	 </div>
+	</div>
+</c:forEach>
 
-<div class="inputArea">
- <button type="submit" id="update_Btn" class="btn btn-primary">완료</button>
- <button type="submit" id="back_Btn" class="btn btn-warning">취소</button>
-  <script>
- $("#back_Btn").click(function(){
-  //history.back();
-  location.href = "/admin/goodsb_view?n=" + ${goods.goodsb_Code};
- });   
-</script>
-</div>   
 
-</form>
-			
-		</div>
-	</section>
-
+    </div>
     <!-- /.row -->
 
-
-  
+  </div>
   <!-- /.container -->
 
   <!-- Footer -->
@@ -188,10 +219,33 @@ textarea#gdsDes { width:400px; height:180px; }
     </div>
     <!-- /.container -->
   </footer>
+</hr>
+
+<div>
+ <ul>
+  <c:if test="${pageMaker.prev}">
+   <li><a href="contactlistPage${pageMaker.makeQuery(pageMaker.startPage - 1)}">이전</a></li>
+  </c:if> 
+  
+  <c:forEach begin="${pageMaker.startPage}" end="${pageMaker.endPage}" var="idx">
+   <li><a href="contactlistPage${pageMaker.makeQuery(idx)}">${idx}</a></li>
+  </c:forEach>
+    
+  <c:if test="${pageMaker.next && pageMaker.endPage > 0}">
+   <li><a href="contactlistPage${pageMaker.makeQuery(pageMaker.endPage + 1)}">다음</a></li>
+  </c:if> 
+ </ul>
+</div>
 
   <!-- Bootstrap core JavaScript -->
   <script src="<c:url value="/resources/vendor/jquery/jquery.min.js" />"></script>
   <script src="<c:url value="/resources/vendor/bootstrap/js/bootstrap.bundle.min.js" />"></script>
+
+
+  <!-- Contact form JavaScript -->
+  <!-- Do not edit these files! In order to set the email address and subject line for the contact form go to the bin/contact_me.php file. -->
+  <script src="js/jqBootstrapValidation.js"></script>
+  <script src="js/contact_me.js"></script>
 
 </body>
 

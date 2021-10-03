@@ -193,12 +193,10 @@ li {
 	 <div class="card-body">
 	  <div class="row">
 	   <div class="col-lg-6">
-	    <p class="card-text"><label>글 번호 :</label>${list.faq_Code}</p>
 	    <p class="card-text"><label>글 제목 :</label>${list.faq_Title}</p>
 	    <p class="card-text"><label>글 종류 :</label>${list.faq_Kinds}</p>
+	    <p class="card-text"><label>글 내용 :</label>${list.faq_Content}</p>
 	    <p class="card-text"><label>작성자 :</label>${list.faq_Id}</p>
-	    <p class="card-text"><div id="btn-place"><a href="/move/manager_faq_view?n=${list.faq_Code}"  class="btn btn-primary">상세보기 &rarr;</a></div> </p>
-	    <a href="/move/manager_faq_delete?n=${list.faq_Code}" class="btn btn-primary">삭제 &rarr;</a>
 	   </div>
 	  </div>
 	 </div>

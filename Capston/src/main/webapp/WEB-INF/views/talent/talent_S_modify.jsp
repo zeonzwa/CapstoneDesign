@@ -52,8 +52,33 @@ textarea#gdsDes { width:400px; height:180px; }
     width: 800px;
 }
 </style>
-
-
+<script language = "javascript">
+function categoryChange(e) {
+	var talent_1 = ["웹디자인/상세페이지", "포토샵편집", "일러스트/캐릭터", "3D모델링/도면", "기타디자인"];
+	var talent_2 = ["영어", "중국어", "일본어", "한자", "기타외국어"];
+	var talent_3 = ["프로젠테이션/엑셀", "워드/타이핑", "교정/편집", "기타문서작성"];
+	var talent_4 = ["영상편집/제작", "애니메이션/UCC", "노래/댄스", "기타음악영상"];
+	var talent_5 = ["홈페이지/웹개발", "응용프로그래밍(코딩)", "모바일/앱", "DB/서버", "기타프로그램개발"];
+	var talent_6 = ["여행일정/계획", "컴퓨터수리/조립", "미용/스타일링", "구매대행/직구", "기타생활서비스"];
+	var target = document.getElementById("tals_Kinds_2");
+	
+	if(e.value == "디자인") var a = talent_1;
+	else if(e.value == "번역/외국어") var a = talent_2;
+	else if(e.value == "문서작성") var a = talent_3;
+	else if(e.value == "음악/영상") var a = talent_4;
+	else if(e.value == "프로그램개발") var a = talent_5;
+	else if(e.value == "생활서비스") var a = talent_6;
+	
+	target.options.length = 0;
+	
+	for(x in a){
+		var opt = document.createElement("option");
+		opt.value = a[x];
+		opt.innerHTML = a[x];
+		target.appendChild(opt);
+	}
+}
+</script>
 </head>
 
 <body>
@@ -71,21 +96,19 @@ textarea#gdsDes { width:400px; height:180px; }
             <a class="nav-link" href="/move/contact">공지사항</a>
           </li>
           <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownPortfolio" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-              중고장터
-            </a>
-            <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownPortfolio">
-              <a class="dropdown-item" href="/admin/trade_list">중고판매</a>
-              <a class="dropdown-item" href="/admin/goodsb_list">중고구매</a>
-            </div>
+            <a class="nav-link" href="/admin/trade_list"> 중고장터</a>
           </li>
           <li class="nav-item dropdown">
                      <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownBlog" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
               재능장터
             </a>
             <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownBlog">
-              <a class="dropdown-item" href="/talent/talent_S_list">재능판매</a>
-              <a class="dropdown-item" href="/talent/talent_B_list">재능구매</a>
+              <a class="dropdown-item" href="/talent/talent_S_list?n=디자인">디자인</a>
+              <a class="dropdown-item" href="/talent/talent_S_list?n=번역/외국어">번역/외국어</a>
+              <a class="dropdown-item" href="/talent/talent_S_list?n=문서작성">문서작성</a>
+              <a class="dropdown-item" href="/talent/talent_S_list?n=음악/영상">음악/영상</a>
+              <a class="dropdown-item" href="/talent/talent_S_list?n=프로그램개발">프로그램개발</a>
+              <a class="dropdown-item" href="/talent/talent_S_list?n=생활서비스">생활서비스</a>
             </div>
           </li>
           <li class="nav-item dropdown">
@@ -93,10 +116,11 @@ textarea#gdsDes { width:400px; height:180px; }
               마이페이지
             </a>
             <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownBlog">
-              <a class="dropdown-item" href="/move/uploaded">내가 등록한 물건</a>
-              <a class="dropdown-item" href="/move/wantbuy">내가 요청한 물건</a>
-              <a class="dropdown-item" href="/move/review">후기관리</a>
+              <a class="dropdown-item" href="/move/uploaded">등록한 중고/재능</a>
+              <a class="dropdown-item" href="/move/trade">거래요청받은 중고/재능거래</a>
+              <a class="dropdown-item" href="/move/wantbuy">거래요청한 중고/재능거래</a>
               <a class="dropdown-item" href="/move/trade_complete">거래완료(후기작성)</a>
+              <a class="dropdown-item" href="/move/review">후기관리</a>
             </div>
           </li>
           <li class="nav-item dropdown">
@@ -143,10 +167,17 @@ textarea#gdsDes { width:400px; height:180px; }
 </div>
 <div class="inputArea">
 	<label for="tals_Kinds">재능분류</label>
-	<select id="tals_Kinds" name="tals_Kinds" >
-		<option value="디자인" <c:if test='${talent.tals_Kinds == "디자인"}'>selected</c:if>>디자인</option>
-  		<option value="코딩" <c:if test='${talent.tals_Kinds == "코딩"}'>selected</c:if>>코딩</option>
- 	 	<option value="과제"  <c:if test='${talent.tals_Kinds == "과제"}'>selected</c:if>>과제</option>
+	<select id="tals_Kinds" name="tals_Kinds" onchange="categoryChange(this)">
+		<option>재능을 선택해주세요</option>
+		<option value="디자인">디자인</option>
+		<option value="번역/외국어">번역/외국어</option>
+		<option value="문서작성">문서작성</option>
+		<option value="음악/영상">음악/영상</option>
+		<option value="프로그램개발">프로그램개발</option>
+		<option value="생활서비스">생활서비스</option>
+	</select>
+	<select id="tals_Kinds_2" name ="tals_Kinds_2">
+	<option>세부 재능 선택</option> 	
 	</select>
 </div>
 <div class="inputArea">

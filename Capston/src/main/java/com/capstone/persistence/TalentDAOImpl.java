@@ -7,8 +7,12 @@ import javax.inject.Inject;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.stereotype.Repository;
 
-import com.capstone.domain.Talent_B_VO;
+import com.capstone.domain.Criteria;
+import com.capstone.domain.Review_T_VO;
+import com.capstone.domain.SearchCriteria;
 import com.capstone.domain.Talent_S_VO;
+import com.capstone.domain.TradeVO;
+import com.capstone.domain.Trade_T_VO;
 
 @Repository
 public class TalentDAOImpl implements TalentDAO{
@@ -39,8 +43,14 @@ public class TalentDAOImpl implements TalentDAO{
 	
 	//재능 판매 목록(화면) 출력
 	@Override
-	public List<Talent_S_VO> talentSlist() throws Exception {
+	public List<Talent_S_VO> talentSlist(String Kinds) throws Exception {
 		return sql.selectList(namespace + ".talentSlist");
+	}
+	
+	//재능 판매 목록(화면) 소분류 출력
+	@Override
+	public List<Talent_S_VO> talentSlist_2(String Kinds) throws Exception {
+		return sql.selectList(namespace + ".talentSlist_2", Kinds);
 	}
 	
 	//재능 판매 상세 조회
@@ -48,30 +58,64 @@ public class TalentDAOImpl implements TalentDAO{
 	public Talent_S_VO talentSview(int Tals_Code) throws Exception {
 		return sql.selectOne(namespace + ".talentSview", Tals_Code);
 	}
-		
-	//재능 구매 등록
+	
+	//재능 판매 상세 조회(후기 출력관련)
 	@Override
-	public void talent_B_Register(Talent_B_VO vo) throws Exception{
-		sql.insert(namespace + ".talent_B_Register", vo);
+	public List<Review_T_VO> talsReview(String tal_Id) throws Exception{
+		return sql.selectList(namespace+".talsReview", tal_Id);
 	}
-	//재능 구매 수정
+	
+	//거래 조회
 	@Override
-	public void talent_B_Modify(Talent_B_VO vo) throws Exception{
-		sql.update(namespace + ".talent_B_Modify", vo);
+	public Trade_T_VO trade_view(int trade_T_Code)throws Exception{
+		return sql.selectOne(namespace + ".trade_view", trade_T_Code);
 	}
-	//재능 구매 삭제
+	
+	//구매자 거래 요청 조회
 	@Override
-	public void talent_B_Delete(int talb_Code) throws Exception{
-		sql.delete(namespace + ".talent_B_Delete", talb_Code);
+	public Trade_T_VO trade_view(String Buyer_Id)throws Exception{
+		return sql.selectOne(namespace+ ".trade_view_2", Buyer_Id);
 	}
-	//재능 구매 목록(화면) 출력
+	
+	//거래 등록
 	@Override
-	public List<Talent_B_VO> talent_B_list() throws Exception{
-		return sql.selectList(namespace + ".talent_B_list");
+	public void trade_T_register(Trade_T_VO vo)throws Exception{
+		sql.insert(namespace+".trade_t_register",vo);
 	}
-	//재능 구매 상세 조회
+	
+	//거래 완료
 	@Override
-	public Talent_B_VO talent_B_View(int talb_Code) throws Exception{
-		return sql.selectOne(namespace + ".talent_B_View", talb_Code);
+	public void trade_T_complete(Trade_T_VO vo) throws Exception{
+		sql.update(namespace+".trade_t_complete", vo);
+	}
+	
+	//거래 취소
+	@Override
+	public void trade_T_delete(int trade_T_Code)throws Exception{
+		sql.delete(namespace+ ".trade_t_delete", trade_T_Code);
+	}
+	
+	//목록+페이징
+	@Override
+	public List<Talent_S_VO> listPage(Criteria cri) throws Exception{
+		return sql.selectList(namespace+".listPage",cri);
+	}
+	
+	//게시글 총 개수
+	@Override
+	public int listCount() throws Exception{
+		return sql.selectOne(namespace+".listCount");
+	}
+	
+	//목록+페이징+검색
+	@Override
+	public List<Talent_S_VO> listSearch(SearchCriteria scri) throws Exception {
+		return sql.selectList(namespace+".listSearch",scri);
+	}
+
+	//검색 결과 개수
+	@Override
+	public int countSearch(SearchCriteria scri) throws Exception {
+		return sql.selectOne(namespace+".countSearch",scri);
 	}
 }

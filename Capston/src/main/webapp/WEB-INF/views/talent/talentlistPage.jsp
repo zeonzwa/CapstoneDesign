@@ -1,8 +1,8 @@
-<%@ page session="false" pageEncoding="utf-8" %>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ page session="false" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <!DOCTYPE html>
-<html lang="en">
 
 <head>
 
@@ -11,48 +11,19 @@
   <meta name="description" content="">
   <meta name="author" content="">
 
-  <title>Modern Business - Start Bootstrap Template</title>
+  <title>재능판매 리스트</title>
 
   <!-- Bootstrap core CSS -->
   <link href="${pageContext.request.contextPath}/resources/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css">
 
   <!-- Custom styles for this template -->
   <link href="${pageContext.request.contextPath}/resources/css/modern-business.css" rel="stylesheet" type="text/css">
-  <link rel="stylesheet" href="./about2.css">
-  <link rel="stylesheet" href="./about3.css">
-  
-  
- <style>
- 
- 	section#container { padding:20px 0; border-top:2px solid #eee; border-bottom:2px solid #eee; }
-	section#container::after { content:""; display:block; clear:both; }
-	div#container_box { float:right; width:calc(100% - 200px - 20px); }
-	
-</style>
- 
+   <!--  add CSS -->
+  <link href="${pageContext.request.contextPath}/resources/vendor/bootstrap/css/web.css" rel="stylesheet" type="text/css">
 <style>
-.inputArea { margin:10px 0; }
-select { width:100px; }
-label { display:inline-block; width:90px; padding:5px; }
-label[for='gdsDes'] { display:block; }
-input { width:150px; }
-textarea#gdsDes { width:400px; height:180px; }
-.step_url {    position: absolute;    top: 16px;    right: 13px;    font-size: 15px;    color: #8e8e8e;}
+.card-img-top { width:418px; height:250px; }
 
-.select_img img {margin:20px 0;}
-.select_img img {width:418px; height:250px;}
-#wrapper {
-    position: relative;
-    height: 100%;
-}
-#content {
-    position: relative;
-    left: 50%;
-    transform: translate(-50%);
-    width: 800px;
-}
 </style>
-
 
 </head>
 
@@ -115,72 +86,72 @@ textarea#gdsDes { width:400px; height:180px; }
       </div>
     </div>
   </nav>
-  
 
-    <!-- Team Members -->
-    <section id="container">
-   
-		<div id="wrapper"> 
-<div id="content">
-		
-			    <h1 class="mt-4 mb-3">재능구매 수정
+  <!-- Page Content -->
+  <div class="container">
+
+    <!-- Page Heading/Breadcrumbs -->
+    <h1 id ="talb_list_title" class="mt-4 mb-3">재능판매 장터
+    <button id = "reg" onclick="location.href='/talent/talent_S_reg'">등록</button>
+    
       <small></small>
     </h1>
-			    <ol class="breadcrumb">
+
+    <ol class="breadcrumb">
       <li class="breadcrumb-item">
-        <a href="index.html">재능구매</a>
+        <a href="talent_S_list">재능판매</a>
       </li>
-      <li class="breadcrumb-item active">재능구매 수정</li>
+      <li class="breadcrumb-item active">재능판매 리스트</li>
     </ol>
-			
-<form role="form" method="post" autocomplete="off" enctype="multipart/form-data">
-
-<input type="hidden" name="talb_Code" value="${talent.talb_Code}" />
-
-
-<div class="inputArea">
- <label for="goods_Title">제목</label>
- <input type="text" id="talb_Title" name="talb_Title" value="${talent.talb_Title}"/>
-</div>
-<div class="inputArea">
-	<label for="talb_Kinds">재능분류</label>
-	<select id="talb_Kinds" name="talb_Kinds" >
-		<option value="디자인" <c:if test='${talent.talb_Kinds == "디자인"}'>selected</c:if>>디자인</option>
-  		<option value="코딩" <c:if test='${talent.talb_Kinds == "코딩"}'>selected</c:if>>코딩</option>
- 	 	<option value="과제"  <c:if test='${talent.talb_Kinds == "과제"}'>selected</c:if>>과제</option>
-	</select>
-</div>
-<div class="inputArea">
- <label for="talb_Content">내용</label>
- <textarea rows="5" cols="50" id="talb_Content" name="talb_Content">${talent.talb_Content}</textarea>
-</div>
-
-<div class="inputArea">
- <button type="submit" id="update_Btn" class="btn btn-primary">완료</button>
- <button type="submit" id="back_Btn" class="btn btn-warning">취소</button>
-  <script>
- $("#back_Btn").click(function(){
-  //history.back();
-  location.href = "/talent/talent_B_view?n=" + ${talent.talb_Code};
- });   
-</script>
-</div>   
-
-</form>
-			
-		</div>
-	</section>
-
+  
+<a href="/talent/talentlistSearch"  class="btn btn-primary">재능판매 검색 &rarr;</a>
+    <c:forEach items="${list}" var="list">
+    <div class="card mb-4">
+      <div class="card-body">
+          <div class="col-lg-6">
+            <h2 class="card-title"><label>제목 : </label>${list.tals_Title}</h2>
+            <p class="card-text"><label>번호 : </label>${list.tals_Code}</p>
+            <p class="card-text"><label>종류 : </label>${list.tals_Kinds}</p>
+            <p class="card-text"><label>작성자 : </label>${list.tals_Id}</p>
+            <p class="card-text"><label>판매희망분류 : </label>${list.tals_Kinds}</p>
+            <p class="card-text"><label>판매희망분류2 : </label>${list.tals_Kinds_2}</p>
+            <p class="card-text"><label>가격 : </label><fmt:formatNumber value="${list.tals_Price}" pattern="###,###,###원"/></p>
+            <p class="card-text"><div id="btn-place"><a href="/talent/talent_S_view?n=${list.tals_Code}"  class="btn btn-primary">상세보기 &rarr;</a></div> </p> 
+          </div>
+      </div>
+    </div>
+      	
+    </c:forEach>
+    </div>
     <!-- /.row -->
 
 
   
   <!-- /.container -->
+<hr />
+
+</div>
+
+<div>
+ <ul>
+  <c:if test="${pageMaker.prev}">
+   <li><a href="talentlistPage${pageMaker.makeQuery(pageMaker.startPage - 1)}">이전</a></li>
+  </c:if> 
+  
+  <c:forEach begin="${pageMaker.startPage}" end="${pageMaker.endPage}" var="idx">
+   <li><a href="talentlistPage${pageMaker.makeQuery(idx)}">${idx}</a></li>
+  </c:forEach>
+    
+  <c:if test="${pageMaker.next && pageMaker.endPage > 0}">
+   <li><a href="talentlistPage${pageMaker.makeQuery(pageMaker.endPage + 1)}">다음</a></li>
+  </c:if> 
+ </ul>
+</div>
 
   <!-- Footer -->
   <footer class="py-5 bg-dark">
     <div class="container">
-      <p class="m-0 text-center text-white">충대 장터</p>
+      <p class="m-0 text-center text-white">충대장터</p>
     </div>
     <!-- /.container -->
   </footer>

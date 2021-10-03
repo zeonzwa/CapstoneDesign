@@ -98,6 +98,8 @@
       </div>
   	</div>
   
+<a href="/admin/tradelistPage"  class="btn btn-primary">중고물품페이징 &rarr;</a>
+
 
     <div class="row">
     	<c:forEach items="${list}" var="list">

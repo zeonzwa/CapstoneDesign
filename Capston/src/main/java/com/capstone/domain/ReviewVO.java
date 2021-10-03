@@ -6,7 +6,7 @@ public class ReviewVO {
 	
 	private String review_Code;		//넣어야 되는 값 : 거래 코드
 	private String review_Content;
-	private String review_Sta;
+	private int review_Sta;
 	private String review_Writer;
 	private Date review_Date;
 	private String review_Goods;
@@ -24,10 +24,11 @@ public class ReviewVO {
 	public void setReview_Content(String review_Content) {
 		this.review_Content = review_Content;
 	}
-	public String getReview_Sta() {
+	
+	public int getReview_Sta() {
 		return review_Sta;
 	}
-	public void setReview_Sta(String review_Sta) {
+	public void setReview_Sta(int review_Sta) {
 		this.review_Sta = review_Sta;
 	}
 	public String getReview_Writer() {

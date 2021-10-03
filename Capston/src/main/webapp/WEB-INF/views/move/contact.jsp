@@ -188,6 +188,7 @@ li {
     </ol>
 
 
+<a href="/move/contactlistPage"  class="btn btn-primary">공지사항 페이징 &rarr;</a>
 <c:forEach items="${list}" var="list">
 	<div class="card mb-4">
 	 <div class="card-body">
@@ -196,7 +197,6 @@ li {
 	    <p class="card-text"><label>글 번호 :</label>${list.notice_Num}</p>
 	    <p class="card-text"><label>글 제목 :</label>${list.notice_Title}</p>
 	    <p class="card-text"><label>글 내용 :</label>${list.notice_Content}</p>
-	    <p class="card-text"><label>작성자 :</label>${list.notice_Id}</p>
 	    <p class="card-text"><div id="btn-place"><a href="/move/contact_view?n=${list.notice_Num}"  class="btn btn-primary">상세보기 &rarr;</a></div> </p>
 	   </div>
 	  </div>

@@ -45,4 +45,10 @@ public class MemberServiceImpl implements MemberService {
 	public List<TradeVO> tradeView(String Id) throws Exception{
 		return dao.tradeView(Id);
 	}
+
+	//관리자 로그인
+	@Override
+	public MemberVO managersignin(MemberVO vo) throws Exception {
+		return dao.managersignin(vo);
+	}
 }

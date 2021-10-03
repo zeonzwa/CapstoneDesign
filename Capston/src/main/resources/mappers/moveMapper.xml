@@ -4,10 +4,60 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.capstone.mappers.moveMapper">
 
+<!-- Paging -->
+<select id="listPage" resultType="com.capstone.domain.NoticeVO"
+parameterType="com.capstone.domain.Criteria">
+    select Notice_Num, Notice_Title, Notice_Date
+       from (
+           select Notice_Num, Notice_Title, Notice_Date,
+               row_number() over(order by Notice_Num desc) as rNum
+           from Notice
+     ) mb
+    where rNum between #{rowStart} and #{rowEnd}
+        order by Notice_Num desc
+</select>
+
+<!-- 검색 -->
+<select id="listSearch" resultType="com.capstone.domain.NoticeVO"
+parameterType="com.capstone.domain.SearchCriteria">
+select Notice_Num, Notice_Title, Notice_Date
+       from (
+           select Notice_Num, Notice_Title, Notice_Date,
+               row_number() over(order by Notice_Num desc) as rNum
+           from Notice
+      <include refid="search"></include>
+     ) mb
+    where rNum between #{rowStart} and #{rowEnd}
+        order by Notice_Num desc
+</select>
+
+<sql id="search">
+ <if test="searchType != null">
+  <if test="searchType == 't'.toString()">where Notice_Title like '%' || #{keyword} || '%'</if>
+  <if test="searchType == 'c'.toString()">where Notice_Content like '%' || #{keyword} || '%'</if>
+ </if>
+</sql>
+
+<select id="countSearch" resultType="int">
+ select count(Notice_Num)
+  from Notice
+   <include refid="search"></include>
+<![CDATA[
+   and Notice_Num > 0
+]]>
+</select>
+
+<!-- 게시글 총 개수 구하기 -->
+<select id="listCount" resultType="int">
+<![CDATA[select count(Notice_Num)
+			from Notice where Notice_Num>0
+			]]>
+</select>
+
 <!-- 공지사항 추가 -->
 <insert id="notice_register">
-	insert into notice(notice_Num, notice_Title, notice_Content, notice_Id)
-	values (notice_seq.nextval, #{notice_Title}, #{notice_Content}, #{notice_Id})
+	insert into notice(notice_Num, notice_Title, notice_Content, notice_Date)
+	values (notice_seq.nextval, #{notice_Title}, #{notice_Content}, sysdate)
 </insert>
 
 <!-- 공지사항 수정 -->
@@ -28,7 +78,7 @@
 <!-- 공지사항 -->
 <select id="noticelist" resultType="com.capstone.domain.NoticeVO">
 	select
-		notice_Num, notice_Title, notice_Content, notice_Id
+		notice_Num, notice_Title, notice_Content
 	from notice
 		order by notice_Num desc
 </select>
@@ -36,54 +86,27 @@
 <!-- 공지사항 상세 조회 -->
 <select id="notice_View" resultType="com.capstone.domain.NoticeVO">
 	select
-		notice_Num, notice_Title, notice_Content, notice_Id
+		notice_Num, notice_Title, notice_Content, notice_Date
 	from notice
 		where notice_Num = #{notice_Num}
 </select>
 
 <!-- 1:1문의 -->
 	<insert id="faq">
-		insert into faq (faq_Code, faq_Title, faq_Kinds, faq_Content, faq_Id)
-		values (faq_seq.nextval, #{faq_Title}, #{faq_Kinds}, #{faq_Content}, #{faq_Id})
+		insert into faq (faq_Title, faq_Kinds, faq_Content, faq_Id, faq_Date)
+		values (#{faq_Title}, #{faq_Kinds}, #{faq_Content}, #{faq_Id}, sysdate)
 	</insert>
 	
 <!-- 1:1문의 리스트 -->
 	<select id="faqlist" resultType="com.capstone.domain.FaqVO">
 		select
-			faq_Code, faq_Title, faq_Kinds, faq_Id
+			faq_Title, faq_Kinds, faq_Content, faq_Date, faq_Id
 		from faq
-			order by faq_Code desc
 	</select>
-	
-<!-- 1:1문의 자세히보기 -->
-	<select id="faq_View" resultType="com.capstone.domain.FaqVO">
-		select
-			faq_Code, faq_Title, faq_Kinds, faq_Content, faq_Id
-		from faq
-			where faq_Code=#{faq_Code}
-	</select>
-	
-<!-- 1:1문의 수정 -->
-	<update id="faqModify">
-	update faq
-			set
-				faq_Title=#{faq_Title},
-				faq_Kinds=#{faq_Kinds},
-				faq_Content=#{faq_Content}
-				
-			where faq_Code=#{faq_Code}
-	</update>
-
-<!-- 1:1문의 삭제 -->
-	<delete id="faqDelete">
-		delete
-				faq
-		where faq_Code=#{faq_Code}
-	</delete>
 	
 <!-- 회원 리스트 -->
 	<select id="memberlist" resultType="com.capstone.domain.MemberVO">
-		select Name, Id, Pw, Major, Student_Num, Email, Phone_Num
+		select Name, Id, Pw, Major, Student_Num, Email, Phone_Num, RegiDate, Verify, Tal_Sta, Goods_Sta
 			from member
 	</select>
 	
@@ -184,5 +207,55 @@
     		from review
         		where review_Code = #{review_Code}
 	</select>		
+	
+<!-- Paging -->
+<select id="goodslistPage" resultType="com.capstone.domain.GoodsVO"
+parameterType="com.capstone.domain.Criteria">
+    select goods_Name, goods_Price, goods_Pic, seller_id
+       from (
+           select goods_Name, goods_Price, goods_Pic, seller_id,
+               row_number() over(order by goods_Code desc) as rNum
+           from GoodsVO
+     ) mb
+    where rNum between #{rowStart} and #{rowEnd}
+        order by goods_Code desc
+</select>
+
+<!-- 검색 -->
+<select id="goodslistSearch" resultType="com.capstone.domain.GoodsVO"
+parameterType="com.capstone.domain.SearchCriteria">
+select goods_Name, goods_Price, goods_Pic, seller_id
+       from (
+           select goods_Name, goods_Price, goods_Pic, seller_id,
+               row_number() over(order by goods_Code desc) as rNum
+           from GoodsVO
+      <include refid="search"></include>
+     ) mb
+    where rNum between #{rowStart} and #{rowEnd}
+        order by goods_Code desc
+</select>
+
+<sql id="goodssearch">
+ <if test="searchType != null">
+  <if test="searchType == 't'.toString()">where goods_Name like '%' || #{keyword} || '%'</if>
+  <if test="searchType == 'c'.toString()">where goods_Des like '%' || #{keyword} || '%'</if>
+ </if>
+</sql>
+
+<select id="goodscountSearch" resultType="int">
+ select count(goods_Code)
+  from goods
+   <include refid="search"></include>
+<![CDATA[
+   and goods_Code > 0
+]]>
+</select>
+
+<!-- 게시글 총 개수 구하기 -->
+<select id="goodslistCount" resultType="int">
+<![CDATA[select count(goods_Code)
+			from goods where goods_Code>0
+			]]>
+</select>
 
 </mapper>

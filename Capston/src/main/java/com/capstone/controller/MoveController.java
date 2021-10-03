@@ -13,18 +13,21 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.capstone.domain.Criteria;
 import com.capstone.domain.FaqVO;
 import com.capstone.domain.GoodsVO;
 import com.capstone.domain.Goods_B_VO;
 import com.capstone.domain.MemberVO;
 import com.capstone.domain.NoticeVO;
+import com.capstone.domain.PageMaker;
 import com.capstone.domain.ReviewVO;
-import com.capstone.domain.Talent_B_VO;
+import com.capstone.domain.SearchCriteria;
 import com.capstone.domain.Talent_S_VO;
 import com.capstone.domain.TradeVO;
 import com.capstone.service.AdminService;
@@ -81,7 +84,6 @@ public class MoveController {
 	public String postManagerRegister(NoticeVO vo, HttpServletRequest req) throws Exception{
 		HttpSession session=req.getSession();
 		MemberVO manager=(MemberVO) session.getAttribute("member");
-		vo.setNotice_Id(manager.getId());
 		moveService.notice_register(vo);
 		return "redirect:/move/manager";
 		
@@ -130,6 +132,62 @@ public class MoveController {
 		model.addAttribute("notice", notice);
 	}
 	
+	//공지사항 페이징
+	@RequestMapping(value="/contactlistPage",method=RequestMethod.GET)
+	public void contactlistPage(@ModelAttribute("cri") Criteria cri, Model model, HttpServletRequest req) throws Exception{
+		logger.info("get contactlist page");
+		HttpSession session = req.getSession();
+		List<NoticeVO> list=moveService.listPage(cri);
+		model.addAttribute("list",list);
+		
+		PageMaker pageMaker=new PageMaker();
+		pageMaker.setCri(cri);
+		pageMaker.setTotalCount(moveService.listCount());
+		model.addAttribute("pageMaker",pageMaker);
+	}
+	
+	//공지사항_페이징_검색
+	@RequestMapping(value="/contactlistSearch",method=RequestMethod.GET)
+	public void contactlistSearch(@ModelAttribute("scri") SearchCriteria scri, Model model, HttpServletRequest req) throws Exception{
+		logger.info("get contactsearch");
+		HttpSession session = req.getSession();
+		List<NoticeVO> list=moveService.listSearch(scri);
+		model.addAttribute("list",list);
+		
+		PageMaker pageMaker=new PageMaker();
+		pageMaker.setCri(scri);
+		pageMaker.setTotalCount(moveService.listCount());
+		model.addAttribute("pageMaker",pageMaker);
+	}
+	
+	//관리자공지사항 페이징
+	@RequestMapping(value="/managerlistPage",method=RequestMethod.GET)
+	public void managerlistPage(@ModelAttribute("cri") Criteria cri, Model model, HttpServletRequest req) throws Exception{
+		logger.info("get contactlist page");
+		HttpSession session = req.getSession();
+		List<NoticeVO> list=moveService.listPage(cri);
+		model.addAttribute("list",list);
+		
+		PageMaker pageMaker=new PageMaker();
+		pageMaker.setCri(cri);
+		pageMaker.setTotalCount(moveService.listCount());
+		model.addAttribute("pageMaker",pageMaker);
+	}
+	
+	//관리자공지사항_페이징_검색
+	@RequestMapping(value="/managerlistSearch",method=RequestMethod.GET)
+	public void managerlistSearch(@ModelAttribute("scri") SearchCriteria scri, Model model, HttpServletRequest req) throws Exception{
+		logger.info("get contactsearch");
+		HttpSession session = req.getSession();
+		List<NoticeVO> list=moveService.listSearch(scri);
+		model.addAttribute("list",list);
+		
+		PageMaker pageMaker=new PageMaker();
+		pageMaker.setCri(scri);
+		pageMaker.setTotalCount(moveService.listCount());
+		model.addAttribute("pageMaker",pageMaker);
+	}
+	
 	
 	//관리자-재능 판매 화면 출력
 	@RequestMapping(value="/manager_talent_S", method=RequestMethod.GET)
@@ -162,37 +220,6 @@ public class MoveController {
 		return "redirect:/move/manager_talent_S";
 	}
 	
-	//관리자-재능 구매 화면 출력
-	@RequestMapping(value="/manager_talent_B", method=RequestMethod.GET)
-	public void getManagerTalentBList(Model model,HttpServletRequest req) throws Exception{
-		logger.info("get manager_talb_list");
-		HttpSession session = req.getSession();
-		MemberVO member = (MemberVO) session.getAttribute("member");
-		List<Talent_B_VO> list=moveService.talent_B_list();
-		model.addAttribute("member", member);
-		model.addAttribute("list", list);
-	}
-	
-	//관리자-재능 구매 화면 상세 조회
-	@RequestMapping(value="/manager_talent_B_view", method=RequestMethod.GET)
-	public void getManagerTalentBview(@RequestParam("n") int talb_Code, Model model, HttpServletRequest req) throws Exception{
-		logger.info("get manager talb view");
-		HttpSession session = req.getSession();
-		MemberVO member = (MemberVO) session.getAttribute("member");
-		Talent_B_VO talent=moveService.talent_B_View(talb_Code);
-		model.addAttribute("talent", talent);
-		model.addAttribute("member", member);
-	}
-	
-	//관리자-재능 구매 삭제
-	@RequestMapping(value="/manager_talent_B_delete", method=RequestMethod.POST)
-	public String postManagerTalentBDelete(@RequestParam("n") int talb_Code) throws Exception{
-		logger.info("post manager talb delete");
-		moveService.talent_B_Delete(talb_Code);
-		
-		return "redirect:/move/manager_talent_B";
-	}
-	
 	//관리자-판매상품 삭제
 	@RequestMapping(value="/manager_sell_delete",method=RequestMethod.GET)
 	public String postManagerGoodsDelete(@RequestParam("n") int goods_Code) throws Exception{
@@ -223,37 +250,6 @@ public class MoveController {
 		TradeVO trade = moveService.trade_view(goods_Code);
 	}
 	
-	//관리자-구매상품 리스트
-	@RequestMapping(value="/manager_buy",method=RequestMethod.GET)
-	public void getManagerGoodsBList(Model model,HttpServletRequest req) throws Exception{
-		logger.info("get manager goodsb list");
-		HttpSession session = req.getSession();
-		MemberVO member = (MemberVO) session.getAttribute("member"); 
-		List<Goods_B_VO> list = moveService.goods_B_list();
-		model.addAttribute("member", member);
-		model.addAttribute("list", list);		
-	}
-	
-	//관리자-구매상품 상세보기
-	@RequestMapping(value = "/manager_buy_view", method = RequestMethod.GET)
-	public void getManagerGoodsBview(@RequestParam("n") int goodsb_Code, Model model, HttpServletRequest req) throws Exception{
-		logger.info("get manager goodsb view");
-		HttpSession session = req.getSession();
-		MemberVO member = (MemberVO) session.getAttribute("member"); 
-		Goods_B_VO goods = moveService.goods_B_View(goodsb_Code);
-		TradeVO trade = moveService.trade_view(goodsb_Code);
-		model.addAttribute("goods", goods);
-		model.addAttribute("member", member);
-	}
-	
-	//관리자-구매상품 삭제
-	@RequestMapping(value = "/manager_buy_delete", method = RequestMethod.GET)
-	public String postManagerGoodsBDelete(@RequestParam("n") int goodsb_Code) throws Exception{
-		logger.info("post manager goodsb delete");
-		moveService.goods_B_Delete(goodsb_Code);
-		return "redirect:/move/manager_buy";
-	}
-	
 	//등록한 판매, 구매 물품 목록 get
 	@RequestMapping(value = "/uploaded", method = RequestMethod.GET)
 	public void getUploaded(Model model, HttpServletRequest req) throws Exception {
@@ -261,10 +257,8 @@ public class MoveController {
 		HttpSession session = req.getSession();
 		MemberVO member = (MemberVO) session.getAttribute("member");
 		List<GoodsVO> list = moveService.goodslist(member.getId());
-		List<Goods_B_VO> list2 = moveService.goods_B_List(member.getId());
 		model.addAttribute("member", member);	
-		model.addAttribute("list", list); 
-		model.addAttribute("list2", list2);
+		model.addAttribute("list", list);
 	}
 	
 	

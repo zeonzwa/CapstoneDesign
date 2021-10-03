@@ -2,38 +2,28 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ page session="false" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
-
 <!DOCTYPE html>
 
 <head>
 
+<script src='https://code.jquery.com/jquery-3.3.1.min.js'></script>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <meta name="description" content="">
   <meta name="author" content="">
 
-  <title>Modern Business - Start Bootstrap Template</title>
-<script src="/resources/jquery/jquery-3.3.1.min.js"></script>
+  <title>재능판매 리스트</title>
+
   <!-- Bootstrap core CSS -->
   <link href="${pageContext.request.contextPath}/resources/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css">
 
   <!-- Custom styles for this template -->
   <link href="${pageContext.request.contextPath}/resources/css/modern-business.css" rel="stylesheet" type="text/css">
-
+   <!--  add CSS -->
+  <link href="${pageContext.request.contextPath}/resources/vendor/bootstrap/css/web.css" rel="stylesheet" type="text/css">
 <style>
-.inputArea { margin:10px 0; }
-select { width:100px; }
-label { display:inline-block; width:200px; padding:5px; }
-label[for='gdsDes'] { display:block; }
-input { width:150px; }
-.gdsDes { marigin:10px 0;width:400px; height:180px; }
-.card-img-top{width:418px; height:250px; }
-.star{background-image:url(/resources/image/star.jpg);}
-.thumbImg {}
-#com_Btn {border : 0; width:100px; height:30px;;  position: relative; left:70%;}
-#rej_Btn {border : 0; width:100px; height:30px;;  position: relative; left:70%;}
-#cancel_Btn {border : 0; width:100px; height:30px;;  position: relative; left:70%;}
-#req_Btn {border : 0; width:100px; height:30px;;  position: relative; left:70%;}
+.card-img-top { width:418px; height:250px; }
+
 </style>
 
 </head>
@@ -102,81 +92,94 @@ input { width:150px; }
   <div class="container">
 
     <!-- Page Heading/Breadcrumbs -->
-    <h1 class="mt-4 mb-3">재능구매 상세</h1>
+    <h1 id ="talb_list_title" class="mt-4 mb-3">재능판매 장터
+    <button id = "reg" onclick="location.href='/talent/talent_S_reg'">등록</button>
+    
+      <small></small>
+    </h1>
 
-	<form role="form" method="post" autocomplete="off">
-			
-	<input type="hidden" name="n" value="${talent.talb_Code}"/>
+    <ol class="breadcrumb">
+      <li class="breadcrumb-item">
+        <a href="talent_S_list">재능판매</a>
+      </li>
+      <li class="breadcrumb-item active">재능판매 리스트</li>
+    </ol>
+  
 
-    <!-- Intro Content -->
-    <div class="row">
-      <div class="col-lg-6">
-        <div class="inputArea">
-				<label for="gdsName">제목</label>
-				<span>${talent.talb_Title}</span>
-		</div>
-		<div class="inputArea">
-				<label for="gdsCategory">구매희망분류</label>
-				<span>${talent.talb_Kinds}</span>
-		</div>
-		 <div class="inputArea">
-				<label>작성자</label>
-				<span>${talent.talb_Id}</span>
-		</div>
-		<div class="inputArea">
-				<label for="gdsCategory">연락처</label>
-				<span>${talent.phone_Num}</span>
-		</div>
-        <div class="inputArea">
-				<label for="gdsDes">내용</label>	
-				<div class="gdsDes">${talent.talb_Content}</div>
-			</div>
+<div class="search">
+ <select name="searchType">
+  <option value="n"<c:out value="${scri.searchType == null ? 'selected' : ''}"/>>-----</option>
+  <option value="t"<c:out value="${scri.searchType eq 't' ? 'selected' : ''}"/>>제목</option>
+  <option value="c"<c:out value="${scri.searchType eq 'c' ? 'selected' : ''}"/>>내용</option>
+  <option value="w"<c:out value="${scri.searchType eq 'w' ? 'selected' : ''}"/>>작성자</option>
+ </select>
+ 
+ <input type="text" name="keyword" id="keywordInput" value="${scri.keyword}"/>
+
+ <button id="searchBtn">검색</button>
+ 
+ <script>
+ $(function(){
+  $('#searchBtn').click(function() {
+   self.location = "talentlistSearch"
+     + '${pageMaker.makeQuery(1)}'
+     + "&searchType="
+     + $("select option:selected").val()
+     + "&keyword="
+     + encodeURIComponent($('#keywordInput').val());
+    });
+ });   
+ </script>
+</div>
+
+    <c:forEach items="${list}" var="list">
+    <div class="card mb-4">
+      <div class="card-body">
+          <div class="col-lg-6">
+            <h2 class="card-title"><label>제목 : </label>${list.tals_Title}</h2>
+            <p class="card-text"><label>글번호 : </label>${list.tals_Code}</p>
+            <p class="card-text"><label>작성자 : </label>${list.tals_Id}</p>
+            <p class="card-text"><label>판매희망분류 : </label>${list.tals_Kinds}</p>
+            <p class="card-text"><label>판매희망분류 2차 : </label>${list.tals_Kinds_2}</p>
+            <p class="card-text"><label>가격 : </label><fmt:formatNumber value="${list.tals_Price}" pattern="###,###,###원"/></p>
+            <p class="card-text"><div id="btn-place"><a href="/talent/talent_S_view?n=${list.tals_Code}"  class="btn btn-primary">상세보기 &rarr;</a></div> </p> 
+          </div>
       </div>
     </div>
-
+      	
+    </c:forEach>
+    </div>
     <!-- /.row -->
-  </div>
-  <c:choose>
-  <c:when test = "${member.id eq talent.talb_Id || member.id=='manager'}">
-  <div id = "tradebtn">
-    <button type="button" id="modify_Btn" class="btn btn-warning">수정</button>
-	<button type="button" id="delete_Btn" class="btn btn-danger">삭제</button>
-			<script>
-					var formObj = $("form[role='form']");
-					
-					$("#modify_Btn").click(function(){
-						formObj.attr("action", "/talent/talent_B_modify");
-						formObj.attr("method", "get")
-						formObj.submit();
-					});
-					
-					$("#delete_Btn").click(function(){
-						
-						var con = confirm("정말로 삭제하시겠습니까?");
-						
-						if(con) {						
-							formObj.attr("action", "/talent/talent_B_delete");
-							formObj.submit();
-						}
-					});
-				</script>	
-  </div>
-
-</c:when>
-<c:otherwise>
-
-</c:otherwise>
-
-</c:choose>
 
 
-   
+  
   <!-- /.container -->
+<hr />
+
+</div>
+
+
+
+<div>
+ <ul>
+  <c:if test="${pageMaker.prev}">
+   <li><a href="talentlistPage${pageMaker.makeQuery(pageMaker.startPage - 1)}">이전</a></li>
+  </c:if> 
+  
+  <c:forEach begin="${pageMaker.startPage}" end="${pageMaker.endPage}" var="idx">
+   <li><a href="talentlistPage${pageMaker.makeQuery(idx)}">${idx}</a></li>
+  </c:forEach>
+    
+  <c:if test="${pageMaker.next && pageMaker.endPage > 0}">
+   <li><a href="talentlistPage${pageMaker.makeQuery(pageMaker.endPage + 1)}">다음</a></li>
+  </c:if> 
+ </ul>
+</div>
 
   <!-- Footer -->
   <footer class="py-5 bg-dark">
     <div class="container">
-      <p class="m-0 text-center text-white">충대 장터</p>
+      <p class="m-0 text-center text-white">충대장터</p>
     </div>
     <!-- /.container -->
   </footer>

@@ -2,6 +2,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ page session="false" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+
 <!DOCTYPE html>
 
 <head>
@@ -18,8 +19,6 @@
 
   <!-- Custom styles for this template -->
   <link href="${pageContext.request.contextPath}/resources/css/modern-business.css" rel="stylesheet" type="text/css">
-   <!--  add CSS -->
-  <link href="${pageContext.request.contextPath}/resources/vendor/bootstrap/css/web.css" rel="stylesheet" type="text/css">
 
 <style>
 .card-img-top { width:418px; height:250px; }
@@ -29,7 +28,6 @@
 </head>
 
 <body>
-
   <!-- Navigation -->
   <nav class="navbar fixed-top navbar-expand-lg navbar-dark bg-dark fixed-top">
     <div class="container">
@@ -88,49 +86,65 @@
     </div>
   </nav>
 
-  
-  <!-- Page Content -->
-  <div class="container">
 
-    <!-- Page Heading/Breadcrumbs -->
-    <h1 id ="talb_list_title" class="mt-4 mb-3">재능구매 장터
-    <button id = "reg" onclick="location.href='/talent/talent_B_register'">등록</button>
-    
-      <small></small>
-    </h1>
 
-    <ol class="breadcrumb">
-      <li class="breadcrumb-item">
-        <a href="talent_B_list.html">재능구매</a>
-      </li>
-      <li class="breadcrumb-item active">재능구매 리스트</li>
-    </ol>
   
 
-    <c:forEach items="${list}" var="list">
-    <div class="card mb-4">
-      <div class="card-body">
-          <div class="col-lg-6">
-            <h2 class="card-title"><label>제목 : </label>${list.talb_Title}</h2>
-            <p class="card-text"><label>작성자 : </label>${list.talb_Id}</p>
-            <p class="card-text"><label>구매희망분류 : </label>${list.talb_Kinds}</p>
-            <p class="card-text"><div id="btn-place"><a href="/talent/talent_B_view?n=${list.talb_Code}"  class="btn btn-primary">상세보기 &rarr;</a></div> </p> 
-          </div>
+    <!-- Team Members -->
+    <div id = "title">
+    <h2>중고판매 장터</h2> 
+    <div id = "Product_reg">
+      <button id = "reg" onclick="location.href='/admin/register'">등록</button>
       </div>
-    </div>
-      	
-    </c:forEach>
+  	</div>
+  
+<a href="/admin/tradelistSearch"  class="btn btn-primary">중고물품검색 &rarr;</a>
+    <div class="row">
+    	<c:forEach items="${list}" var="list">
+    	 <div class="col-lg-100">
+        <div class="card h-100 text-center">
+        <div id="trade_list_margin">
+         <a href="/admin/trade_view?n=${list.goods_Code}"><img src="${list.goods_Pic}" class="card-img-top"/></a>
+         </div>
+          <div class="card-body">
+				<h4 class="card-title"><label>제목 : </label>${list.goods_Name}</h4>
+				 <p class="card-text"><label>가격 : </label><fmt:formatNumber value="${list.goods_Price}" pattern="###,###,###원"/></p>
+          </div>
+          <div class="card-footer">
+          	<span>작성자:</span>
+            <a href="/admin/trade_view?n=${list.goods_Code}">${list.seller_Id}</a>
+          </div>
+        </div>
+      </div>
+    	
+    	</c:forEach>
     </div>
     <!-- /.row -->
 
 
   
   <!-- /.container -->
+  
+<div>
+ <ul>
+  <c:if test="${pageMaker.prev}">
+   <li><a href="tradelistPage${pageMaker.makeQuery(pageMaker.startPage - 1)}">이전</a></li>
+  </c:if> 
+  
+  <c:forEach begin="${pageMaker.startPage}" end="${pageMaker.endPage}" var="idx">
+   <li><a href="tradelistPage${pageMaker.makeQuery(idx)}">${idx}</a></li>
+  </c:forEach>
+    
+  <c:if test="${pageMaker.next && pageMaker.endPage > 0}">
+   <li><a href="tradelistPage${pageMaker.makeQuery(pageMaker.endPage + 1)}">다음</a></li>
+  </c:if> 
+ </ul>
+</div>
 
   <!-- Footer -->
   <footer class="py-5 bg-dark">
     <div class="container">
-      <p class="m-0 text-center text-white">충대 장터</p>
+      <p class="m-0 text-center text-white">충대장터</p>
     </div>
     <!-- /.container -->
   </footer>

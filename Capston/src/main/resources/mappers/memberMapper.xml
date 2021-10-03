@@ -6,22 +6,32 @@
 
 <!-- 회원 가입 -->
 <insert id="signup">
- insert into member (Name, Id, Pw, Major, Student_Num, Email, Phone_Num)
-  values(#{Name}, #{Id}, #{Pw}, #{Major}, #{Student_Num}, #{Email}, #{Phone_Num}) 
+ insert into member (Name, Id, Pw, Major, Student_Num, Email, Phone_Num, tal_Sta, goods_Sta)
+  values(#{Name}, #{Id}, #{Pw}, #{Major}, #{Student_Num}, #{Email}, #{Phone_Num}, 0, 0) 
 </insert>
 
 <!-- 로그인 -->
 <select id="signin" resultType="com.capstone.domain.MemberVO">
 	select
-	    Name, Id, Pw, Major, Student_Num, Email, Phone_Num
+	    Name, Id, Pw, Major, Student_Num, Email, Phone_Num, verify
 	from
 	    member
 	where Id = #{Id} AND Pw = #{Pw}
 </select>
+
 <!-- 아이디 체크 -->
 <select id="idChk" resultType="com.capstone.domain.MemberVO">
 	select Id from member 
 	where Id = #{Id}
+</select>
+
+<!-- 관리자용 로그인 -->
+<select id="managersignin" resultType="com.capstone.domain.MemberVO">
+	select
+		Name, Id, Pw, Major, Student_Num, Email, Phone_Num, verify
+		from
+			member
+		where Id=#{Id} AND Pw=#{Pw} AND verify=9
 </select>
 
 <!-- 거래 조회 -->
@@ -32,4 +42,5 @@
 	    where buyer_Id = #{Id} AND trade_State = 3
 	        order by goods_Code desc
 	</select>
+	
 </mapper>

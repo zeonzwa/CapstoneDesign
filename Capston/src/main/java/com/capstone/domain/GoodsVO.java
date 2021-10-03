@@ -14,7 +14,15 @@ public class GoodsVO {
 	private String goods_Pic;
 	private Date goods_Date;
 	private String phone_Num;
+	private String goods_State;
 	
+	
+	public String getGoods_State() {
+		return goods_State;
+	}
+	public void setGoods_State(String goods_State) {
+		this.goods_State = goods_State;
+	}
 	public String getPhone_Num() {
 		return phone_Num;
 	}

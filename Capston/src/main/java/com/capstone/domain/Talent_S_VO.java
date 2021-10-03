@@ -7,12 +7,15 @@ public class Talent_S_VO {
 	private String tals_Code;
 	private String tals_Title;
 	private String tals_Kinds;
+	private String tals_Kinds_2;
 	private String tals_Content;
 	private int tals_Price;
 	private String tals_Term;
 	private String phone_Num;
 	private Date tals_Date;
 	private String tals_Id;
+	
+	
 	
 	public String getTals_Id() {
 		return tals_Id;
@@ -37,6 +40,12 @@ public class Talent_S_VO {
 	}
 	public void setTals_Kinds(String tals_Kinds) {
 		this.tals_Kinds = tals_Kinds;
+	}
+	public String getTals_Kinds_2() {
+		return tals_Kinds_2;
+	}
+	public void setTals_Kinds_2(String tals_Kinds_2) {
+		this.tals_Kinds_2 = tals_Kinds_2;
 	}
 	public String getTals_Content() {
 		return tals_Content;

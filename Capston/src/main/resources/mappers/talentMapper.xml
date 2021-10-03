@@ -6,10 +6,61 @@
 
 <!--재능 판매 등록 -->	
 <insert id="register">
-	insert into Talent_S (tals_Code, tals_Title, tals_Kinds, tals_Content, tals_Price, tals_Term, phone_Num, tals_Id)
-	values (tals_seq.nextval, #{tals_Title}, #{tals_Kinds}, #{tals_Content},
+	insert into Talent_S (tals_Code, tals_Title, tals_Kinds, tals_Kinds_2,tals_Content, tals_Price, tals_Term, phone_Num, tals_Id)
+	values (tals_seq.nextval, #{tals_Title}, #{tals_Kinds}, #{tals_Kinds_2},#{tals_Content},
 		#{tals_Price}, #{tals_Term}, #{phone_Num}, #{tals_Id})
 </insert>
+
+<!-- Paging -->
+<select id="listPage" resultType="com.capstone.domain.Talent_S_VO"
+parameterType="com.capstone.domain.Criteria">
+    select tals_Code, tals_Title, tals_Kinds, tals_Kinds_2, tals_Term, tals_Price, tals_Date, tals_Id
+       from (
+           select tals_Code, tals_Title, tals_Kinds, tals_Kinds_2, tals_Term, tals_Price, tals_Date, tals_Id,
+               row_number() over(order by tals_Code desc) as rNum
+           from Talent_S
+     ) mb
+    where rNum between #{rowStart} and #{rowEnd}
+        order by tals_Code desc
+</select>
+
+<!-- 검색 -->
+<select id="listSearch" resultType="com.capstone.domain.Talent_S_VO"
+parameterType="com.capstone.domain.SearchCriteria">
+select tals_Code, tals_Title, tals_Kinds, tals_Kinds_2, tals_Content, tals_Term, tals_Price, tals_Date, tals_Id
+       from (
+           select tals_Code, tals_Title, tals_Kinds, tals_Kinds_2, tals_Content, tals_Term, tals_Price, tals_Date, tals_Id,
+               row_number() over(order by tals_Code desc) as rNum
+           from Talent_S
+      <include refid="search"></include>
+     ) mb
+    where rNum between #{rowStart} and #{rowEnd}
+        order by tals_Code desc
+</select>
+
+<sql id="search">
+ <if test="searchType != null">
+  <if test="searchType == 't'.toString()">where tals_Title like '%' || #{keyword} || '%'</if>
+  <if test="searchType == 'c'.toString()">where tals_Content like '%' || #{keyword} || '%'</if>
+  <if test="searchType == 'i'.toString()">where tals_Id like '%' || #{keyword} || '%'</if>
+ </if>
+</sql>
+
+<select id="countSearch" resultType="int">
+ select count(tals_Code)
+  from Talent_S
+   <include refid="search"></include>
+<![CDATA[
+   and tals_Code > 0
+]]>
+</select>
+
+<!-- 게시글 총 개수 구하기 -->
+<select id="listCount" resultType="int">
+<![CDATA[select count(tals_Code)
+			from Talent_S where tals_Code>0
+			]]>
+</select>
 
 <!--재능 판매 수정 -->
 <update id="talentModify">
@@ -17,8 +68,10 @@
 		set
 			tals_Title = #{tals_Title},
 			tals_Kinds = #{tals_Kinds},
+			tals_Kinds_2 = #{tals_Kinds_2},
 			tals_Content = #{tals_Content},
-			tals_Price = #{tals_Price}
+			tals_Price = #{tals_Price},
+			tals_Term = #{tals_Term}
 			
 		where tals_Code = ${tals_Code}
 </update>
@@ -30,57 +83,72 @@
 </delete>
 
 
-<!--재능 판매 목록(화면) 출력 -->
+<!--재능 판매 목록(화면) 대분류 전체 출력 -->
 <select id="talentSlist" resultType="com.capstone.domain.Talent_S_VO">
-	select tals_Code, tals_Title, tals_Kinds, tals_Content, 
+	select 
+		tals_Code, tals_Title, tals_Kinds, tals_Kinds_2 ,tals_Content, 
 	tals_Price, phone_Num, tals_Date, tals_Id
-	from Talent_S order by tals_Code desc
+	from Talent_S
+	where  tals_kinds = #{Kinds} 
+	order by tals_Code desc
 </select>
 
+<!--재능 판매 목록(화면) 소분류 출력 -->
+<select id="talentSlist_2" resultType="com.capstone.domain.Talent_S_VO">
+	select 
+		tals_Code, tals_Title, tals_Kinds, tals_Kinds_2 ,tals_Content, 
+	tals_Price, phone_Num, tals_Date, tals_Id
+	from Talent_S
+	where  tals_kinds_2 = #{Kinds} 
+	order by tals_Code desc
+</select>
 
 <!--재능 판매 상세 조회 -->
 <select id="talentSview" resultType="com.capstone.domain.Talent_S_VO">
-	select tals_Code, tals_Title, tals_Kinds, tals_Content, tals_Price, phone_Num, tals_Date, tals_Id, tals_Term
-	from Talent_S where Tals_Code = #{Tals_Code}
+	select tals_Code, tals_Title, tals_Kinds, tals_Kinds_2 ,tals_Content, tals_Price, phone_Num, tals_Date, tals_Id, tals_Term
+	from Talent_S where tals_Code = #{Tals_Code}
 </select>
 
+<!--재능 판매 상세 조회(후기출력관련) -->
+	<select id="talsReview" resultType="com.capstone.domain.Review_T_VO">
+		select
+			rev_T_Code, rev_T_Content, rev_T_Sta , rev_T_Writer, rev_T_Date, rev_T_Kinds, rev_T_Kinds_2
+		from review_t
+		where rev_T_Trader = #{tal_Id}
+			order by rev_T_Code desc
+	</select>
 
-<!--재능 구매 등록 -->
-<insert id="talent_B_Register">
-		insert into talent_b (talb_Code, talb_Id ,talb_Title, talb_Kinds, talb_Content, phone_Num)
-		values (talb_seq.nextval, #{talb_Id}, #{talb_Title}, #{talb_Kinds}, #{talb_Content}, #{phone_Num})
+<!-- 거래 테이블 조회 -->
+<select id="trade_view" resultType="com.capstone.domain.Trade_T_VO">
+	select trade_T_Code, talent_Code, seller_Id, buyer_Id ,trade_T_State
+	from Trade_T where trade_T_Code = #{trade_T_Code}
+</select>
+
+<!-- 거래 테이블 구매자 조회 -->
+<select id="trade_view_2" resultType="com.capstone.domain.Trade_T_VO">
+	select trade_T_Code, talent_Code, seller_Id, buyer_Id ,trade_T_State
+	from Trade_T where buyer_Id = #{Buyer_Id} AND trade_T_State=2
+</select>
+
+<!-- 거래 등록 -->
+<insert id="trade_t_register">
+	insert into trade_T (trade_T_Code, talent_Code, seller_Id, buyer_Id, trade_T_State, talent_Title, buyer_Phone, talent_Kinds, talent_Kinds_2)
+	values (trade_t_seq.nextval, #{talent_Code}, #{seller_Id}, #{buyer_Id} ,2, #{talent_Title}, #{buyer_Phone},#{talent_Kinds},#{talent_Kinds_2})
 </insert>
 
-<!--재능 구매 수정 -->
-	<update id="talent_B_Modify">
-	update talent_b
-		    set
-		        talb_Title = #{talb_Title},
-		        talb_Kinds = #{talb_Kinds},
-		        talb_Content = #{talb_Content}
-		        
-		    where talb_Code = ${talb_Code}
-	</update>
+<!-- 거래 완료 -->
+<update id="trade_t_complete">
+	update Trade_T
+		set
+			trade_T_State = #{trade_T_State}
+		where trade_T_Code = #{trade_T_Code}
+</update>
 
-<!--재능 구매 삭제 -->
-	<delete id="talent_B_Delete">
-		delete
-			talent_b
-		where talb_Code = #{talb_Code}
-	</delete>
-
-<!--재능 구매 목록(화면) 출력 -->
-	<select id="talent_B_list" resultType="com.capstone.domain.Talent_B_VO">
-		select
-			talb_Code, talb_Id, talb_Title, talb_Kinds, talb_Content, phone_Num, talb_Date
-	    from talent_b
-	        order by talb_Code desc
-	</select>
-<!--재능 구매 상세 조회 -->
-	<select id="talent_B_View" resultType="com.capstone.domain.Talent_B_VO">
-	select talb_Code, talb_Id, talb_Title, talb_Kinds, talb_Content, phone_Num, talb_Date
-    		from talent_b
-        		where talb_Code = #{talb_Code}
-	</select>
+<!-- 거래 취소 -->
+<delete id="trade_t_delete">
+	delete 
+		Trade_T
+	where trade_T_Code = #{trade_T_Code}
+</delete>
 
 </mapper>

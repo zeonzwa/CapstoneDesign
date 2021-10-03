@@ -15,15 +15,19 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.capstone.domain.Criteria;
 import com.capstone.domain.GoodsVO;
 import com.capstone.domain.Goods_B_VO;
 import com.capstone.domain.MemberVO;
+import com.capstone.domain.PageMaker;
 import com.capstone.domain.ReviewVO;
+import com.capstone.domain.SearchCriteria;
 import com.capstone.domain.TradeVO;
 import com.capstone.service.AdminService;
 import com.capstone.utils.UploadFileUtils;
@@ -145,6 +149,42 @@ public class AdminController {
 		List<GoodsVO> list = adminService.goodslist();  // GoodsVO형태의 List형 변수 list 선언
 		model.addAttribute("member", member);	
 		model.addAttribute("list", list);  // 변수 list의 값을 list 세션에 부여
+	}
+	
+	//판매거래소 페이징
+	@RequestMapping(value="/tradelistPage",method=RequestMethod.GET)
+	public void tradelistPage(@ModelAttribute("cri") Criteria cri, Model model, HttpServletRequest req) throws Exception{
+		logger.info("get list page");
+		HttpSession session = req.getSession();
+		MemberVO member = (MemberVO) session.getAttribute("member"); 
+		List<GoodsVO> list=adminService.listPage(cri);
+		List<GoodsVO> list2=adminService.goodslist();
+		model.addAttribute("member",member);
+		model.addAttribute("list",list);
+		model.addAttribute("list2",list2);
+		
+		PageMaker pageMaker=new PageMaker();
+		pageMaker.setCri(cri);
+		pageMaker.setTotalCount(adminService.listCount());
+		model.addAttribute("pageMaker",pageMaker);
+	}
+	
+	//판매거래소 목록+페이징+검색
+	@RequestMapping(value="/tradelistSearch",method=RequestMethod.GET)
+	public void tradelistSearch(@ModelAttribute("scri") SearchCriteria scri, Model model, HttpServletRequest req) throws Exception{
+		logger.info("get list search");
+		HttpSession session = req.getSession();
+		MemberVO member = (MemberVO) session.getAttribute("member"); 
+		List<GoodsVO> list=adminService.goodslist();
+		List<GoodsVO> list2=adminService.listSearch(scri);
+		model.addAttribute("member",member);
+		model.addAttribute("list",list);
+		model.addAttribute("list2",list2);
+		
+		PageMaker pageMaker=new PageMaker();
+		pageMaker.setCri(scri);
+		pageMaker.setTotalCount(adminService.listCount());
+		model.addAttribute("pageMaker",pageMaker);
 	}
 		
 	// 판매상품 상세 조회

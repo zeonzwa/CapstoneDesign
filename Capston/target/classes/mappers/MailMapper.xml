@@ -11,8 +11,8 @@
   	
   	<!-- 회원 가입 -->
 	<insert id="memberJoin">
- 		insert into member (Name, Id, Pw, Major, Student_Num, Email, Phone_Num)
-  			values(#{Name}, #{Id}, #{Pw}, #{Major}, #{Student_Num}, #{Email}, #{Phone_Num}) 
+ 		insert into member (Name, Id, Pw, Major, Student_Num, Email, Phone_Num, RegiDate, Verify, tal_Sta, goods_Sta)
+  			values(#{Name}, #{Id}, #{Pw}, #{Major}, #{Student_Num}, #{Email}, #{Phone_Num}, sysdate, 0, 0, 0) 
 	</insert>
 
   </mapper>

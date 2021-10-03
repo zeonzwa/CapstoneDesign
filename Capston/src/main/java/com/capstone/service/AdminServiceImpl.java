@@ -6,10 +6,13 @@ import javax.inject.Inject;
 
 import org.springframework.stereotype.Service;
 
+import com.capstone.domain.Criteria;
 import com.capstone.domain.GoodsVO;
 import com.capstone.domain.Goods_B_VO;
 import com.capstone.domain.MemberVO;
 import com.capstone.domain.ReviewVO;
+import com.capstone.domain.SearchCriteria;
+import com.capstone.domain.Talent_S_VO;
 import com.capstone.domain.TradeVO;
 import com.capstone.persistence.AdminDAO;
 
@@ -109,6 +112,30 @@ public class AdminServiceImpl implements AdminService {
 	@Override
 	public void tradeDelete(int goods_Code) throws Exception {
 		dao.tradeDelete(goods_Code);
+	}
+	
+	//목록+페이징
+	@Override
+	public List<GoodsVO> listPage(Criteria cri) throws Exception{
+		return dao.listPage(cri);
+	}
+	
+	//게시글 총 개수
+	@Override
+	public int listCount() throws Exception{
+		return dao.listCount();
+	}
+	
+	//목록+페이징+검색
+	@Override
+	public List<GoodsVO> listSearch(SearchCriteria scri) throws Exception {
+		return dao.listSearch(scri);
+	}
+
+	//검색결과개수
+	@Override
+	public int countSearch(SearchCriteria scri) throws Exception {
+		return dao.countSearch(scri);
 	}
 
 }

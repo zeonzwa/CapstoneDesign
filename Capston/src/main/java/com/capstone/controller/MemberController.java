@@ -100,6 +100,48 @@ private static final Logger logger = LoggerFactory.getLogger(MemberController.cl
 		 return "redirect:/";
 	}
 	
+	//관리자로그인 get
+	@RequestMapping(value="/sign",method=RequestMethod.GET)
+	public void getManagerSignin() throws Exception{
+		logger.info("get managersignin");
+	}
+	
+	//관리자 로그인 post
+	@RequestMapping(value="/sign" , method = RequestMethod.POST)
+	public String postManagerSignin(MemberVO vo, Model model, HttpServletRequest req, RedirectAttributes rttr, HttpServletResponse response) throws Exception{
+		logger.info("post managersignin");
+		
+		MemberVO login=service.managersignin(vo);
+		HttpSession session = req.getSession();
+		if(login==null){
+			model.addAttribute("msg","ID나PW가 틀립니다.");
+			return "member/signin";
+		}
+		else {
+			session.setAttribute("member", login);
+			
+			List<TradeVO> list = service.tradeView(login.getId());
+			response.setContentType("text/html; charset=UTF-8");
+			 
+			PrintWriter out = response.getWriter();
+			if(list.size()==0) {
+				out.println("<script language='javascript'>");
+				out.println("alert('관리자 페이지에 오신것을 환영합니다.');");
+				out.println("</script>");
+				 
+				out.flush();
+			}
+			else {					 
+				out.println("<script language='javascript'>");
+				out.println("alert('완료된 거래 중 작성하지 않은 후기가 있습니다.');");
+				out.println("</script>");
+				 
+				out.flush();
+			}
+		}
+		return "/move/manager";
+	}
+	
 	//아이디 중복 체크
 	@ResponseBody
 	@RequestMapping(value="/idChk", method = RequestMethod.POST)

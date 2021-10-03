@@ -2,13 +2,14 @@ package com.capstone.persistence;
 
 import java.util.List;
 
+import com.capstone.domain.Criteria;
 import com.capstone.domain.FaqVO;
 import com.capstone.domain.GoodsVO;
 import com.capstone.domain.Goods_B_VO;
 import com.capstone.domain.MemberVO;
 import com.capstone.domain.NoticeVO;
 import com.capstone.domain.ReviewVO;
-import com.capstone.domain.Talent_B_VO;
+import com.capstone.domain.SearchCriteria;
 import com.capstone.domain.Talent_S_VO;
 import com.capstone.domain.TradeVO;
 
@@ -37,15 +38,6 @@ public interface MoveDAO {
 	
 	//재능판매 화면출력
 	public List<Talent_S_VO> talentSlist() throws Exception;
-	
-	//재능구매 상세조회
-	public Talent_B_VO talent_B_View(int talb_Code) throws Exception;
-	
-	//재능구매 삭제
-	public void talent_B_Delete(int talb_Code) throws Exception;
-	
-	//재능구매 화면출력
-	public List<Talent_B_VO> talent_B_list() throws Exception;
 	
 	//1:1문의 등록
 	public void faq(FaqVO vo) throws Exception;
@@ -118,4 +110,16 @@ public interface MoveDAO {
 	
 	//관리자-구매상품 상세조회
 	public Goods_B_VO goods_B_View(int goods_B_Code) throws Exception;
+	
+	//목록+페이징
+	public List<NoticeVO> listPage(Criteria cri) throws Exception;
+	
+	//게시글 총 개수
+	public int listCount() throws Exception;
+	
+	//목록+페이징+검색
+	public List<NoticeVO> listSearch(SearchCriteria scri) throws Exception;
+	
+	//검색 결과 개수
+	public int countSearch(SearchCriteria scri) throws Exception;
 }

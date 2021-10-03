@@ -6,14 +6,13 @@ public class NoticeVO {
 	private String notice_Title;
 	private String notice_Content;
 	private Date notice_Date;
-	private String notice_Num;
-	private String notice_Id;
+	private int notice_Num;
 	
 	
-	public String getNotice_Num() {
+	public int getNotice_Num() {
 		return notice_Num;
 	}
-	public void setNotice_Num(String notice_Num) {
+	public void setNotice_Num(int notice_Num) {
 		this.notice_Num = notice_Num;
 	}
 	public String getNotice_Title() {
@@ -34,13 +33,6 @@ public class NoticeVO {
 	public void setNotice_Date(Date notice_Date) {
 		this.notice_Date = notice_Date;
 	}
-	public String getNotice_Id() {
-		return notice_Id;
-	}
-	public void setNotice_Id(String notice_Id) {
-		this.notice_Id = notice_Id;
-	}
-	
 	
 	
 }

@@ -2,13 +2,14 @@ package com.capstone.service;
 
 import java.util.List;
 
+import com.capstone.domain.Criteria;
 import com.capstone.domain.FaqVO;
 import com.capstone.domain.GoodsVO;
 import com.capstone.domain.Goods_B_VO;
 import com.capstone.domain.MemberVO;
 import com.capstone.domain.NoticeVO;
 import com.capstone.domain.ReviewVO;
-import com.capstone.domain.Talent_B_VO;
+import com.capstone.domain.SearchCriteria;
 import com.capstone.domain.Talent_S_VO;
 import com.capstone.domain.TradeVO;
 
@@ -58,22 +59,9 @@ public interface MoveService {
 		
 	//재능 판매 상세 조회
 	public Talent_S_VO talentSview(int Tals_Code) throws Exception;
-		
-	
-	//재능 구매 삭제
-	public void talent_B_Delete(int talb_Code) throws Exception;
-	
-	//재능 구매 목록(화면) 출력
-	public List<Talent_B_VO> talent_B_list() throws Exception;
-	
-	//재능 구매 상세 조회
-	public Talent_B_VO talent_B_View(int talb_Code) throws Exception;
 	
 	//내가 등록한 판매 물품
 	public List<GoodsVO> goodslist(String seller_Id) throws Exception;
-		
-	//내가 등록한 구매희망 물품
-	public List<Goods_B_VO> goods_B_List(String goodsb_Id) throws Exception;
 	
 	//내가 요청한 거래들
 	public List<TradeVO> my_Trade_List(String goodsb_Id) throws Exception;
@@ -111,12 +99,15 @@ public interface MoveService {
 	//관리자-판매상품 삭제
 	public void goodsDelete(int goods_Code) throws Exception;
 	
-	//관리자-구매상품 삭제
-	public void goods_B_Delete(int goods_B_Code) throws Exception;
+	//목록+페이징
+	public List<NoticeVO> listPage(Criteria cri) throws Exception;
 	
-	//관리자-구매상품 리스트
-	public List<Goods_B_VO> goods_B_list() throws Exception;
+	//게시글 총 개수
+	public int listCount() throws Exception;
 	
-	//관리자-구매상품 상세조회
-	public Goods_B_VO goods_B_View(int goods_B_Code) throws Exception;
+	//목록+페이징+검색
+	public List<NoticeVO> listSearch(SearchCriteria scri) throws Exception;
+	
+	//검색결과개수
+	public int countSearch(SearchCriteria scri) throws Exception;
 }

@@ -7,13 +7,14 @@ import javax.inject.Inject;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.stereotype.Repository;
 
+import com.capstone.domain.Criteria;
 import com.capstone.domain.FaqVO;
 import com.capstone.domain.GoodsVO;
 import com.capstone.domain.Goods_B_VO;
 import com.capstone.domain.MemberVO;
 import com.capstone.domain.NoticeVO;
 import com.capstone.domain.ReviewVO;
-import com.capstone.domain.Talent_B_VO;
+import com.capstone.domain.SearchCriteria;
 import com.capstone.domain.Talent_S_VO;
 import com.capstone.domain.TradeVO;
 
@@ -185,24 +186,6 @@ public class MoveDAOImpl implements MoveDAO {
 		return sql.selectList(namespace1 + ".talentSlist");
 	}
 
-	//재능구매 상세 조회
-	@Override
-	public Talent_B_VO talent_B_View(int talb_Code) throws Exception {
-		return sql.selectOne(namespace1 + ".talent_B_View", talb_Code);
-	}
-
-	//재능구매 삭제
-	@Override
-	public void talent_B_Delete(int talb_Code) throws Exception {
-		sql.delete(namespace1 + ".talent_B_Delete", talb_Code);
-	}
-
-	//재능구매 리스트
-	@Override
-	public List<Talent_B_VO> talent_B_list() throws Exception {
-		return sql.selectList(namespace1 + ".talent_B_list");
-	}
-
 	//관리자-판매상품 리스트
 	@Override
 	public List<GoodsVO> goodslist() throws Exception {
@@ -231,5 +214,29 @@ public class MoveDAOImpl implements MoveDAO {
 	@Override
 	public Goods_B_VO goods_B_View(int goods_B_Code) throws Exception {
 		return sql.selectOne(namespace + ".goods_B_View", goods_B_Code);
+	}
+
+	//목록+페이징
+	@Override
+	public List<NoticeVO> listPage(Criteria cri) throws Exception{
+		return sql.selectList(namespace+".listPage",cri);
+	}
+	
+	//게시글 총 개수
+	@Override
+	public int listCount() throws Exception{
+		return sql.selectOne(namespace+".listCount");
+	}
+	
+	//목록+페이징+검색
+	@Override
+	public List<NoticeVO> listSearch(SearchCriteria scri) throws Exception {
+		return sql.selectList(namespace+".listSearch",scri);
+	}
+
+	//검색 결과 개수
+	@Override
+	public int countSearch(SearchCriteria scri) throws Exception {
+		return sql.selectOne(namespace+".countSearch",scri);
 	}
 }

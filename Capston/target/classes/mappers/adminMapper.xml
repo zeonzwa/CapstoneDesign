@@ -4,6 +4,56 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.capstone.mappers.adminMapper">
 
+<!-- Paging -->
+<select id="listPage" resultType="com.capstone.domain.GoodsVO"
+parameterType="com.capstone.domain.Criteria">
+    select goods_Code, seller_Id, goods_Name, goods_Cate, goods_Sta,goods_Price, goods_Des, goods_Pic, goods_Date, phone_Num
+       from (
+           select goods_Code, seller_Id, goods_Name, goods_Cate, goods_Sta,goods_Price, goods_Des, goods_Pic, goods_Date, phone_Num,
+               row_number() over(order by goods_Code desc) as rNum
+           from goods
+     ) mb
+    where rNum between #{rowStart} and #{rowEnd}
+        order by goods_Code desc
+</select>
+
+<!-- 검색 -->
+<select id="listSearch" resultType="com.capstone.domain.GoodsVO"
+parameterType="com.capstone.domain.SearchCriteria">
+select goods_Code, goods_Name, goods_Price, goods_Pic, seller_id
+       from (
+           select goods_Code goods_Name, goods_Price, goods_Pic, seller_id,
+               row_number() over(order by goods_Code desc) as rNum
+           from goods
+      <include refid="search"></include>
+     ) mb
+    where rNum between #{rowStart} and #{rowEnd}
+        order by goods_Code desc
+</select>
+
+<sql id="search">
+ <if test="searchType != null">
+  <if test="searchType == 't'.toString()">where goods_Name like '%' || #{keyword} || '%'</if>
+  <if test="searchType == 'c'.toString()">where goods_Des like '%' || #{keyword} || '%'</if>
+ </if>
+</sql>
+
+<select id="countSearch" resultType="int">
+ select count(goods_Code)
+  from goods
+   <include refid="search"></include>
+<![CDATA[
+   and goods_Code > 0
+]]>
+</select>
+
+<!-- 게시글 총 개수 구하기 -->
+<select id="listCount" resultType="int">
+<![CDATA[select count(goods_Code)
+			from goods where goods_Code>0
+			]]>
+</select>
+
 <!--판매 상품 등록 -->
 	<insert id="register">
 		insert into goods (goods_Code, seller_Id, goods_Name, goods_Cate, goods_Price,goods_Sta, goods_Des, 
