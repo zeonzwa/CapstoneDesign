@@ -2,24 +2,23 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ page session="false" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+
 <!DOCTYPE html>
 
 <head>
-
+<script src='https://code.jquery.com/jquery-3.3.1.min.js'></script>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <meta name="description" content="">
   <meta name="author" content="">
 
-  <title>거래소</title>
+  <title>거래소(관리자)</title>
 
   <!-- Bootstrap core CSS -->
   <link href="${pageContext.request.contextPath}/resources/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css">
 
   <!-- Custom styles for this template -->
   <link href="${pageContext.request.contextPath}/resources/css/modern-business.css" rel="stylesheet" type="text/css">
-    <!--  add CSS -->
-  <link href="${pageContext.request.contextPath}/resources/vendor/bootstrap/css/web.css" rel="stylesheet" type="text/css">
 
 <style>
 .card-img-top { width:418px; height:250px; }
@@ -29,9 +28,8 @@
 </head>
 
 <body>
-
   <!-- Navigation -->
-   <nav class="navbar fixed-top navbar-expand-lg navbar-dark bg-dark fixed-top">
+  <nav class="navbar fixed-top navbar-expand-lg navbar-dark bg-dark fixed-top">
     <div class="container">
       <a class="navbar-brand" href="/move/index">충대 장터</a>
       <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
@@ -88,52 +86,92 @@
     </div>
   </nav>
 
-  
-  <!-- Page Content -->
-  <div class="container">
 
-    <!-- Page Heading/Breadcrumbs -->
-    
-    <h1 id ="talb_list_title" class="mt-4 mb-3">중고구매 장터(관리자) 
-      <small></small>
-    </h1>
 
-    <ol class="breadcrumb">
-      <li class="breadcrumb-item">
-        <a href="index.html">중고구매</a>
-      </li>
-      <li class="breadcrumb-item active">중고구매 리스트</li>
-    </ol>
   
 
-    <c:forEach items="${list}" var="list">
-    <div class="card mb-4">
-      <div class="card-body">
-          <div class="col-lg-6">
-            <h2 class="card-title"><label>제목 : </label>${list.goodsb_Title}</h2>
-            <p class="card-text"> <label>작성자 : </label>${list.goodsb_Id}</p>
-            <p class="card-text"> <label>구매희망분류 : </label>${list.goodsb_Cate}</p>
-            <p class="card-text"> <label>연락처 : </label>${list.phone_Num}</p>
-            <p class="card-text"> <label>구매희망가격 : </label><fmt:formatNumber value="${list.goodsb_Price}" pattern="###,###,###원"/></p>
-            <p class="card-text"> <label>글 : </label>${list.goodsb_Des}</p>
-            <a href="/move/manager_buy_delete?n=${list.goodsb_Code}" class="btn btn-primary">삭제 &rarr;</a>
+    <!-- Team Members -->
+    <div id = "title">
+    <h2>중고판매 장터(관리자전용)</h2> 
+  	</div>
+ 
+ <div class="search">
+ <select name="searchType">
+  <option value="n"<c:out value="${scri.searchType == null ? 'selected' : ''}"/>>-----</option>
+  <option value="t"<c:out value="${scri.searchType eq 't' ? 'selected' : ''}"/>>제목</option>
+  <option value="c"<c:out value="${scri.searchType eq 'c' ? 'selected' : ''}"/>>내용</option>
+ </select>
+ 
+ <input type="text" name="keyword" id="keywordInput" value="${scri.keyword}"/>
+
+ <button id="searchBtn">검색</button>
+ 
+ <script>
+ $(function(){
+  $('#searchBtn').click(function() {
+   self.location = "managerSelllistSearch"
+     + '${pageMaker.makeQuery(1)}'
+     + "&searchType="
+     + $("select option:selected").val()
+     + "&keyword="
+     + encodeURIComponent($('#keywordInput').val());
+    });
+ });   
+ </script>
+</div>
+  
+
+    <div class="row">
+    	<c:forEach items="${list}" var="list">
+    	 <div class="col-lg-100">
+        <div class="card h-100 text-center">
+        <div id="trade_list_margin">
+         <a href="/admin/trade_view?n=${list.goods_Code}"><img src="${list.goods_Pic}" class="card-img-top"/></a>
+         </div>
+          <div class="card-body">
+				<h4 class="card-title"><label>제목 : </label>${list.goods_Name}</h4>
+				 <p class="card-text"><label>가격 : </label><fmt:formatNumber value="${list.goods_Price}" pattern="###,###,###원"/></p>
+				  <p class="card-text"><label>상품분류 : </label>${list.goods_Cate}</p>
+				  <p class="card-text"><label>연락처 : </label>${list.phone_Num}</p>
+				  <p class="card-text"><label>상품상태 : </label>${list.goods_Sta}</p>
+				  <p class="card-text"><label>상품소개 : </label>${list.goods_Des}</p>
           </div>
-
+          <div class="card-footer">
+          	<span>작성자:</span>
+            <a>${list.seller_Id}</a>
+            <a href="/move/manager_sell_delete?n=${list.goods_Code}" class="btn btn-primary">삭제 &rarr;</a>
+          </div>
+        </div>
       </div>
-    </div>
-      	
-    </c:forEach>
+    	
+    	</c:forEach>
     </div>
     <!-- /.row -->
 
 
   
   <!-- /.container -->
+  
+<div>
+ <ul>
+  <c:if test="${pageMaker.prev}">
+   <li><a href="managerSelllistPage${pageMaker.makeQuery(pageMaker.startPage - 1)}">이전</a></li>
+  </c:if> 
+  
+  <c:forEach begin="${pageMaker.startPage}" end="${pageMaker.endPage}" var="idx">
+   <li><a href="managerSelllistPage${pageMaker.makeQuery(idx)}">${idx}</a></li>
+  </c:forEach>
+    
+  <c:if test="${pageMaker.next && pageMaker.endPage > 0}">
+   <li><a href="managerSelllistPage${pageMaker.makeQuery(pageMaker.endPage + 1)}">다음</a></li>
+  </c:if> 
+ </ul>
+</div>
 
   <!-- Footer -->
   <footer class="py-5 bg-dark">
     <div class="container">
-      <p class="m-0 text-center text-white">충대 장터</p>
+      <p class="m-0 text-center text-white">충대장터</p>
     </div>
     <!-- /.container -->
   </footer>

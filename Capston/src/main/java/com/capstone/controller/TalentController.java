@@ -51,7 +51,7 @@ public class TalentController {
 		
 		talentService.register(vo);
 		
-		return "redirect:/talent/talent_S_list";
+		return "redirect:/move/index";
 	}
 	
 	
@@ -70,7 +70,7 @@ public class TalentController {
 		logger.info("post modify");
 		
 		talentService.talentSModify(vo);
-		return "redirect:/talent/talent_S_list";
+		return "redirect:/move/index";
 	}
 	
 	
@@ -80,7 +80,7 @@ public class TalentController {
 		logger.info("post talent delete");
 		talentService.talentDelete(tals_Code);
 		
-		return "redirect:/talent/talent_S_list";
+		return "redirect:/move/index";
 	}
 	
 	//재능 판매 대분류 화면 출력 

@@ -211,4 +211,44 @@ public class MoveServiceImpl implements MoveService {
 	public int countSearch(SearchCriteria scri) throws Exception {
 		return dao.countSearch(scri);
 	}
+
+	@Override
+	public List<GoodsVO> goodslistPage(Criteria cri) throws Exception {
+		return dao.goodslistPage(cri);
+	}
+
+	@Override
+	public int goodslistCount() throws Exception {
+		return dao.goodslistCount();
+	}
+
+	@Override
+	public List<GoodsVO> goodslistSearch(SearchCriteria scri) throws Exception {
+		return dao.goodslistSearch(scri);
+	}
+
+	@Override
+	public int goodscountSearch(SearchCriteria scri) throws Exception {
+		return dao.goodscountSearch(scri);
+	}
+
+	@Override
+	public List<Talent_S_VO> talentlistPage(Criteria cri) throws Exception {
+		return dao.talentlistPage(cri);
+	}
+
+	@Override
+	public int talentlistCount() throws Exception {
+		return dao.talentlistCount();
+	}
+
+	@Override
+	public List<Talent_S_VO> talentlistSearch(SearchCriteria scri) throws Exception {
+		return dao.talentlistSearch(scri);
+	}
+
+	@Override
+	public int talentcountSearch(SearchCriteria scri) throws Exception {
+		return dao.talentcountSearch(scri);
+	}
 }

@@ -43,6 +43,8 @@ select tals_Code, tals_Title, tals_Kinds, tals_Kinds_2, tals_Content, tals_Term,
   <if test="searchType == 't'.toString()">where tals_Title like '%' || #{keyword} || '%'</if>
   <if test="searchType == 'c'.toString()">where tals_Content like '%' || #{keyword} || '%'</if>
   <if test="searchType == 'i'.toString()">where tals_Id like '%' || #{keyword} || '%'</if>
+  <if test="searchType == 'a'.toString()">where tals_Kinds like '%' || #{keyword} || '%'</if>
+  <if test="searchType == 'b'.toString()">where tals_Kinds_2 like '%' || #{keyword} || '%'</if>
  </if>
 </sql>
 
@@ -89,7 +91,7 @@ select tals_Code, tals_Title, tals_Kinds, tals_Kinds_2, tals_Content, tals_Term,
 		tals_Code, tals_Title, tals_Kinds, tals_Kinds_2 ,tals_Content, 
 	tals_Price, phone_Num, tals_Date, tals_Id
 	from Talent_S
-	where  tals_kinds = #{Kinds} 
+	where  tals_kinds = #{Kinds, jdbcType=VARCHAR} 
 	order by tals_Code desc
 </select>
 
@@ -99,7 +101,7 @@ select tals_Code, tals_Title, tals_Kinds, tals_Kinds_2, tals_Content, tals_Term,
 		tals_Code, tals_Title, tals_Kinds, tals_Kinds_2 ,tals_Content, 
 	tals_Price, phone_Num, tals_Date, tals_Id
 	from Talent_S
-	where  tals_kinds_2 = #{Kinds} 
+	where  tals_kinds_2 = #{Kinds, jdbcType=VARCHAR} 
 	order by tals_Code desc
 </select>
 

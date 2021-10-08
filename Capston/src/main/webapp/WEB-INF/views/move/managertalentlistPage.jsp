@@ -11,7 +11,7 @@
   <meta name="description" content="">
   <meta name="author" content="">
 
-  <title>거래소</title>
+  <title>재능판매 리스트</title>
 
   <!-- Bootstrap core CSS -->
   <link href="${pageContext.request.contextPath}/resources/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css">
@@ -20,7 +20,6 @@
   <link href="${pageContext.request.contextPath}/resources/css/modern-business.css" rel="stylesheet" type="text/css">
    <!--  add CSS -->
   <link href="${pageContext.request.contextPath}/resources/vendor/bootstrap/css/web.css" rel="stylesheet" type="text/css">
-
 <style>
 .card-img-top { width:418px; height:250px; }
 
@@ -88,32 +87,36 @@
     </div>
   </nav>
 
-  
   <!-- Page Content -->
   <div class="container">
 
     <!-- Page Heading/Breadcrumbs -->
-    <h1 id ="talb_list_title" class="mt-4 mb-3">(관리자전용)재능구매 장터
+    <h1 id ="talb_list_title" class="mt-4 mb-3">관리자-재능판매 장터
     
       <small></small>
     </h1>
 
     <ol class="breadcrumb">
       <li class="breadcrumb-item">
-        <a href="talent_B_list.html">재능구매</a>
+        <a href="talent_S_list">(관리자)재능판매</a>
       </li>
-      <li class="breadcrumb-item active">재능구매 리스트</li>
+      <li class="breadcrumb-item active">(관리자)재능판매 리스트</li>
     </ol>
   
-
+<a href="/move/managertalentlistSearch"  class="btn btn-primary">재능판매 검색 &rarr;</a>
     <c:forEach items="${list}" var="list">
     <div class="card mb-4">
       <div class="card-body">
           <div class="col-lg-6">
-            <h2 class="card-title"><label>제목 : </label>${list.talb_Title}</h2>
-            <p class="card-text"><label>작성자 : </label>${list.talb_Id}</p>
-            <p class="card-text"><label>구매희망분류 : </label>${list.talb_Kinds}</p>
-            <p class="card-text"><div id="btn-place"><a href="/move/manager_talent_B_view?n=${list.talb_Code}"  class="btn btn-primary">상세보기 &rarr;</a></div> </p> 
+            <h2 class="card-title"><label>제목 : </label>${list.tals_Title}</h2>
+            <p class="card-text"><label>번호 : </label>${list.tals_Code}</p>
+            <p class="card-text"><label>종류 : </label>${list.tals_Kinds}</p>
+            <p class="card-text"><label>작성자 : </label>${list.tals_Id}</p>
+            <p class="card-text"><label>판매희망분류 : </label>${list.tals_Kinds}</p>
+            <p class="card-text"><label>판매희망분류2 : </label>${list.tals_Kinds_2}</p>
+            <p class="card-text"><label>가격 : </label><fmt:formatNumber value="${list.tals_Price}" pattern="###,###,###원"/></p>
+            <p class="card-text"><div id="btn-place"><a href="/move/manager_talent_S_view?n=${list.tals_Code}"  class="btn btn-primary">상세보기 &rarr;</a></div> </p> 
+            <a href="/move/manager_talent_S_delete?n=${list.tals_Code}" class="btn btn-primary">삭제 &rarr;</a>
           </div>
       </div>
     </div>
@@ -125,11 +128,30 @@
 
   
   <!-- /.container -->
+<hr />
+
+</div>
+
+<div>
+ <ul>
+  <c:if test="${pageMaker.prev}">
+   <li><a href="managertalentlistPage${pageMaker.makeQuery(pageMaker.startPage - 1)}">이전</a></li>
+  </c:if> 
+  
+  <c:forEach begin="${pageMaker.startPage}" end="${pageMaker.endPage}" var="idx">
+   <li><a href="managertalentlistPage${pageMaker.makeQuery(idx)}">${idx}</a></li>
+  </c:forEach>
+    
+  <c:if test="${pageMaker.next && pageMaker.endPage > 0}">
+   <li><a href="managertalentlistPage${pageMaker.makeQuery(pageMaker.endPage + 1)}">다음</a></li>
+  </c:if> 
+ </ul>
+</div>
 
   <!-- Footer -->
   <footer class="py-5 bg-dark">
     <div class="container">
-      <p class="m-0 text-center text-white">충대 장터</p>
+      <p class="m-0 text-center text-white">충대장터</p>
     </div>
     <!-- /.container -->
   </footer>

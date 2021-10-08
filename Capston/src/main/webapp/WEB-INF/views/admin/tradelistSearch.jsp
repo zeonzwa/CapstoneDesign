@@ -99,7 +99,7 @@
  <script>
  $(function(){
   $('#searchBtn').click(function() {
-   self.location = "talentlistSearch"
+   self.location = "tradelistSearch"
      + '${pageMaker.makeQuery(1)}'
      + "&searchType="
      + $("select option:selected").val()

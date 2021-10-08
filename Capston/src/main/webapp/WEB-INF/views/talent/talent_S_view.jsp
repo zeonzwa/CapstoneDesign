@@ -147,7 +147,7 @@ input { width:150px; }
     
       </div>
   <c:choose>
-  <c:when test = "${member.id eq talent.tals_Id}">
+  <c:when test = "${member.id eq talent.tals_Id || member.id=='manager'}">
   <div id = "tradebtn">
     <button type="button" id="modify_Btn" class="btn btn-warning">수정</button>
 	<button type="button" id="delete_Btn" class="btn btn-danger">삭제</button>

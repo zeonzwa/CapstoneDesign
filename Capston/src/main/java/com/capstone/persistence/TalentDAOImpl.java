@@ -44,7 +44,7 @@ public class TalentDAOImpl implements TalentDAO{
 	//재능 판매 목록(화면) 출력
 	@Override
 	public List<Talent_S_VO> talentSlist(String Kinds) throws Exception {
-		return sql.selectList(namespace + ".talentSlist");
+		return sql.selectList(namespace + ".talentSlist",Kinds);
 	}
 	
 	//재능 판매 목록(화면) 소분류 출력

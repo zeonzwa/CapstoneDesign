@@ -110,4 +110,28 @@ public interface MoveService {
 	
 	//검색결과개수
 	public int countSearch(SearchCriteria scri) throws Exception;
+	
+	//관리자-물품판매 목록+페이징
+	public List<GoodsVO> goodslistPage(Criteria cri) throws Exception;
+	
+	//관리자-물품판매 게시글 총수
+	public int goodslistCount() throws Exception;
+	
+	//관리자-물품판매 목록+페이징+검색
+	public List<GoodsVO> goodslistSearch(SearchCriteria scri) throws Exception;
+	
+	//관리자-물품판매 검색 결과 개수
+	public int goodscountSearch(SearchCriteria scri) throws Exception;	
+	
+	//관리자-재능판매 목록+페이징
+	public List<Talent_S_VO> talentlistPage(Criteria cri) throws Exception;
+	
+	//관리자-재능판매 게시글 총수
+	public int talentlistCount() throws Exception;
+	
+	//관리자-재능판매 목록+페이징+검색
+	public List<Talent_S_VO> talentlistSearch(SearchCriteria scri) throws Exception;
+	
+	//관리자-재능판매 검색 결과 개수
+	public int talentcountSearch(SearchCriteria scri) throws Exception;
 }

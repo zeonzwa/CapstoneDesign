@@ -211,11 +211,11 @@ select Notice_Num, Notice_Title, Notice_Date
 <!-- Paging -->
 <select id="goodslistPage" resultType="com.capstone.domain.GoodsVO"
 parameterType="com.capstone.domain.Criteria">
-    select goods_Name, goods_Price, goods_Pic, seller_id
+    select goods_Code, seller_Id, goods_Name, goods_Cate, goods_Sta,goods_Price, goods_Des, goods_Pic, goods_Date, phone_Num
        from (
-           select goods_Name, goods_Price, goods_Pic, seller_id,
+           select goods_Code, seller_Id, goods_Name, goods_Cate, goods_Sta,goods_Price, goods_Des, goods_Pic, goods_Date, phone_Num,
                row_number() over(order by goods_Code desc) as rNum
-           from GoodsVO
+           from goods
      ) mb
     where rNum between #{rowStart} and #{rowEnd}
         order by goods_Code desc
@@ -224,13 +224,13 @@ parameterType="com.capstone.domain.Criteria">
 <!-- 검색 -->
 <select id="goodslistSearch" resultType="com.capstone.domain.GoodsVO"
 parameterType="com.capstone.domain.SearchCriteria">
-select goods_Name, goods_Price, goods_Pic, seller_id
+select goods_Code, seller_Id, goods_Name, goods_Cate
        from (
-           select goods_Name, goods_Price, goods_Pic, seller_id,
+           select goods_Code, seller_Id, goods_Name, goods_Cate,
                row_number() over(order by goods_Code desc) as rNum
-           from GoodsVO
-      <include refid="search"></include>
-     ) mb
+           from goods
+      <include refid="goodssearch"></include>
+     )
     where rNum between #{rowStart} and #{rowEnd}
         order by goods_Code desc
 </select>
@@ -245,7 +245,7 @@ select goods_Name, goods_Price, goods_Pic, seller_id
 <select id="goodscountSearch" resultType="int">
  select count(goods_Code)
   from goods
-   <include refid="search"></include>
+   <include refid="goodssearch"></include>
 <![CDATA[
    and goods_Code > 0
 ]]>
@@ -255,6 +255,57 @@ select goods_Name, goods_Price, goods_Pic, seller_id
 <select id="goodslistCount" resultType="int">
 <![CDATA[select count(goods_Code)
 			from goods where goods_Code>0
+			]]>
+</select>
+
+<!-- Paging -->
+<select id="talentlistPage" resultType="com.capstone.domain.Talent_S_VO"
+parameterType="com.capstone.domain.Criteria">
+    select tals_Code, tals_Title, tals_Kinds, tals_Kinds_2, tals_Term, tals_Price, tals_Date, tals_Id
+       from (
+           select tals_Code, tals_Title, tals_Kinds, tals_Kinds_2, tals_Term, tals_Price, tals_Date, tals_Id,
+               row_number() over(order by tals_Code desc) as rNum
+           from Talent_S
+     ) mb
+    where rNum between #{rowStart} and #{rowEnd}
+        order by tals_Code desc
+</select>
+
+<!-- 검색 -->
+<select id="talentlistSearch" resultType="com.capstone.domain.Talent_S_VO"
+parameterType="com.capstone.domain.SearchCriteria">
+select tals_Code, tals_Title, tals_Kinds, tals_Kinds_2, tals_Content, tals_Term, tals_Price, tals_Date, tals_Id
+       from (
+           select tals_Code, tals_Title, tals_Kinds, tals_Kinds_2, tals_Content, tals_Term, tals_Price, tals_Date, tals_Id,
+               row_number() over(order by tals_Code desc) as rNum
+           from Talent_S
+      <include refid="talentsearch"></include>
+     ) mb
+    where rNum between #{rowStart} and #{rowEnd}
+        order by tals_Code desc
+</select>
+
+<sql id="talentsearch">
+ <if test="searchType != null">
+  <if test="searchType == 't'.toString()">where tals_Title like '%' || #{keyword} || '%'</if>
+  <if test="searchType == 'c'.toString()">where tals_Content like '%' || #{keyword} || '%'</if>
+  <if test="searchType == 'i'.toString()">where tals_Id like '%' || #{keyword} || '%'</if>
+ </if>
+</sql>
+
+<select id="talentcountSearch" resultType="int">
+ select count(tals_Code)
+  from Talent_S
+   <include refid="talentsearch"></include>
+<![CDATA[
+   and tals_Code > 0
+]]>
+</select>
+
+<!-- 게시글 총 개수 구하기 -->
+<select id="talentlistCount" resultType="int">
+<![CDATA[select count(tals_Code)
+			from Talent_S where tals_Code>0
 			]]>
 </select>
 

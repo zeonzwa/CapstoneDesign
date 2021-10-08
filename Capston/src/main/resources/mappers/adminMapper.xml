@@ -20,13 +20,13 @@ parameterType="com.capstone.domain.Criteria">
 <!-- 검색 -->
 <select id="listSearch" resultType="com.capstone.domain.GoodsVO"
 parameterType="com.capstone.domain.SearchCriteria">
-select goods_Code, goods_Name, goods_Price, goods_Pic, seller_id
+select goods_Code, seller_Id, goods_Name, goods_Cate
        from (
-           select goods_Code goods_Name, goods_Price, goods_Pic, seller_id,
+           select goods_Code, seller_Id, goods_Name, goods_Cate,
                row_number() over(order by goods_Code desc) as rNum
            from goods
       <include refid="search"></include>
-     ) mb
+     )
     where rNum between #{rowStart} and #{rowEnd}
         order by goods_Code desc
 </select>
@@ -66,7 +66,6 @@ select goods_Code, goods_Name, goods_Price, goods_Pic, seller_id
 		select
 			goods_Code, seller_Id, goods_Name, goods_Cate, goods_Sta,goods_Price, goods_Des, goods_Pic, goods_Date, phone_Num
 	    from goods
-	    where goods_State = 1
 	        order by goods_Code desc
 	</select>
 <!--판매 상품 조회 -->
@@ -105,49 +104,10 @@ select goods_Code, goods_Name, goods_Price, goods_Pic, seller_id
 		where goods_Code = #{goods_Code}
 	</delete>	
 	
-<!--구매 상품 등록 -->	
-	<insert id="goods_B_Register">
-		insert into goods_b (goodsb_Code, goodsb_Id ,goodsb_Title, goodsb_Cate, goodsb_Price, goodsb_Des, phone_Num)
-		values (goods_b_seq.nextval, #{goodsb_Id}, #{goodsb_Title}, #{goodsb_Cate}, #{goodsb_Price}, #{goodsb_Des}, #{phone_Num})
-	</insert>
-
-<!--구매 상품 수정 -->	
-	<update id="goods_B_Modify">
-	update goods_b
-		    set
-		        goodsb_Title = #{goodsb_Title},
-		        goodsb_Cate = #{goodsb_Cate},
-		        goodsb_Price = #{goodsb_Price}, 
-		        goodsb_Des = #{goodsb_Des}
-		        
-		    where goodsb_Code = ${goodsb_Code}
-	</update>
-
-<!--구매 상품 삭제 -->	
-	<delete id="goods_B_Delete">
-		delete
-			goods_b
-		where goodsb_Code = #{goodsb_Code}
-	</delete>
-
-<!--구매 상품 목록(화면) 출력 -->	
-	<select id="goods_B_list" resultType="com.capstone.domain.Goods_B_VO">
-		select
-			goodsb_Code, goodsb_Id, goodsb_Title, goodsb_Cate, goodsb_Price, goodsb_Des, phone_Num, goodsb_Date
-	    from goods_b
-	        order by goodsb_Code desc
-	</select>
-<!--구매 상품 상세 조회 -->	
-	<select id="goods_B_View" resultType="com.capstone.domain.Goods_B_VO">
-	select goodsb_Code, goodsb_Id, goodsb_Title, goodsb_Cate, goodsb_Price, goodsb_Des, phone_Num, goodsb_Date
-    		from goods_b
-        		where goodsb_Code = #{goodsb_Code}
-	</select>
-	
 <!-- 거래 등록 -->
 	<insert id="trade_register">
 		insert into trade (trade_Code, goods_Code, seller_Id, trade_State)
-		values (tbl_goods_seq.nextval, #{goods_Code}, #{seller_Id}, 1)
+		values (trade_seq.nextval, #{goods_Code}, #{seller_Id}, 1)
 	</insert>
 <!-- 거래 조회 -->
 	<select id="trade_view" resultType="com.capstone.domain.TradeVO">

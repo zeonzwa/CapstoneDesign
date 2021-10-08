@@ -94,7 +94,7 @@
     <div id = "title">
     <h2>중고판매 장터(관리자전용)</h2> 
   	</div>
-  
+  <a href="/move/managerSelllistPage"  class="btn btn-primary">페이징 &rarr;</a>
 
     <div class="row">
     	<c:forEach items="${list}" var="list">

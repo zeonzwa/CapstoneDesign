@@ -12,8 +12,8 @@
   <meta name="description" content="">
   <meta name="author" content="">
 
-  <title>Modern Business - Start Bootstrap Template</title>
-<script src="/resources/jquery/jquery-3.3.1.min.js"></script>
+  <title>거래소(관리자)</title>
+
   <!-- Bootstrap core CSS -->
   <link href="${pageContext.request.contextPath}/resources/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css">
 
@@ -21,27 +21,15 @@
   <link href="${pageContext.request.contextPath}/resources/css/modern-business.css" rel="stylesheet" type="text/css">
 
 <style>
-.inputArea { margin:10px 0; }
-select { width:100px; }
-label { display:inline-block; width:200px; padding:5px; }
-label[for='gdsDes'] { display:block; }
-input { width:150px; }
-.gdsDes { marigin:10px 0;width:400px; height:180px; }
-.card-img-top{width:418px; height:250px; }
-.star{background-image:url(/resources/image/star.jpg);}
-.thumbImg {}
-#com_Btn {border : 0; width:100px; height:30px;;  position: relative; left:70%;}
-#rej_Btn {border : 0; width:100px; height:30px;;  position: relative; left:70%;}
-#cancel_Btn {border : 0; width:100px; height:30px;;  position: relative; left:70%;}
-#req_Btn {border : 0; width:100px; height:30px;;  position: relative; left:70%;}
+.card-img-top { width:418px; height:250px; }
+
 </style>
 
 </head>
 
 <body>
-
   <!-- Navigation -->
-   <nav class="navbar fixed-top navbar-expand-lg navbar-dark bg-dark fixed-top">
+  <nav class="navbar fixed-top navbar-expand-lg navbar-dark bg-dark fixed-top">
     <div class="container">
       <a class="navbar-brand" href="/move/index">충대 장터</a>
       <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
@@ -99,89 +87,64 @@ input { width:150px; }
   </nav>
 
 
-  <!-- Page Content -->
-  <div class="container">
 
-    <!-- Page Heading/Breadcrumbs -->
-    <h1 class="mt-4 mb-3">중고구매 상세</h1>
+  
 
-	<form role="form" method="post" autocomplete="off">
-			
-	<input type="hidden" name="n" value="${goods.goodsb_Code}"/>
-
-    <!-- Intro Content -->
+    <!-- Team Members -->
+    <div id = "title">
+    <h2>중고판매 장터(관리자전용)</h2> 
+  	</div>
+  
+ <a href="/move/managerSelllistSearch"  class="btn btn-primary">검색 &rarr;</a>
     <div class="row">
-      <div class="col-lg-6">
-        <div class="inputArea">
-				<label for="gdsName">제목</label>
-				<span>${goods.goodsb_Title}</span>
-		</div>
-		<div class="inputArea">
-				<label for="gdsCategory">구매희망분류</label>
-				<span>${goods.goodsb_Cate}</span>
-		</div>
-		 <div class="inputArea">
-				<label>작성자</label>
-				<span>${goods.goodsb_Id}</span>
-		</div>
-		<div class="inputArea">
-				<label for="gdsCategory">연락처</label>
-				<span>${goods.phone_Num}</span>
-		</div>
-		<div class="inputArea">
-				<label for="gdsPrice">구매희망가격</label>
-				<span><fmt:formatNumber value="${goods.goodsb_Price}" pattern="###,###,###원"/></span>
-			</div>
-        <div class="inputArea">
-				<label for="gdsDes">구매내용</label>	
-				<div class="gdsDes">${goods.goodsb_Des}</div>
-			</div>
+    	<c:forEach items="${list}" var="list">
+    	 <div class="col-lg-100">
+        <div class="card h-100 text-center">
+        <div id="trade_list_margin">
+         <a href="/admin/trade_view?n=${list.goods_Code}"><img src="${list.goods_Pic}" class="card-img-top"/></a>
+         </div>
+          <div class="card-body">
+				<h4 class="card-title"><label>제목 : </label>${list.goods_Name}</h4>
+				 <p class="card-text"><label>가격 : </label><fmt:formatNumber value="${list.goods_Price}" pattern="###,###,###원"/></p>
+				  <p class="card-text"><label>상품분류 : </label>${list.goods_Cate}</p>
+				  <p class="card-text"><label>연락처 : </label>${list.phone_Num}</p>
+				  <p class="card-text"><label>상품상태 : </label>${list.goods_Sta}</p>
+				  <p class="card-text"><label>상품소개 : </label>${list.goods_Des}</p>
+          </div>
+          <div class="card-footer">
+          	<span>작성자:</span>
+            <a>${list.seller_Id}</a>
+            <a href="/move/manager_sell_delete?n=${list.goods_Code}" class="btn btn-primary">삭제 &rarr;</a>
+          </div>
+        </div>
       </div>
+    	
+    	</c:forEach>
     </div>
-
     <!-- /.row -->
-  </div>
-  <c:choose>
-  <c:when test = "${member.id eq goods.goodsb_Id}">
-  <div id = "tradebtn">
-    <button type="button" id="modify_Btn" class="btn btn-warning">수정</button>
-	<button type="button" id="delete_Btn" class="btn btn-danger">삭제</button>
-			<script>
-					var formObj = $("form[role='form']");
-					
-					$("#modify_Btn").click(function(){
-						formObj.attr("action", "/admin/goodsb_modify");
-						formObj.attr("method", "get")
-						formObj.submit();
-					});
-					
-					$("#delete_Btn").click(function(){
-						
-						var con = confirm("정말로 삭제하시겠습니까?");
-						
-						if(con) {						
-							formObj.attr("action", "/move/manager_buy_delete");
-							formObj.submit();
-						}
-					});
-				</script>	
-  </div>
 
-</c:when>
-<c:otherwise>
-
-</c:otherwise>
-
-</c:choose>
- 
-
-   
+<div>
+ <ul>
+  <c:if test="${pageMaker.prev}">
+   <li><a href="managerSelllistPage${pageMaker.makeQuery(pageMaker.startPage - 1)}">이전</a></li>
+  </c:if> 
+  
+  <c:forEach begin="${pageMaker.startPage}" end="${pageMaker.endPage}" var="idx">
+   <li><a href="managerSelllistPage${pageMaker.makeQuery(idx)}">${idx}</a></li>
+  </c:forEach>
+    
+  <c:if test="${pageMaker.next && pageMaker.endPage > 0}">
+   <li><a href="managerSelllistPage${pageMaker.makeQuery(pageMaker.endPage + 1)}">다음</a></li>
+  </c:if> 
+ </ul>
+</div>
+  
   <!-- /.container -->
 
   <!-- Footer -->
   <footer class="py-5 bg-dark">
     <div class="container">
-      <p class="m-0 text-center text-white">충대 장터</p>
+      <p class="m-0 text-center text-white">충대장터</p>
     </div>
     <!-- /.container -->
   </footer>

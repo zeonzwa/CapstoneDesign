@@ -111,7 +111,9 @@
   <option value="n"<c:out value="${scri.searchType == null ? 'selected' : ''}"/>>-----</option>
   <option value="t"<c:out value="${scri.searchType eq 't' ? 'selected' : ''}"/>>제목</option>
   <option value="c"<c:out value="${scri.searchType eq 'c' ? 'selected' : ''}"/>>내용</option>
-  <option value="w"<c:out value="${scri.searchType eq 'w' ? 'selected' : ''}"/>>작성자</option>
+  <option value="i"<c:out value="${scri.searchType eq 'w' ? 'selected' : ''}"/>>작성자</option>
+  <option value="a"<c:out value="${scri.searchType eq 'w' ? 'selected' : ''}"/>>1차분류</option>
+  <option value="b"<c:out value="${scri.searchType eq 'w' ? 'selected' : ''}"/>>2차분류</option>
  </select>
  
  <input type="text" name="keyword" id="keywordInput" value="${scri.keyword}"/>

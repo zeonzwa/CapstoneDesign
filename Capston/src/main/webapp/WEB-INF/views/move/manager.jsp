@@ -179,7 +179,7 @@ li {
     <h3 id="notice_list_title" class="mt-4 mb-3">관리자 게시판
     <button id = "reg" onclick="location.href='/move/manager_register'">등록</button>
     <a href="/move/contact_member">회원관리</a><br>
-    <a href="/move/manager_talent_S">재능판매관리</a><br>
+    <a href="/move/managertalentlistPage">재능판매관리</a><br>
     <a href="/move/manager_sell">물품판매관리</a><br>
     <a href="/move/manager_faq">1:1문의관리</a><br>
       <small></small>

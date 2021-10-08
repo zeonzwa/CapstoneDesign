@@ -98,16 +98,6 @@ input { width:150px; }
     </div>
   </nav>
 
-  <!-- Page Content -->
-  <div class="container">
-
-    <!-- Page Heading/Breadcrumbs -->
-    <h1 class="mt-4 mb-3">재능 판매 상세</h1>
-
-	<form role="form" method="post" autocomplete="off">
-			
-	<input type="hidden" name="n" value="${talent.tals_Code}"/>
-
     <!-- Intro Content -->
     <div class="row">
       <div class="col-lg-6">
@@ -116,10 +106,14 @@ input { width:150px; }
 				<span>${talent.tals_Title}</span>
 		</div>
 		 <div class="inputArea">
-				<label for="tals_Kinds">판매희망분류</label>
+				<label for="tals_Kinds">재능1차분류</label>
 				<span>${talent.tals_Kinds}</span>
 		</div>
-		        <div class="inputArea">
+		 <div class="inputArea">
+				<label for="tals_Kinds_2">재능2차분류</label>
+				<span>${talent.tals_Kinds_2}</span>
+		</div>
+		<div class="inputArea">
 				<label>작성자</label>
 				<span>${talent.tals_Id}</span>
 		</div>
@@ -151,7 +145,7 @@ input { width:150px; }
 					var formObj = $("form[role='form']");
 					
 					$("#modify_Btn").click(function(){
-						formObj.attr("action", "/talent/talent_S_modify");
+						formObj.attr("action", "/move/talent_S_modify");
 						formObj.attr("method", "get")
 						formObj.submit();
 					});

@@ -239,4 +239,52 @@ public class MoveDAOImpl implements MoveDAO {
 	public int countSearch(SearchCriteria scri) throws Exception {
 		return sql.selectOne(namespace+".countSearch",scri);
 	}
+
+	//관리자-물품판매 목록+페이징
+	@Override
+	public List<GoodsVO> goodslistPage(Criteria cri) throws Exception {
+		return sql.selectList(namespace+".goodslistPage",cri);
+	}
+
+	//관리자-물품판매 게시글 총 개수
+	@Override
+	public int goodslistCount() throws Exception {
+		return sql.selectOne(namespace+".goodslistCount");
+	}
+
+	//관리자-물품판매 목록+페이징+검색
+	@Override
+	public List<GoodsVO> goodslistSearch(SearchCriteria scri) throws Exception {
+		return sql.selectList(namespace+".goodslistSearch",scri);
+	}
+
+	//관리자-물품판매 검색 결과 개수
+	@Override
+	public int goodscountSearch(SearchCriteria scri) throws Exception {
+		return sql.selectOne(namespace+".goodscountSearch",scri);
+	}
+
+	//관리자-재능판매 목록+페이징
+	@Override
+	public List<Talent_S_VO> talentlistPage(Criteria cri) throws Exception {
+		return sql.selectList(namespace+".talentlistPage",cri);
+	}
+
+	//관리자-재능판매 게시글 총 개수
+	@Override
+	public int talentlistCount() throws Exception {
+		return sql.selectOne(namespace+".talentlistCount");
+	}
+
+	//관리자-재능판매 목록+페이징+검색
+	@Override
+	public List<Talent_S_VO> talentlistSearch(SearchCriteria scri) throws Exception {
+		return sql.selectList(namespace+".talentlistSearch",scri);
+	}
+
+	//관리자-재능판매 검색 결과 개수
+	@Override
+	public int talentcountSearch(SearchCriteria scri) throws Exception {
+		return sql.selectOne(namespace+".talentcountSearch",scri);
+	}
 }

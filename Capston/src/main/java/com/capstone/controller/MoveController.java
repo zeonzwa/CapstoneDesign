@@ -212,12 +212,12 @@ public class MoveController {
 	}
 	
 	//관리자-재능 판매 삭제
-	@RequestMapping(value="/manager_talent_S_delete",method=RequestMethod.POST)
-	public String getManagerTalentDelete(@RequestParam("n") int tals_Code) throws Exception{
+	@RequestMapping(value="/manager_talent_S_delete",method=RequestMethod.GET)
+	public String postManagerTalentDelete(@RequestParam("n") int tals_Code) throws Exception{
 		logger.info("post manager_talent delete");
 		moveService.talentDelete(tals_Code);
 		
-		return "redirect:/move/manager_talent_S";
+		return "redirect:/move/managertalentlistPage";
 	}
 	
 	//관리자-판매상품 삭제
@@ -248,6 +248,75 @@ public class MoveController {
 		MemberVO member = (MemberVO) session.getAttribute("member");
 		GoodsVO goods = moveService.goodsView(goods_Code);
 		TradeVO trade = moveService.trade_view(goods_Code);
+	}
+	
+	//관리자-판매상품 페이징
+	@RequestMapping(value="managerSelllistPage",method=RequestMethod.GET)
+	public void managerSelllistPage(@ModelAttribute("cri") Criteria cri, Model model, HttpServletRequest req) throws Exception{
+		logger.info("get manager sell list page");
+		HttpSession session = req.getSession();
+		MemberVO member = (MemberVO) session.getAttribute("member"); 
+		List<GoodsVO> list=moveService.goodslistPage(cri);
+		List<GoodsVO> list2=moveService.goodslist();
+		model.addAttribute("member",member);
+		model.addAttribute("list",list);
+		model.addAttribute("list2",list2);
+		
+		PageMaker pageMaker=new PageMaker();
+		pageMaker.setCri(cri);
+		pageMaker.setTotalCount(moveService.goodslistCount());
+		model.addAttribute("pageMaker",pageMaker);
+	}
+	
+	//관리자-판매상품 목록+페이징+검색
+	@RequestMapping(value="managerSelllistSearch",method=RequestMethod.GET)
+	public void managerSelllistSearch(@ModelAttribute("scri") SearchCriteria scri, Model model, HttpServletRequest req) throws Exception{
+		logger.info("get maanger sell list Search");
+		HttpSession session = req.getSession();
+		MemberVO member = (MemberVO) session.getAttribute("member"); 
+		List<GoodsVO> list=moveService.goodslist();
+		List<GoodsVO> list2=moveService.goodslistSearch(scri);
+		model.addAttribute("member",member);
+		model.addAttribute("list",list);
+		model.addAttribute("list2",list2);
+		
+		PageMaker pageMaker=new PageMaker();
+		pageMaker.setCri(scri);
+		pageMaker.setTotalCount(moveService.goodslistCount());
+		model.addAttribute("pageMaker",pageMaker);
+	}
+	
+	//관리자 재능판매 목록 페이징
+	@RequestMapping(value="/managertalentlistPage",method=RequestMethod.GET)
+	public void managertalentlistPage(@ModelAttribute("cri") Criteria cri, Model model, HttpServletRequest req) throws Exception{
+		logger.info("get manager list page");
+		HttpSession session = req.getSession();
+		MemberVO member = (MemberVO) session.getAttribute("member"); 
+		List<Talent_S_VO> list=moveService.talentlistPage(cri);
+		model.addAttribute("member",member);
+		model.addAttribute("list",list);
+		
+		PageMaker pageMaker=new PageMaker();
+		pageMaker.setCri(cri);
+		pageMaker.setTotalCount(moveService.talentlistCount());
+		model.addAttribute("pageMaker",pageMaker);
+	}
+	
+	//관리자 재능판매 목록 페이징+검색
+	@RequestMapping(value="/managertalentlistSearch", method=RequestMethod.GET)
+	public void managertalentlistSearch(@ModelAttribute("scri") SearchCriteria scri, Model model, HttpServletRequest req) throws Exception{
+		logger.info("get manager talent list Search");
+		HttpSession session = req.getSession();
+		MemberVO member = (MemberVO) session.getAttribute("member"); 
+		
+		List<Talent_S_VO> list=moveService.talentlistSearch(scri);
+		model.addAttribute("member",member);
+		model.addAttribute("list",list);
+		
+		PageMaker pageMaker=new PageMaker();
+		pageMaker.setCri(scri);
+		pageMaker.setTotalCount(moveService.talentlistCount());
+		model.addAttribute("pageMaker",pageMaker);	
 	}
 	
 	//등록한 판매, 구매 물품 목록 get
