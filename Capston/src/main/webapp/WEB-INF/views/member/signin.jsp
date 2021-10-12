@@ -38,7 +38,7 @@
 		 </form>
         <div class="join">
         	<span>아이디가 아직 없으신가요?</span>
-          	 <a href="/member/join">회원가입</a></hr>
+          	 <a href="/member/signup">회원가입</a></hr>
           	 <a href="/member/sign">관리자용</a>
          </div>
          </form>
